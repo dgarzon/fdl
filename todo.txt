@@ -1,0 +1,53 @@
+1. Lexical Analysis (Scanner): Reads the input from a file as a text stream and tries to divide the entire text into Tokens. The rules for creating these tokens are predefined for a given high-level language. Every token has a token type.
+
+Ex.
+
+int x = 4;
+
+| Token |      Token Type     |
+|-------|---------------------|
+| int   | keyword             |
+| a     | identifier/variable |
+| =     | operator/assignment |
+| 5     | decimal number      |
+| ;     | delimiter           |
+|-------|---------------------|
+
+The job of the scanner is to read the entire program as a text stream, and categorize each as a valid token. If it finds an invalid token, it should return an error.
+
+After performing the lexical analysis, we should get as output a list of tokens. This list of tokens are then taken to the second stage of the compiler.
+
+|--------------------|----|---------|----|----------------|----|--------|----|-----|----|------------------|
+| High Level Program | -> | Scanner | -> | List of Tokens | -> | Parser | -> | AST | -> | Semantic Checker |
+|--------------------|----|---------|----|----------------|----|--------|----|-----|----|------------------|
+
+2. Syntax Checker (Parser): it tries to follow the rules of the grammar of a given language and creates a data structure, abstract syntax tree or parse tree.
+                    G = (V, T, P, S)
+
+A grammar is a four-tuple:
+  - V: set of non-terminals.
+  - T: set of terminals.
+  - P: set of rules.
+  - S: starting non-terminal.
+
+                            S
+                        /   |   \
+                    V       V       V
+                   / \     / \     / \
+                  T   T   T   T   T   T
+
+It follows the rules of the grammar to create this abstract syntax tree.It removes ambiguity by following association rules, and precedence rules.
+
+Ex.
+
+a + b * c
+
+The operator * has a higher precendence, and hence b should be attached to * instead of +.
+
+3. Semantic Checker: tries to follow certain semantic rules of the given language.
+
+Ex. A variable is used before defined, but it is not defined, then it is a semantic error.
+
+x = 10;
+
+It is syntaxically correct, but semantically incorrect as it was never defined.
