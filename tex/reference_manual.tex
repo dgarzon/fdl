@@ -1,0 +1,117 @@
+\documentclass{article}
+
+\usepackage[USenglish]{babel}
+
+\usepackage{amsfonts}
+
+\usepackage[normalem]{ulem}
+
+\usepackage{exercise}
+
+\usepackage{amsmath}
+
+\usepackage{systeme}
+
+\usepackage{epsfig}
+
+\newtheorem{thm}{Theorem}
+
+% Margins
+\usepackage[top=0.8in, bottom=1in, left=1in, right=1in]{geometry}
+
+% Code Fonts
+\usepackage{floatrow}
+\usepackage{minted}
+\floatsetup[listing]{style=Plaintop}
+\usemintedstyle{bw}
+
+% Headings
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\thesection \arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesection \arabic{subsection}.\arabic{subsubsection}}
+
+% Sections
+\usepackage{lipsum}
+\setlength\parindent{24pt}
+
+% Custom Title
+\usepackage{titling}
+\setlength{\droptitle}{-6em}
+\posttitle{\par\end{center}}
+\postauthor{\end{tabular}\par\end{center}}
+% \postdate{\par\end{center}}
+
+% Center
+\newenvironment{ncenter}
+ {\parskip=0pt\par\nopagebreak\centering}
+ {\par\noindent\ignorespacesafterend}
+
+% Title Definition
+\title{\textbf{\huge Reference Manual: ...}}
+\author{
+  Cara J. Borenstein\\
+  Columbia University\\
+  cjb2182@columbia.edu
+  \and
+  Daniel Garzon\\
+  Columbia University\\
+  dg2796@columbia.edu
+  \and
+  Daniel L. Newman\\
+  Columbia University\\
+  dln2111@columbia.edu
+  \and
+  Pranav Bhalla\\
+  Columbia University\\
+  pb2538@columbia.edu
+  \and
+  Rupayan Basu\\
+  Columbia University\\
+  rb3034@columbia.edu
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+Brief Description ...
+
+\section{Section}
+
+Some text  ...
+
+\textbf{Some bold text  ...}
+
+\emph{Some italic text  ...}
+
+\subsection{Subsection}
+
+More text  ...
+
+\centerline{Centered text ...}
+\vspace{0.4em}
+
+\section{Other Section}
+\subsection{Other Subsection}
+
+
+\subsection{Some Code}
+\vspace{-1em}
+\begin{listing}[H]
+  \caption{Code for ...}
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontfamily=courier, fontsize=\scriptsize,mathescape]{c}
+int main(int argc, char const *argv[])
+{
+  printf("%s\n", "Hello World!");
+  return 0;
+}
+
+// Check available languages in Terminal: pygmentize -L lexers
+  \end{minted}
+
+  \label{lst:the-code}
+\end{listing}
+
+% subsection car_rentals (end)
+\end{document}
