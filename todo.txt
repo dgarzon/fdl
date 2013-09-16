@@ -21,6 +21,32 @@ After performing the lexical analysis, we should get as output a list of tokens.
 | High Level Program | -> | Scanner | -> | List of Tokens | -> | Parser | -> | AST | -> | Semantic Checker |
 |--------------------|----|---------|----|----------------|----|--------|----|-----|----|------------------|
 
+Lexical: anything related to words.
+- Tasks in Compiler Design:
+  i. Process the input characters that constitute a high level program into valid set of tokens.
+  ii. It skips the comments and white spaces while creating these tokens.
+  iii. If any erroneous input is provided by the user, the lexical analizer should correlate that error to a file source and line number.
+
+- Terminology:
+  i. Token: a set of input strings which are related through a similar pattern. Any word that starts with a letter and contains any number or letter in between is called an Identifier.
+  ii. Lexeme: the actual input string which represents the token.
+  iii. Pattern: rules that a lexical analyzer follows to create a token.
+
+Ex.
+
+x = x * (acc + 123)
+
+|     Token     | Lexeme |
+|---------------|--------|
+| Identifier    | x      |
+| Operator Eq   | =      |
+| Identifier    | x      |
+| Operator Mult | *      |
+| L_Paren       | (      |
+| Identifier    | acc    |
+| Operator Plus | +      |
+| Integer Const | 123    |
+
 2. Syntax Checker (Parser): it tries to follow the rules of the grammar of a given language and creates a data structure, abstract syntax tree or parse tree.
                     G = (V, T, P, S)
 
