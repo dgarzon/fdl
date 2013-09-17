@@ -1,51 +1,3 @@
-\documentclass{article}
-
-\usepackage[USenglish]{babel}
-
-\usepackage{amsfonts}
-
-\usepackage[normalem]{ulem}
-
-\usepackage{exercise}
-
-\usepackage{amsmath}
-
-\usepackage{systeme}
-
-\usepackage{epsfig}
-
-\newtheorem{thm}{Theorem}
-
-% Margins
-\usepackage[top=0.8in, bottom=1in, left=1in, right=1in]{geometry}
-
-% Code Fonts
-\usepackage{floatrow}
-\usepackage{minted}
-\floatsetup[listing]{style=Plaintop}
-\usemintedstyle{bw}
-
-% Headings
-\renewcommand{\thesection}{\arabic{section}.}
-\renewcommand{\thesubsection}{\thesection \arabic{subsection}}
-\renewcommand{\thesubsubsection}{\thesection \arabic{subsection}.\arabic{subsubsection}}
-
-% Sections
-\usepackage{lipsum}
-\setlength\parindent{24pt}
-
-% Custom Title
-\usepackage{titling}
-\setlength{\droptitle}{-6em}
-\posttitle{\par\end{center}}
-\postauthor{\end{tabular}\par\end{center}}
-% \postdate{\par\end{center}}
-
-% Center
-\newenvironment{ncenter}
- {\parskip=0pt\par\nopagebreak\centering}
- {\par\noindent\ignorespacesafterend}
-
 % Title Definition
 \title{\textbf{\huge Reference Manual: ...}}
 \author{
@@ -71,47 +23,59 @@
 }
 \date{}
 
+\documentclass[10pt]{article}
+
+\usepackage[gray]{xcolor}
+\usepackage{minted}
+\usepackage[USenglish]{babel}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{inconsolata}
+
 \begin{document}
+
 \maketitle
 
-Brief Description ...
+\begin{abstract}
+This is the paper's abstract \ldots
+\end{abstract}
 
-\section{Section}
+\section{Introduction}
+This is an \textbf{introduction} to our \emph{language} \ldots
 
-Some text  ...
+\paragraph{Language Goals}
+The remainder of this article is organized as follows.
+Section~\ref{previous work} gives account of previous work.
+Our new and exciting results are described in Section~\ref{results}.
+Finally, Section~\ref{conclusions} gives the conclusions.
 
-\textbf{Some bold text  ...}
+\section{Syntax}\label{previous work}
 
-\emph{Some italic text  ...}
+\subsection{Basic Data Types}
+\subsection{Mathematical Operators}
+\subsection{Logical Operators}
+\subsection{Valid Expressions}
+\subsection{Control Statements}
+\subsection{Function Definition}
 
-\subsection{Subsection}
-
-More text  ...
-
-\centerline{Centered text ...}
-\vspace{0.4em}
-
-\section{Other Section}
-\subsection{Other Subsection}
-
-
-\subsection{Some Code}
-\vspace{-1em}
+\section{Example Program}\label{results}
+In this section we describe the results.
 \begin{listing}[H]
   \caption{Code for ...}
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontfamily=courier, fontsize=\scriptsize,mathescape]{c}
-int main(int argc, char const *argv[])
-{
-  printf("%s\n", "Hello World!");
-  return 0;
-}
-
-// Check available languages in Terminal: pygmentize -L lexers
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+    int main(int argc, char const *argv[])
+    {
+      printf("%s\n", "Hello World!");
+      return 0;
+    }
   \end{minted}
-
   \label{lst:the-code}
 \end{listing}
 
-% subsection car_rentals (end)
+\section{Conclusions}\label{conclusions}
+We worked hard, and achieved very little.
+
+\bibliographystyle{abbrv}
+\bibliography{main}
+
 \end{document}
