@@ -1,5 +1,64 @@
-- Service API Language
-- MATLAB Language
-- String Manupulation Language
-- Educational Language
-- Formula Translator Language
+File Manipulation Language: FML
+
+Data Types:
+  - integer
+  - boolean
+  - directory
+  - file
+  - line
+  - string
+  - character
+
+Operators:
+
+  Append:
+  |-----------|        |-----------|
+  | Data Type |   +    | Data Type |
+  |-----------|        |-----------|
+
+  Remove:
+  |-----------|        |-----------|
+  | Data Type |   -    | Data Type |
+  |-----------|        |-----------|
+
+  Comparisson of Content:
+  |-----------|        |-----------|
+  | Data Type |   |    | Data Type |
+  |-----------|        |-----------|
+
+  Comparisson by Reference:
+  |-----------|        |-----------|
+  | Data Type |   &    | Data Type |
+  |-----------|        |-----------|
+
+Example Program:
+
+def main ()
+  /* Setting up our Directory */
+  directory home <- "~/home"
+
+  /* Initializing two file variables to some files available within the directory. */
+  file file_1 <- "file_name_1.txt" in home
+  file file_2 <- "file_name_2.txt" in home
+
+  /* If contents of both files are equal. */
+  if file_1 = file_2 then
+    print "They are equals!"
+  else
+    /* Allocate a new file, and store the contents of file_1 that are not in file_2 */
+    file temp <- file_1 - file_2
+  end
+
+  string hello <- "Hello World!"
+  integer index <- search hello ? file_1
+  if index != -1
+    print "String successfully found."
+  else
+    print "String not found."
+  end
+
+  file temp
+  for home_file in home
+    temp <- temp + home_file
+  end
+end
