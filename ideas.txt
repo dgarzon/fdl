@@ -21,10 +21,15 @@ Operators:
   | Data Type |   -    | Data Type |
   |-----------|        |-----------|
 
-  Comparisson of Content:
+  Comparisson (Equal):
   |-----------|        |-----------|
-  | Data Type |   |    | Data Type |
+  | Data Type |   =    | Data Type |
   |-----------|        |-----------|
+
+  Comparisson (Not Equal):
+  |-----------|         |-----------|
+  | Data Type |   !=    | Data Type |
+  |-----------|         |-----------|
 
   Comparisson by Reference:
   |-----------|        |-----------|
