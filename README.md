@@ -1,4 +1,4 @@
-coms_w4115
+File Managment Language (FML):
 ==========
 
-PLT
+Programming Languages and Translators (COMS W4115)
