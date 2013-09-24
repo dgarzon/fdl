@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  22 SEP 2013 02:37
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  23 SEP 2013 22:25
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -270,42 +270,68 @@ Package: changepage 2009/10/20 v1.0c check page and change page layout
 \c@cp@cntr=\count100
 \cp@tempcnt=\count101
 )
-(./reference_manual.aux)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen114
+\extrarowheight=\dimen115
+\NC@list=\toks19
+\extratabsurround=\skip46
+\backup@length=\skip47
+)
+(./reference_manual.aux
+
+LaTeX Warning: Label `tab:title' multiply defined.
+
+
+LaTeX Warning: Label `tab:title' multiply defined.
+
+
+LaTeX Warning: Label `lst:the-code' multiply defined.
+
+
+LaTeX Warning: Label `lst:the-code' multiply defined.
+
+
+LaTeX Warning: Label `lst:the-code' multiply defined.
+
+
+LaTeX Warning: Label `lst:the-code' multiply defined.
+
+)
 \openout1 = `reference_manual.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 36.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 36.
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 35.
+ (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    ... okay on input line 35.
 
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count102
-\scratchdimen=\dimen114
+\scratchdimen=\dimen116
 \scratchbox=\box30
 \nofMPsegments=\count103
 \nofMParguments=\count104
-\everyMPshowfont=\toks19
+\everyMPshowfont=\toks20
 \MPscratchCnt=\count105
-\MPscratchDim=\dimen115
+\MPscratchDim=\dimen117
 \MPnumerator=\count106
 \makeMPintoPDFobject=\count107
-\everyMPtoPDFconversion=\toks20
+\everyMPtoPDFconversion=\toks21
 )
 runsystem(pygmentize -S default -f latex > reference_manual.pyg)...executed.
 
@@ -345,18 +371,25 @@ runsystem(pygmentize -S default -f latex > reference_manual.pyg)...executed.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 40.
+(Font)              <12> on input line 37.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 40.
+(Font)              <8> on input line 37.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 40.
+(Font)              <6> on input line 37.
+[1
+
+{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 61.
+
+[2]
 \openout3 = `reference_manual.pyg'.
 
-runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape      -P lin
-enos -P "verboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out
-.pyg reference_manual.pyg)...executed.
+runsystem(pygmentize -l python -f latex -F tokenmerge      -P mathescape       
+-P "verboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out.pyg 
+reference_manual.pyg)...executed.
 
-(./reference_manual.out.pyg
+ (./reference_manual.out.pyg
 LaTeX Font Info:    Try loading font information for OT1+fi4 on input line 1.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/inconsolata/ot1fi4.fd
@@ -367,42 +400,88 @@ LaTeX Font Warning: Font shape `OT1/fi4/bx/n' undefined
 (Font)              using `OT1/fi4/m/n' instead on input line 2.
 
 )
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 76.
 runsystem(rm reference_manual.out.pyg)...executed.
 
 runsystem(rm reference_manual.pyg)...executed.
 
+\openout3 = `reference_manual.pyg'.
 
-No file reference_manual.bbl.
-[1
+runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape       -P "v
+erboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out.pyg refer
+ence_manual.pyg)...executed.
 
-{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+ (./reference_manual.out.pyg)
+runsystem(rm reference_manual.out.pyg)...executed.
+
+runsystem(rm reference_manual.pyg)...executed.
+
+\openout3 = `reference_manual.pyg'.
+
+runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape       -P "v
+erboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out.pyg refer
+ence_manual.pyg)...executed.
+
+ (./reference_manual.out.pyg)
+runsystem(rm reference_manual.out.pyg)...executed.
+
+runsystem(rm reference_manual.pyg)...executed.
+
+\openout3 = `reference_manual.pyg'.
+
+runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape       -P "v
+erboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out.pyg refer
+ence_manual.pyg)...executed.
+
+
+(./reference_manual.out.pyg)
+runsystem(rm reference_manual.out.pyg)...executed.
+
+runsystem(rm reference_manual.pyg)...executed.
+
+ [3]
+\openout3 = `reference_manual.pyg'.
+
+runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape      -P lin
+enos -P "verboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out
+.pyg reference_manual.pyg)...executed.
+
+ (./reference_manual.out.pyg)
+runsystem(rm reference_manual.out.pyg)...executed.
+
+runsystem(rm reference_manual.pyg)...executed.
+
+ [4]
 (./reference_manual.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 3768 strings out of 493315
- 52890 string characters out of 6137904
- 126198 words of memory out of 5000000
- 7170 multiletter control sequences out of 15000+600000
- 10283 words of font info for 36 fonts, out of 8000000 for 9000
+ 3822 strings out of 493315
+ 53645 string characters out of 6137904
+ 127935 words of memory out of 5000000
+ 7214 multiletter control sequences out of 15000+600000
+ 10642 words of font info for 37 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,10n,35p,265b,530s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,12n,35p,257b,516s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/inconsolata/fi4-ot1tt.enc
 }</usr/local/texlive/2013/texmf-dist/fonts/type1/public/inconsolata/Inconsolata
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.
 pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.p
+fb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.
+pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
 fb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 ></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
 /usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on reference_manual.pdf (1 page, 84384 bytes).
+r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on reference_manual.pdf (4 pages, 117085 bytes).
 PDF statistics:
- 37 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 58 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

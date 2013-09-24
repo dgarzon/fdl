@@ -1,5 +1,13 @@
 \documentclass[11pt]{article}
 
+\usepackage[gray]{xcolor}
+\usepackage{minted}
+\usepackage[USenglish]{babel}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{inconsolata}
+\usepackage{changepage}
+\usepackage{array}
+
 % Title Definition
 \title{\textbf{\huge Proposal: File Management Language (FML)}}
 \author{
@@ -23,22 +31,10 @@
   Columbia University\\
   rb3034@columbia.edu
 }
-\date{}
-
-\usepackage[gray]{xcolor}
-\usepackage{minted}
-\usepackage[USenglish]{babel}
-\usepackage[margin=0.7in]{geometry}
-\usepackage{inconsolata}
-\usepackage{changepage}
-
 
 \begin{document}
 
-\changepage{1cm}{}{}{}{}{-1cm}{}{}{}
-
 \maketitle
-
 
 \begin{abstract}
 This is the paper's abstract \ldots
@@ -53,14 +49,266 @@ Section~\ref{previous work} gives account of previous work.
 Our new and exciting results are described in Section~\ref{results}.
 Finally, Section~\ref{conclusions} gives the conclusions.
 
+\newpage
 \section{Syntax}\label{previous work}
 
 \subsection{Basic Data Types}
+
+\begin{table}[ht]
+  \centering
+  \caption {Basic Data Types} \label{tab:title}
+  \vspace{0.5em}
+  \begin{tabular}{|m{8em}|b{25em}|}
+  \hline
+
+  %% row 1
+  \textbf{primitive}
+  &
+  \vspace{0.7em}
+  \textbf{Description} \\ [0.7em]
+  \hline
+
+  %% row 2
+  \emph{integer}
+  &
+  \vspace{0.7em}
+  \dots Some text
+  \\[0.7em]
+  \hline
+
+  %% row 3
+  \emph{boolean}
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 4
+  \emph{character}
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 5
+  \emph{string}
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  \emph{directory}
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 7
+  \emph{file}
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 8
+  \emph{date}
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 9
+  \emph{ftype}
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 10
+  \emph{tag}
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+  \end{tabular}
+\end{table}
+
 \subsection{Mathematical Operators}
+
+\begin{table}[ht]
+  \centering
+  \caption {Mathematical Operators.} \label{tab:title}
+  \vspace{0.5em}
+  \begin{tabular}{|m{8em}|b{25em}|}
+  \hline
+
+  %% row 1
+  \textbf{operator}
+  &
+  \vspace{0.7em}
+  \textbf{Description} \\ [0.7em]
+  \hline
+
+  %% row 2
+  $+$
+  &
+  \vspace{0.7em}
+  \dots Some text
+  \\[0.7em]
+  \hline
+
+  %% row 3
+  $-$
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 4
+  $*$
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 5
+  $,$
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  \end{tabular}
+\end{table}
+
+\newpage
+
 \subsection{Logical Operators}
-\subsection{Valid Expressions}
+
+\begin{table}[ht]
+  \centering
+  \caption {Logical Operators.} \label{tab:title}
+  \vspace{0.5em}
+  \begin{tabular}{|m{8em}|b{25em}|}
+  \hline
+
+  %% row 1
+  \textbf{operator}
+  &
+  \vspace{0.7em}
+  \textbf{Description} \\ [0.7em]
+  \hline
+
+  %% row 2
+  $==$
+  &
+  \vspace{0.7em}
+  \dots Some text
+  \\[0.7em]
+  \hline
+
+  %% row 3
+  $!=$
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 4
+  $>$
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 5
+  $>=$
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  $<$
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  %% row 7
+  $<=$
+  &
+  \vspace{0.7em}
+  \dots
+  \\[0.7em]
+  \hline
+
+  \end{tabular}
+\end{table}
+
 \subsection{Control Statements}
+\subsubsection{\emph{if-then-else}}
+\begin{listing}[H]
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{python}
+    if <condition> then
+      <expression>
+    else
+      <expression>
+    end
+  \end{minted}
+  \label{lst:the-code}
+\end{listing}
+
+\subsubsection{\emph{while}}
+\begin{listing}[H]
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+    while <condition> then
+      <expression>
+    end
+  \end{minted}
+  \label{lst:the-code}
+\end{listing}
+
+\subsubsection{\emph{for}}
+\begin{listing}[H]
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+    for <identifier> in <set of files> do
+      <expression>
+    end
+  \end{minted}
+  \label{lst:the-code}
+\end{listing}
 \subsection{Function Definition}
+\begin{listing}[H]
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+    def <identifier> (<parameter list>)
+      <expression>
+    end
+  \end{minted}
+  \label{lst:the-code}
+\end{listing}
+
+\subsection{Built-in Functions}
 
 \section{Example Program}\label{results}
 In this section we describe the results.
@@ -79,8 +327,5 @@ In this section we describe the results.
 
 \section{Conclusions}\label{conclusions}
 We worked hard, and achieved very little.
-
-\bibliographystyle{abbrv}
-\bibliography{main}
 
 \end{document}
