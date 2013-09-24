@@ -7,9 +7,10 @@
 \usepackage{inconsolata}
 \usepackage{changepage}
 \usepackage{array}
+\usepackage{amsfonts}
 
 % Title Definition
-\title{\textbf{\huge Proposal: File Management Language (FML)}}
+\title{\textbf{\huge Proposal: File and Directory Manipulation Language (FDL)}}
 \author{
   Cara J. Borenstein\\
   Columbia University\\
@@ -36,18 +37,19 @@
 
 \maketitle
 
-\begin{abstract}
-This is the paper's abstract \ldots
-\end{abstract}
+% \begin{abstract}
+% This is the paper's abstract \ldots
+% \end{abstract}
 
-\section{Introduction}
-This is an \textbf{introduction} to our \emph{language} \ldots
+\section{Motivation}
+With the \emph{proliferation of storage devices}, and the rise of mobile and cloud computing, users must now manage a \emph{large number of files scattered across several locations}. Thus the problem of accessing and organizing multiple files quickly and easily across storage media is becoming increasingly more important. Currently there is no language that enables users to efficiently and easily organize their files and directories according to various attributes such as ‘last modified date’, ‘created by’, size etc. and add customized tags to files such as “scrap”, “important”, “work”, and “home.”
 
-\paragraph{Language Goals}
-The remainder of this article is organized as follows.
-Section~\ref{previous work} gives account of previous work.
-Our new and exciting results are described in Section~\ref{results}.
-Finally, Section~\ref{conclusions} gives the conclusions.
+\section{Description}
+File and Directory Manipulation Language (FDL, pronounced “fiddle”)  \emph{solves this problem} by providing simple and intuitive syntax for manipulating \emph{files} and \emph{directories}. By providing the user with new \emph{data types}, and an extensive list of \emph{mathematical and logical operators}, what used to be tedious and time consuming will now be easy and fast.
+
+Users can write programs that organize their file systems by conveniently copying files and directories to different locations, and removing files and directories from specific filepaths, through the use of mathematical operators. Users can loop through subdirectories and files contained within a chosen directory, with a template to browse the file/directory tree stemming from that directory by specifying different levels. One example is the ability to perform a function on all nodes of the tree at a certain level away from the root directory.
+
+Files can be organized in this manner by the attributes spanning from last modified date to size, and additional, customized tags can be added to files for organizational purposes. Customized tags can be serialized and stored on the machine in XML format, to be loaded when users are navigating the file system.
 
 \newpage
 \section{Syntax}\label{previous work}
@@ -56,9 +58,8 @@ Finally, Section~\ref{conclusions} gives the conclusions.
 
 \begin{table}[ht]
   \centering
-  \caption {Basic Data Types} \label{tab:title}
   \vspace{0.5em}
-  \begin{tabular}{|m{8em}|b{25em}|}
+  \begin{tabular}{|m{8em}|b{34em}|}
   \hline
 
   %% row 1
@@ -69,86 +70,110 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   \hline
 
   %% row 2
-  \emph{integer}
+  \vspace{-0.5em}
+  \emph{int}
   &
   \vspace{0.7em}
-  \dots Some text
+  The set of all positive natural numbers: $\mathbb{N}^0 = \{0,1,2,3,\dots,k\}$
   \\[0.7em]
   \hline
 
   %% row 3
-  \emph{boolean}
+  \vspace{-0.9em}
+  \emph{bool}
   &
   \vspace{0.7em}
-  \dots
-  \\[0.7em]
-  \hline
-
-  %% row 4
-  \emph{character}
-  &
-  \vspace{0.7em}
-  \dots
+  Used to compare two files or directories for equality. Returns 1 for \emph{true} and 0 for \emph{false}.
   \\[0.7em]
   \hline
 
   %% row 5
+  \vspace{0.2em}
   \emph{string}
   &
   \vspace{0.7em}
-  \dots
+  A sequence of \emph{characters} surrounded by quotes.
   \\[0.7em]
   \hline
 
   %% row 6
-  \emph{directory}
+  \vspace{-1.5em}
+  \emph{dir}
   &
   \vspace{0.7em}
-  \dots
+   Object that holds the path to a \emph{collection} of 0 or more \emph{files} in memory.  Directories can contain any number of \emph{files} and any number of \emph{sub-directories}.
   \\[0.7em]
   \hline
 
   %% row 7
+  \vspace{-1em}
   \emph{file}
   &
   \vspace{0.7em}
-  \dots
+  Object that has a \emph{file\textunderscore type}, \emph{modified\textunderscore date}, \emph{created\textunderscore date}, and 0 or more customized \emph{tags}.
   \\[0.7em]
   \hline
 
-  %% row 8
-  \emph{date}
-  &
-  \vspace{0.7em}
-  \dots
-  \\[0.7em]
-  \hline
-
-  %% row 9
-  \emph{ftype}
-  &
-  \vspace{0.7em}
-  \dots
-  \\[0.7em]
-  \hline
-
-  %% row 10
-  \emph{tag}
-  &
-  \vspace{0.7em}
-  \dots
-  \\[0.7em]
-  \hline
   \end{tabular}
 \end{table}
 
+\subsection{File Attributes}
+
+\begin{table}[ht]
+  \centering
+  \vspace{0.5em}
+  \begin{tabular}{|m{8em}|b{34em}|}
+  \hline
+
+  %% row 1
+  \textbf{attribute}
+  &
+  \vspace{0.7em}
+  \textbf{Description} \\ [0.7em]
+  \hline
+
+  %% row 2
+  \emph{created\textunderscore date}
+  &
+  \vspace{0.7em}
+  Field that holds the date when a \emph{file} was created.
+  \\[0.7em]
+  \hline
+
+  %% row 3
+  \emph{modified\textunderscore date}
+  &
+  \vspace{0.7em}
+  Field that holds the date of the last time a \emph{file} was modified.
+  \\[0.7em]
+  \hline
+
+  %% row 4
+  \emph{file\textunderscore type}
+  &
+  \vspace{0.7em}
+  Field that holds the type of a file. (ex. 'txt', 'jpeg').
+  \\[0.7em]
+  \hline
+
+  %% row 5
+  \emph{tag}
+  &
+  \vspace{0.7em}
+  Field that holds a \emph{customized association} of a \emph{file} or \emph{directory}.
+  \\[0.7em]
+  \hline
+
+  \end{tabular}
+\end{table}
+
+\newpage
 \subsection{Mathematical Operators}
 
 \begin{table}[ht]
   \centering
-  \caption {Mathematical Operators.} \label{tab:title}
   \vspace{0.5em}
-  \begin{tabular}{|m{8em}|b{25em}|}
+  \begin{tabular}{|m{8em}|b{34em}|}
   \hline
 
   %% row 1
@@ -162,7 +187,7 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   $+$
   &
   \vspace{0.7em}
-  \dots Some text
+  Used to add \emph{files} to \emph{directories} and also to append \emph{strings}.
   \\[0.7em]
   \hline
 
@@ -170,38 +195,51 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   $-$
   &
   \vspace{0.7em}
-  \dots
+  Used to remove 1 or more \emph{files} from a \emph{directory}.
   \\[0.7em]
   \hline
 
   %% row 4
-  $*$
+  $,$
   &
   \vspace{0.7em}
-  \dots
+  Used to specify multiple objects that should be evaluated separately by the previous operator.
   \\[0.7em]
   \hline
 
   %% row 5
-  $,$
+  $=$
   &
   \vspace{0.7em}
-  \dots
+  Assignment operator.
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  $+=$
+  &
+  \vspace{0.7em}
+  For a \emph{directory} it is used to add a \emph{file} or \emph{sub-directory} to the \emph{directory}. For integers, it is the \emph{addition and assignment} operator.
+  \\[0.7em]
+  \hline
+
+  %% row 7
+  $-=$
+  &
+  \vspace{0.7em}
+  For a \emph{directory} it is used to remove a \emph{file} or \emph{sub-directory} to from \emph{directory}. For integers, it is the \emph{substraction and assignment} operator.
   \\[0.7em]
   \hline
 
   \end{tabular}
 \end{table}
 
-\newpage
-
 \subsection{Logical Operators}
 
 \begin{table}[ht]
   \centering
-  \caption {Logical Operators.} \label{tab:title}
   \vspace{0.5em}
-  \begin{tabular}{|m{8em}|b{25em}|}
+  \begin{tabular}{|m{8em}|b{34em}|}
   \hline
 
   %% row 1
@@ -215,7 +253,7 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   $==$
   &
   \vspace{0.7em}
-  \dots Some text
+  Equality operator.
   \\[0.7em]
   \hline
 
@@ -223,7 +261,7 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   $!=$
   &
   \vspace{0.7em}
-  \dots
+  Inequality operator.
   \\[0.7em]
   \hline
 
@@ -231,7 +269,7 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   $>$
   &
   \vspace{0.7em}
-  \dots
+  Used for checking the level of a \emph{sub-directory} (select \emph{files} at a level \emph{greater than} the current \emph{directory}), and for comparing \emph{integers}.
   \\[0.7em]
   \hline
 
@@ -239,7 +277,7 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   $>=$
   &
   \vspace{0.7em}
-  \dots
+  Used for checking the level of a \emph{sub-directory} (select \emph{files} at a level \emph{greater than or equal to} the current \emph{directory}), and for comparing \emph{integers}.
   \\[0.7em]
   \hline
 
@@ -247,7 +285,7 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   $<$
   &
   \vspace{0.7em}
-  \dots
+  Used for checking the level of a \emph{sub-directory} (select \emph{files} at a level \emph{less than} the current \emph{directory}), and for comparing \emph{integers}.
   \\[0.7em]
   \hline
 
@@ -255,12 +293,14 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   $<=$
   &
   \vspace{0.7em}
-  \dots
+  Used for checking the level of a \emph{sub-directory} (select \emph{files} at a level \emph{less than or equal to} the current \emph{directory}), and for comparing \emph{integers}.
   \\[0.7em]
   \hline
 
   \end{tabular}
 \end{table}
+
+\newpage
 
 \subsection{Control Statements}
 \subsubsection{\emph{if-then-else}}
@@ -308,24 +348,28 @@ Finally, Section~\ref{conclusions} gives the conclusions.
   \label{lst:the-code}
 \end{listing}
 
-\subsection{Built-in Functions}
-
+\newpage
 \section{Example Program}\label{results}
-In this section we describe the results.
 \begin{listing}[H]
   \caption{Code for ...}
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
   \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
-    int main(int argc, char const *argv[])
-    {
-      printf("%s\n", "Hello World!");
-      return 0;
-    }
+    main
+      directory D1 = "/SAMPLE_PATH";//path to the source directory
+      string str = ""; //path to the destination folder
+
+      // we expect file_temp will loop over all files in "D1" including subfolders
+      for file_temp in D1
+        if( file_temp.Extension == "jpg" || file_temp.Extension == "jpeg" ){
+          // we wish to name the folders with date on which images were created
+          // the below stmt creates(in case it didnt exist) or points dtemp to //the folder
+          Directory dtemp = str + file_temp.Date;
+          dtemp = dtemp + file_temp;
+        }
+      }
+    end
   \end{minted}
   \label{lst:the-code}
 \end{listing}
-
-\section{Conclusions}\label{conclusions}
-We worked hard, and achieved very little.
 
 \end{document}
