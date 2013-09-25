@@ -42,12 +42,14 @@
 % \end{abstract}
 
 \section{Motivation}
-With the \emph{proliferation of storage devices}, and the rise of mobile and cloud computing, users must now manage a \emph{large number of files scattered across several locations}. Thus the problem of accessing and organizing multiple files quickly and easily across storage media is becoming increasingly more important. Currently there is no language that enables users to efficiently and easily organize their files and directories according to various attributes such as ‘last modified date’, ‘created by’, size etc. and add customized tags to files such as “scrap”, “important”, “work”, and “home.”
+With the proliferation of storage devices, and the rise of mobile and cloud computing, users must now manage a large number of files scattered across several locations. Furthermore, with the availability of inexpensive storage options, users do not feel the need to delete files, often leading to an unmanageable accumulation of files. Thus the problem of accessing and organizing multiple files quickly and easily across diverse storage media is becoming increasingly important.
+
+While the GUI offered by various operating systems is inefficient for handling large number of files and directories at the same time, the command line interface on the other hand requires users to learn complex Swiss-knife like commands and their innumerable options, even to perform basic operations. What is required is a programming language, that allows users to write simple programs that perform both specialized as well as routine tasks to efficiently and easily organize their files and directories.
 
 \section{Description}
-File and Directory Manipulation Language (FDL, pronounced “fiddle”)  \emph{solves this problem} by providing simple and intuitive syntax for manipulating \emph{files} and \emph{directories}. By providing the user with new \emph{data types}, and an extensive list of \emph{mathematical and logical operators}, what used to be tedious and time consuming will now be easy and fast.
+File and Directory Manipulation Language (FDL, pronounced “fiddle”)  solves this problem by providing a simple and intuitive syntax for managing files and directories. By providing the user with new data types, and an extensive list of mathematical and logical operators, what used to be tedious and time consuming will now be easy and fast.
 
-Users can write programs that organize their file systems by conveniently copying files and directories to different locations, and removing files and directories from specific filepaths, through the use of mathematical operators. Users can loop through subdirectories and files contained within a chosen directory, with a template to browse the file/directory tree stemming from that directory by specifying different levels. One example is the ability to perform a function on all nodes of the tree at a certain level away from the root directory.
+Users can write programs that organize their file systems by conveniently copying files and directories to different locations, and removing files and directories from specific file paths, through the use of mathematical operators. Users can loop through subdirectories and files contained within a chosen directory, with a template to browse the file/directory tree stemming from that directory by specifying different levels. One example is the ability to perform a function on all nodes of the tree at a certain level away from the root directory.
 
 Files can be organized in this manner by the attributes spanning from last modified date to size, and additional, customized tags can be added to files for organizational purposes. Customized tags can be serialized and stored on the machine in XML format, to be loaded when users are navigating the file system.
 
@@ -117,7 +119,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \end{tabular}
 \end{table}
 
-\subsection{File Attributes}
+\subsection{File and Folder Attributes}
 
 \begin{table}[ht]
   \centering
@@ -136,7 +138,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \emph{created\textunderscore date}
   &
   \vspace{0.7em}
-  Field that holds the date when a \emph{file} was created.
+  Field that holds the date when a \emph{file} or \emph{directory} was created.
   \\[0.7em]
   \hline
 
@@ -144,7 +146,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \emph{modified\textunderscore date}
   &
   \vspace{0.7em}
-  Field that holds the date of the last time a \emph{file} was modified.
+  Field that holds the date of the last time a \emph{file} or \emph{directory}  was modified.
   \\[0.7em]
   \hline
 
@@ -152,7 +154,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \emph{file\textunderscore type}
   &
   \vspace{0.7em}
-  Field that holds the type of a file. (ex. 'txt', 'jpeg').
+  Field that holds the type of a \emph{file}. (ex. 'txt', 'jpeg').
   \\[0.7em]
   \hline
 
@@ -160,7 +162,23 @@ Files can be organized in this manner by the attributes spanning from last modif
   \emph{tag}
   &
   \vspace{0.7em}
-  Field that holds a \emph{customized association} of a \emph{file} or \emph{directory}.
+  Field that holds a \emph{customized association} of a \emph{file}.
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  \emph{path}
+  &
+  \vspace{0.7em}
+  Field that holds the path of the \emph{file} or \emph{directory}.
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  \emph{name}
+  &
+  \vspace{0.7em}
+  Field that holds the name of the \emph{file} or \emph{directory}.
   \\[0.7em]
   \hline
 
@@ -349,27 +367,146 @@ Files can be organized in this manner by the attributes spanning from last modif
 \end{listing}
 
 \newpage
-\section{Example Program}\label{results}
+\section{Example Programs}\label{results}
+\subsection{Case 1:}
+Write a program that can pickup all .jpg files in a directory, or sub-directory, and create new folders by date and save copies in the respective folder.
 \begin{listing}[H]
-  \caption{Code for ...}
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
   \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
-    main
-      directory D1 = "/SAMPLE_PATH";//path to the source directory
-      string str = ""; //path to the destination folder
+    def main()
+      dir D1 = "/SAMPLE_PATH" //path to the source directory
+      string str = ""  //path to the destination folder
 
       // we expect file_temp will loop over all files in "D1" including subfolders
-      for file_temp in D1
-        if( file_temp.Extension == "jpg" || file_temp.Extension == "jpeg" ){
+      for file_temp in D1 do
+        if file_temp.type == "jpeg" do
           // we wish to name the folders with date on which images were created
-          // the below stmt creates(in case it didnt exist) or points dtemp to //the folder
-          Directory dtemp = str + file_temp.Date;
-          dtemp = dtemp + file_temp;
-        }
-      }
+          // the below stmt creates(in case it didnt exist) or points dtemp to the folder.
+          dir dir_temp = str + file_temp.Date
+          dir_temp += file_temp
+        end
+      end
     end
   \end{minted}
-  \label{lst:the-code}
+\end{listing}
+
+\subsection{Case 2:}
+A user has downloaded several project folders from a course website and would like to separate the code and document files in these folders and organize them into two folders.
+\begin{listing}[H]
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+    def main()
+      //Assuming project folders were unzipped in directory W4115
+      dir desktop = “~/Desktop”
+      dir projects = desktop.path + ”/W4115”
+
+      //Create new directories in the desktop
+      dir project_code = desktop.path + ”/projectCode”
+      dir project_docs = desktop.path + “/projectDocs”
+
+      for dir_temp in projects do
+        for file_temp in dir_temp level <= 3 do
+          if file_temp.type == "ml" do
+            projectCode += file_temp
+          else if file_temp.type == "pdf"
+            projectDocs += file_temp
+          end
+        end
+      end
+    end
+  \end{minted}
+\end{listing}
+
+\newpage
+\subsection{Case 3:}
+Suppose there is a group of peers who want to share pictures, or any other file, amongst themselves. One of them should be able to take the shared files, and copy them, but some duplicates may exist. That individual should be able to write a program that deletes the duplicates and copies all the disting files to a new directory.
+\begin{listing}[H]
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+    def main()
+      dir D1 = "" //path to the first source directory
+      dir D2 = "" //path to the second source directory
+      dir D3 = "" //path to the destination directory with no duplicates
+      string duplicate_file_path  //list of comma separated duplicate files paths
+
+      //We wish to compare files in the two folder(and subfolders)
+      for file_temp1 in D1 do
+        bool flag = true
+        for file_dest in D3 do
+          if file_temp.type == "jpeg":
+            if file_temp1.name == file_dest.Name:
+              // duplicate file found
+              flag = false
+              duplicate_file_path += " , " + file_temp1.path
+              D1 -= file_temp1   // delete duplicate from original
+              break
+            end
+          end
+        end
+      end
+      if flag == true do
+        D3 += file_temp1
+      end
+
+      for file_temp2 in D2 do
+        bool flag = true
+        for file_dest in D3 do
+          if file_temp.type == "jpeg"
+            if file_temp2.name == file_dest.name do
+              flag = false
+              duplicate_file_path += ", " + file_temp1.Path
+              D1 -= file_temp2
+              break
+            end
+          end
+        if flag == true do
+          D3 += file_temp2
+        end
+      end
+    end
+  \end{minted}
+\end{listing}
+
+\newpage
+\subsection{Case 4:}
+User has copied 500 image files from his camera to a folder ‘Canon’, and would like to rename all of them to something meaningful.
+\begin{listing}[H]
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+    def main()
+      dir camera = input(“Enter device path: “)
+      string name_prefix = input(“Enter name prefix: ”)
+      dir myPictures = “~/Desktop/MyPictures”
+
+      count = 1
+      for file in camera do
+        if file.type == “jpeg” do
+          file.name = name_prefix + string(count) //Convert int to string
+          count = count + 1
+          myPictures += file
+        end
+      end
+    end
+  \end{minted}
+\end{listing}
+
+\subsection{Case 5:}
+Using custom tags to list all ebooks that have been read from a folder containing ebooks organized into subfolders A-Z, and add the “wishlist” tag to all other ebooks.
+\begin{listing}[H]
+  \definecolor{bg}{rgb}{0.95,0.95,0.95}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+    def main()
+      dir library = "~/Desktop/Ebooks"
+      print “List of books read: \n”
+      for file in library level=”all” do
+        if file.tag == “read”:
+          print file.name + “\n”
+        else
+          file.tag = “wishlist”
+        end
+      end
+    end
+  \end{minted}
 \end{listing}
 
 \end{document}

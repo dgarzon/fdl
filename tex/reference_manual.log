@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  24 SEP 2013 19:55
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 SEP 2013 02:18
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -296,9 +296,6 @@ LaTeX Warning: Label `lst:the-code' multiply defined.
 
 LaTeX Warning: Label `lst:the-code' multiply defined.
 
-
-LaTeX Warning: Label `lst:the-code' multiply defined.
-
 )
 \openout1 = `reference_manual.aux'.
 
@@ -383,42 +380,6 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
-Missing character: There is no ò in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ò in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
@@ -499,7 +460,171 @@ runsystem(rm reference_manual.out.pyg)...executed.
 
 runsystem(rm reference_manual.pyg)...executed.
 
- [5] (./reference_manual.aux)
+
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
+
+ []
+
+\openout3 = `reference_manual.pyg'.
+
+runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape      -P lin
+enos -P "verboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out
+.pyg reference_manual.pyg)...executed.
+
+(./reference_manual.out.pyg
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+)
+runsystem(rm reference_manual.out.pyg)...executed.
+
+runsystem(rm reference_manual.pyg)...executed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--418
+
+ []
+
+[5]
+\openout3 = `reference_manual.pyg'.
+
+runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape      -P lin
+enos -P "verboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out
+.pyg reference_manual.pyg)...executed.
+
+ (./reference_manual.out.pyg)
+runsystem(rm reference_manual.out.pyg)...executed.
+
+runsystem(rm reference_manual.pyg)...executed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 467--468
+
+ []
+
+[6]
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ò in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ô in font cmr10!
+\openout3 = `reference_manual.pyg'.
+
+runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape      -P lin
+enos -P "verboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out
+.pyg reference_manual.pyg)...executed.
+
+ (./reference_manual.out.pyg
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+)
+runsystem(rm reference_manual.out.pyg)...executed.
+
+runsystem(rm reference_manual.pyg)...executed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 490--491
+
+ []
+
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ú in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ù in font cmr10!
+\openout3 = `reference_manual.pyg'.
+
+runsystem(pygmentize -l c -f latex -F tokenmerge      -P mathescape      -P lin
+enos -P "verboptions= ,tabsize=2,fontsize=\normalsize " -o reference_manual.out
+.pyg reference_manual.pyg)...executed.
+
+(./reference_manual.out.pyg
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ú in font rm-inconsolata!
+Missing character: There is no ‚ in font rm-inconsolata!
+Missing character: There is no Ä in font rm-inconsolata!
+Missing character: There is no ù in font rm-inconsolata!
+)
+runsystem(rm reference_manual.out.pyg)...executed.
+
+runsystem(rm reference_manual.pyg)...executed.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--510
+
+ []
+
+[7] (./reference_manual.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -508,13 +633,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3902 strings out of 493315
- 54844 string characters out of 6137904
- 129403 words of memory out of 5000000
- 7278 multiletter control sequences out of 15000+600000
+ 3909 strings out of 493315
+ 55038 string characters out of 6137904
+ 134405 words of memory out of 5000000
+ 7277 multiletter control sequences out of 15000+600000
  12875 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,12n,35p,671b,528s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,13n,35p,573b,536s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/inconsolata/fi4-ot1tt.enc
 }</usr/local/texlive/2013/texmf-dist/fonts/type1/public/inconsolata/Inconsolata
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.
@@ -528,10 +653,10 @@ r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
 ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loc
 al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on reference_manual.pdf (5 pages, 136546 bytes).
+Output written on reference_manual.pdf (7 pages, 142909 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
