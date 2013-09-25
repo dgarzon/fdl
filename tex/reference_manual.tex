@@ -324,7 +324,7 @@ Files can be organized in this manner by the attributes spanning from last modif
 \subsubsection{\emph{if-then-else}}
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{python}
+  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     if <condition> then
       <expression>
     else
@@ -337,7 +337,7 @@ Files can be organized in this manner by the attributes spanning from last modif
 \subsubsection{\emph{while}}
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     while <condition> then
       <expression>
     end
@@ -348,7 +348,7 @@ Files can be organized in this manner by the attributes spanning from last modif
 \subsubsection{\emph{for}}
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     for <identifier> in <set of files> do
       <expression>
     end
@@ -358,7 +358,7 @@ Files can be organized in this manner by the attributes spanning from last modif
 \subsection{Function Definition}
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+  \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def <identifier> (<parameter list>)
       <expression>
     end
@@ -372,7 +372,7 @@ Files can be organized in this manner by the attributes spanning from last modif
 Write a program that can pickup all .jpg files in a directory, or sub-directory, and create new folders by date and save copies in the respective folder.
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
       dir D1 = "/SAMPLE_PATH" //path to the source directory
       string str = ""  //path to the destination folder
@@ -394,7 +394,7 @@ Write a program that can pickup all .jpg files in a directory, or sub-directory,
 A user has downloaded several project folders from a course website and would like to separate the code and document files in these folders and organize them into two folders.
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
       //Assuming project folders were unzipped in directory W4115
       dir desktop = “~/Desktop”
@@ -422,7 +422,7 @@ A user has downloaded several project folders from a course website and would li
 Suppose there is a group of peers who want to share pictures, or any other file, amongst themselves. One of them should be able to take the shared files, and copy them, but some duplicates may exist. That individual should be able to write a program that deletes the duplicates and copies all the disting files to a new directory.
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
       dir D1 = "" //path to the first source directory
       dir D2 = "" //path to the second source directory
@@ -472,7 +472,7 @@ Suppose there is a group of peers who want to share pictures, or any other file,
 User has copied 500 image files from his camera to a folder ‘Canon’, and would like to rename all of them to something meaningful.
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
       dir camera = input(“Enter device path: “)
       string name_prefix = input(“Enter name prefix: ”)
@@ -494,7 +494,7 @@ User has copied 500 image files from his camera to a folder ‘Canon’, and wou
 Using custom tags to list all ebooks that have been read from a folder containing ebooks organized into subfolders A-Z, and add the “wishlist” tag to all other ebooks.
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
-  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{c}
+  \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
       dir library = "~/Desktop/Ebooks"
       print “List of books read: \n”
