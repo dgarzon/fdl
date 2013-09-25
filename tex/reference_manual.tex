@@ -119,7 +119,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \end{tabular}
 \end{table}
 
-\subsection{File and Folder Attributes}
+\subsection{File and Directory Attributes}
 
 \begin{table}[ht]
   \centering
@@ -179,6 +179,15 @@ Files can be organized in this manner by the attributes spanning from last modif
   &
   \vspace{0.7em}
   Field that holds the name of the \emph{file} or \emph{directory}.
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  \vspace{-1em}
+  \emph{level}
+  &
+  \vspace{0.7em}
+  Field that tracks the depth (an integer) at which a given \emph{file} or \emph{directory} is with respect to the root.
   \\[0.7em]
   \hline
 
@@ -356,7 +365,7 @@ Files can be organized in this manner by the attributes spanning from last modif
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
   \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
-    for <identifier> in <set of files> do
+    for <identifier> in <set of files>, level <logical operator> <integer: default = all> do
       <expression>
     end
   \end{minted}
