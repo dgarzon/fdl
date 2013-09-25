@@ -12,6 +12,14 @@
 % Title Definition
 \title{\textbf{\huge Proposal: File and Directory Manipulation Language (FDL)}}
 \author{
+  Rupayan Basu\\
+  Columbia University\\
+  rb3034@columbia.edu
+  \and
+  Pranav Bhalla\\
+  Columbia University\\
+  pb2538@columbia.edu
+  \and
   Cara J. Borenstein\\
   Columbia University\\
   cjb2182@columbia.edu
@@ -23,14 +31,6 @@
   Daniel L. Newman\\
   Columbia University\\
   dln2111@columbia.edu
-  \and
-  Pranav Bhalla\\
-  Columbia University\\
-  pb2538@columbia.edu
-  \and
-  Rupayan Basu\\
-  Columbia University\\
-  rb3034@columbia.edu
 }
 
 \begin{document}
@@ -218,6 +218,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \hline
 
   %% row 4
+  \vspace{-0.9em}
   $,$
   &
   \vspace{0.7em}
@@ -234,6 +235,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \hline
 
   %% row 6
+  \vspace{-0.9em}
   $+=$
   &
   \vspace{0.7em}
@@ -242,6 +244,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \hline
 
   %% row 7
+  \vspace{-0.9em}
   $-=$
   &
   \vspace{0.7em}
@@ -284,6 +287,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \hline
 
   %% row 4
+  \vspace{-0.9em}
   $>$
   &
   \vspace{0.7em}
@@ -292,6 +296,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \hline
 
   %% row 5
+  \vspace{-0.9em}
   $>=$
   &
   \vspace{0.7em}
@@ -300,6 +305,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \hline
 
   %% row 6
+  \vspace{-0.9em}
   $<$
   &
   \vspace{0.7em}
@@ -308,6 +314,7 @@ Files can be organized in this manner by the attributes spanning from last modif
   \hline
 
   %% row 7
+  \vspace{-0.9em}
   $<=$
   &
   \vspace{0.7em}
@@ -379,7 +386,7 @@ Write a program that can pickup all .jpg files in a directory, or sub-directory,
 
       // we expect file_temp will loop over all files in "D1" including subfolders
       for file_temp in D1 do
-        if file_temp.type == "jpeg" do
+        if file_temp.type == "jpeg" then
           // we wish to name the folders with date on which images were created
           // the below stmt creates(in case it didnt exist) or points dtemp to the folder.
           dir dir_temp = str + file_temp.Date
@@ -406,7 +413,7 @@ A user has downloaded several project folders from a course website and would li
 
       for dir_temp in projects do
         for file_temp in dir_temp level <= 3 do
-          if file_temp.type == "ml" do
+          if file_temp.type == "ml" then
             projectCode += file_temp
           else if file_temp.type == "pdf"
             projectDocs += file_temp
@@ -433,8 +440,8 @@ Suppose there is a group of peers who want to share pictures, or any other file,
       for file_temp1 in D1 do
         bool flag = true
         for file_dest in D3 do
-          if file_temp.type == "jpeg":
-            if file_temp1.name == file_dest.Name:
+          if file_temp.type == "jpeg" then
+            if file_temp1.name == file_dest.name then
               // duplicate file found
               flag = false
               duplicate_file_path += " , " + file_temp1.path
@@ -451,8 +458,8 @@ Suppose there is a group of peers who want to share pictures, or any other file,
       for file_temp2 in D2 do
         bool flag = true
         for file_dest in D3 do
-          if file_temp.type == "jpeg"
-            if file_temp2.name == file_dest.name do
+          if file_temp.type == "jpeg" then
+            if file_temp2.name == file_dest.name then
               flag = false
               duplicate_file_path += ", " + file_temp1.Path
               D1 -= file_temp2
@@ -480,7 +487,7 @@ User has copied 500 image files from his camera to a folder ‘Canon’, and wou
 
       count = 1
       for file in camera do
-        if file.type == “jpeg” do
+        if file.type == “jpeg” then
           file.name = name_prefix + string(count) //Convert int to string
           count = count + 1
           myPictures += file
@@ -499,7 +506,7 @@ Using custom tags to list all ebooks that have been read from a folder containin
       dir library = "~/Desktop/Ebooks"
       print “List of books read: \n”
       for file in library level=”all” do
-        if file.tag == “read”:
+        if file.tag == “read” then
           print file.name + “\n”
         else
           file.tag = “wishlist”

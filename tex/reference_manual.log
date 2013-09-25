@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 SEP 2013 02:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  25 SEP 2013 02:42
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -286,7 +286,17 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
-(./reference_manual.aux)
+(./reference_manual.aux
+
+LaTeX Warning: Label `lst:the-code' multiply defined.
+
+
+LaTeX Warning: Label `lst:the-code' multiply defined.
+
+
+LaTeX Warning: Label `lst:the-code' multiply defined.
+
+)
 \openout1 = `reference_manual.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
@@ -303,8 +313,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 36.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 36.
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 36.
@@ -443,7 +452,7 @@ runsystem(rm reference_manual.out.pyg)...executed.
 runsystem(rm reference_manual.pyg)...executed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 390--391
+Underfull \hbox (badness 10000) in paragraph at lines 397--398
 
  []
 
@@ -484,7 +493,7 @@ runsystem(rm reference_manual.out.pyg)...executed.
 runsystem(rm reference_manual.pyg)...executed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--418
+Underfull \hbox (badness 10000) in paragraph at lines 424--425
 
  []
 
@@ -501,7 +510,7 @@ runsystem(rm reference_manual.out.pyg)...executed.
 runsystem(rm reference_manual.pyg)...executed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 467--468
+Underfull \hbox (badness 10000) in paragraph at lines 474--475
 
  []
 
@@ -549,7 +558,7 @@ runsystem(rm reference_manual.out.pyg)...executed.
 runsystem(rm reference_manual.pyg)...executed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 490--491
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
 
  []
 
@@ -602,19 +611,19 @@ runsystem(rm reference_manual.out.pyg)...executed.
 runsystem(rm reference_manual.pyg)...executed.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 509--510
+Underfull \hbox (badness 10000) in paragraph at lines 516--517
 
  []
 
 [7] (./reference_manual.aux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
  3902 strings out of 493315
  54954 string characters out of 6137904
- 132340 words of memory out of 5000000
+ 132405 words of memory out of 5000000
  7270 multiletter control sequences out of 15000+600000
  12875 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -632,7 +641,7 @@ r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
 ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loc
 al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on reference_manual.pdf (7 pages, 141236 bytes).
+Output written on reference_manual.pdf (7 pages, 141161 bytes).
 PDF statistics:
  77 PDF objects out of 1000 (max. 8388607)
  55 compressed objects within 1 object stream
