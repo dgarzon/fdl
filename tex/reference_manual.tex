@@ -365,7 +365,7 @@ Files can be organized in this manner by the attributes spanning from last modif
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
   \begin{minted}[linenos=false, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
-    for <identifier> in <set of files>, level <logical operator> <integer: default = all> do
+    for <identifier> in <directory> level <logical operator> <integer: default = all> do
       <expression>
     end
   \end{minted}
@@ -413,18 +413,18 @@ A user has downloaded several project folders from a course website and would li
   \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
       //Assuming project folders were unzipped in directory W4115
-      dir desktop = “~/Desktop”
-      dir projects = desktop.path + ”/W4115”
+      dir desktop = '~/Desktop'
+      dir projects = desktop.path + '/W4115'
 
       //Create new directories in the desktop
-      dir project_code = desktop.path + ”/projectCode”
-      dir project_docs = desktop.path + “/projectDocs”
+      dir project_code = desktop.path + '/projectCode'
+      dir project_docs = desktop.path + '/projectDocs'
 
       for dir_temp in projects do
         for file_temp in dir_temp level <= 3 do
-          if file_temp.type == "ml" then
+          if file_temp.type == 'ml' then
             projectCode += file_temp
-          else if file_temp.type == "pdf"
+          else if file_temp.type == 'pdf'
             projectDocs += file_temp
           end
         end
@@ -435,49 +435,49 @@ A user has downloaded several project folders from a course website and would li
 
 \newpage
 \subsection{Case 3:}
-Suppose there is a group of peers who want to share pictures, or any other file, amongst themselves. One of them should be able to take the shared files, and copy them, but some duplicates may exist. That individual should be able to write a program that deletes the duplicates and copies all the disting files to a new directory.
+Suppose there is a group of peers who want to share pictures, or any other file, amongst themselves. One of them should be able to take the shared files, and copy them, but some duplicates may exist. That individual should be able to write a program that deletes the duplicates and copies all the distinct files to a new directory.
 \begin{listing}[H]
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
   \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
-      dir D1 = "" //path to the first source directory
-      dir D2 = "" //path to the second source directory
-      dir D3 = "" //path to the destination directory with no duplicates
+      dir D1 = '' //path to the first source directory
+      dir D2 = '' //path to the second source directory
+      dir D3 = '' //path to the destination directory with no duplicates
       string duplicate_file_path  //list of comma separated duplicate files paths
 
       //We wish to compare files in the two folder(and subfolders)
       for file_temp1 in D1 do
         bool flag = true
         for file_dest in D3 do
-          if file_temp.type == "jpeg" then
+          if file_temp1.type == 'jpeg' then
             if file_temp1.name == file_dest.name then
               // duplicate file found
               flag = false
-              duplicate_file_path += " , " + file_temp1.path
+              duplicate_file_path +=  ', ' + file_temp1.path
               D1 -= file_temp1   // delete duplicate from original
               break
             end
           end
         end
-      end
-      if flag == true do
-        D3 += file_temp1
+        if flag == true then
+          D3 += file_temp1
+        end
       end
 
       for file_temp2 in D2 do
         bool flag = true
         for file_dest in D3 do
-          if file_temp.type == "jpeg" then
+          if file_temp.type == 'jpeg' then
             if file_temp2.name == file_dest.name then
               flag = false
-              duplicate_file_path += ", " + file_temp1.Path
+              duplicate_file_path += ', ' + file_temp1.Path
               D1 -= file_temp2
               break
             end
           end
-        if flag == true do
-          D3 += file_temp2
-        end
+      end
+      if flag == true then
+        D3 += file_temp2
       end
     end
   \end{minted}
@@ -490,13 +490,13 @@ User has copied 500 image files from his camera to a folder ‘Canon’, and wou
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
   \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
-      dir camera = input(“Enter device path: “)
-      string name_prefix = input(“Enter name prefix: ”)
-      dir myPictures = “~/Desktop/MyPictures”
+      dir camera = input('Enter device path: ')
+      string name_prefix = input('Enter name prefix: ')
+      dir myPictures = '~/Desktop/MyPictures'
 
-      count = 1
+      int count = 1
       for file in camera do
-        if file.type == “jpeg” then
+        if file.type == 'jpeg' then
           file.name = name_prefix + string(count) //Convert int to string
           count = count + 1
           myPictures += file
@@ -512,13 +512,13 @@ Using custom tags to list all ebooks that have been read from a folder containin
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
   \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
-      dir library = "~/Desktop/Ebooks"
-      print “List of books read: \n”
-      for file in library level=”all” do
-        if file.tag == “read” then
-          print file.name + “\n”
+      dir library = '~/Desktop/Ebooks'
+      print 'List of books read: \n'
+      for file in library level='all' do
+        if file.tag == 'read' then
+          print file.name + '\n'
         else
-          file.tag = “wishlist”
+          file.tag = 'wishlist'
         end
       end
     end
