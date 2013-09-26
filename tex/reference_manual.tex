@@ -390,12 +390,12 @@ Write a program that can pickup all .jpg files in a directory, or sub-directory,
   \definecolor{bg}{rgb}{0.95,0.95,0.95}
   \begin{minted}[linenos=true, bgcolor=bg, tabsize=2, fontsize=\normalsize,mathescape]{text}
     def main()
-      dir D1 = "/SAMPLE_PATH" //path to the source directory
-      string str = ""  //path to the destination folder
+      dir D1 = '/SAMPLE_PATH' //path to the source directory
+      string str = '' //path to the destination folder
 
       // we expect file_temp will loop over all files in "D1" including subfolders
       for file_temp in D1 do
-        if file_temp.type == "jpeg" then
+        if file_temp.type == 'jpeg' then
           // we wish to name the folders with date on which images were created
           // the below stmt creates(in case it didnt exist) or points dtemp to the folder.
           dir dir_temp = str + file_temp.Date
