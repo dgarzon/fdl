@@ -57,7 +57,7 @@ Files can be organized in this manner by the attributes spanning from last modif
 \section{Syntax}\label{previous work}
 
 \subsection{Basic Data Types}
-In FDL there are four primitive types available to the user:
+
 \begin{table}[ht]
   \centering
   \vspace{0.5em}
@@ -100,25 +100,26 @@ In FDL there are four primitive types available to the user:
 
   %% row 6
   \vspace{-1.5em}
-  \emph{path}
+  \emph{dir}
   &
   \vspace{0.7em}
-   Object that holds the file-system location to a \emph{collection} of 0 or more \emph{files} or \emph{directories} in memory.  A path can be a single \emph{file}, a collection of \emph{files}, and a \emph{directory}.
+   Object that holds the path to a \emph{collection} of 0 or more \emph{files} in memory.  Directories can contain any number of \emph{files} and any number of \emph{sub-directories}.
   \\[0.7em]
   \hline
 
-  %% row 6
-  \vspace{-1.5em}
-  \emph{map}
+  %% row 7
+  \vspace{-1em}
+  \emph{file}
   &
   \vspace{0.7em}
-   A map is an associative array containing a collection of primitives, indexed by a key that can be either a \emph{singleton} or a \emph{tuple} integer.
+  Object that has a \emph{file\textunderscore type}, \emph{modified\textunderscore date}, \emph{created\textunderscore date}, and 0 or more customized \emph{tags}.
   \\[0.7em]
   \hline
+
   \end{tabular}
 \end{table}
 
-\subsection{Path Attributes}
+\subsection{File and Directory Attributes}
 
 \begin{table}[ht]
   \centering
@@ -131,14 +132,6 @@ In FDL there are four primitive types available to the user:
   &
   \vspace{0.7em}
   \textbf{Description} \\ [0.7em]
-  \hline
-
-  %% row 6
-  \emph{name}
-  &
-  \vspace{0.7em}
-  Field that holds the name of the \emph{file} or \emph{directory}.
-  \\[0.7em]
   \hline
 
   %% row 2
@@ -157,69 +150,49 @@ In FDL there are four primitive types available to the user:
   \\[0.7em]
   \hline
 
-  %% row 6
-  \emph{kind}
+  %% row 4
+  \emph{file\textunderscore type}
   &
   \vspace{0.7em}
-  Field that holds the kind of the \emph{path}. It will return \emph{file} or \emph{directory}.
+  Field that holds the type of a \emph{file}. (ex. 'txt', 'jpeg').
+  \\[0.7em]
+  \hline
+
+  %% row 5
+  \emph{tag}
+  &
+  \vspace{0.7em}
+  Field that holds a \emph{customized association} of a \emph{file}.
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  \emph{path}
+  &
+  \vspace{0.7em}
+  Field that holds the path of the \emph{file} or \emph{directory}.
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  \emph{name}
+  &
+  \vspace{0.7em}
+  Field that holds the name of the \emph{file} or \emph{directory}.
+  \\[0.7em]
+  \hline
+
+  %% row 6
+  \vspace{-1em}
+  \emph{level}
+  &
+  \vspace{0.7em}
+  Field that tracks the depth (an integer) at which a given \emph{file} or \emph{directory} is with respect to the root.
   \\[0.7em]
   \hline
 
   \end{tabular}
 \end{table}
-
-\newpage
-
-\subsection{Map Operations}
-
-\begin{table}[ht]
-  \centering
-  \vspace{0.5em}
-  \begin{tabular}{|m{8em}|b{34em}|}
-  \hline
-
-  %% row 1
-  \textbf{operation}
-  &
-  \vspace{0.7em}
-  \textbf{Description} \\ [0.7em]
-  \hline
-
-  %% row 6
-  \emph{insert}
-  &
-  \vspace{0.7em}
-  Built-in function that inserts an element to a \emph{map}. The first argument passed will be used as the \emph{key} while the second argument will be the value associated with that key.
-  \\[0.7em]
-  \hline
-
-  %% row 2
-  \emph{reassign}
-  &
-  \vspace{0.7em}
-  Built-in function that reassigns the value of an element in a \emph{map}. The first argument passed will be used as the \emph{key} while the second argument will be the new value associated with that key. If the key is invalid, the function will return NULL.
-  \\[0.7em]
-  \hline
-
-  %% row 3
-  \emph{delete}
-  &
-  \vspace{0.7em}
-  Built-in function that deletes an entry of a \emph{map}. The function only takes one argument, the entry \emph{key}. If the key is invalid, the function will return NULL, else it deletes the entry and returns TRUE.
-  \\[0.7em]
-  \hline
-
-  %% row 6
-  \emph{lookup}
-  &
-  \vspace{0.7em}
-  Built-in function that check whether a value exists in a \emph{map}. The function only takes one argument, the desired \emph{value}. If the value exists, the function returns the \emph{key} associated with that value. If the value does not exists, the function returns NULL.
-  \\[0.7em]
-  \hline
-
-  \end{tabular}
-\end{table}
-
 
 \newpage
 \subsection{Mathematical Operators}
