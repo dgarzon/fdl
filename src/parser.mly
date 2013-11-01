@@ -99,9 +99,12 @@ stmt_list:
 stmt:
     expr                                            { Expr($1) }
     | RETURN expr                                   { Return($2) }
-    | stmt_list                                     { Block(List.rev $2) }
+    | stmt_list                                     { Block(List.rev $1) }
     | IF LPAREN expr RPAREN THEN stmt               { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt     { If($3, $6, $8) }
     | WHILE LPAREN expr RPAREN stmt                 { While($3, $5) }
 
 expr:
+    LIT_INT     { Literal($1) }
+    | LIT_STR   { Literal($1) }
+    | ID        { Id($1) }

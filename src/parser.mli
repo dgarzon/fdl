@@ -47,4 +47,4 @@ type token =
   | EOF
 
 val program :
-  (Lexing.lexbuf  -> token) -> Lexing.lexbuf -> Ast.program
+  (Lexing.lexbuf  -> token) -> Lexing.lexbuf -> Ast.main
