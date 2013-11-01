@@ -1,6 +1,6 @@
 1. Lexical Analysis (Scanner): Reads the input from a file as a text stream and tries to divide the entire text into Tokens. The rules for creating these tokens are predefined for a given high-level language. Every token has a token type.
 
-Ex.
+Example
 
 int x = 4;
 
