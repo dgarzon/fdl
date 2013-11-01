@@ -1,4 +1,4 @@
-File Manipulation Language: FML
+File Manipulation Language: FDL
 
 Data Types:
   - integer
