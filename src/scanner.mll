@@ -11,26 +11,35 @@ rule token = parse
 	| ';'			{ SEMI }		| ','			{ COMMA }
 	| '+'			{ PLUS }		| '-'			{ MINUS }
 	| '*'			{ TIMES }		| '/'			{ DIVIDE }
-	| '='			{ ASSIGN }		
+	| '='			{ ASSIGN }
+	| "<<-"			{ MOVE }
+	| "<-"			{ COPY }
 	| "=="			{ EQ }			| "!="			{ NEQ }
-	| '<'			{ LESS }		| "<="			{ LEQ }
-	| '>'			{ GRT }			| ">="			{ GEQ }
+	| '<'			{ LT }			| "<="			{ LEQ }
+	| '>'			{ GT }			| ">="			{ GEQ }
 	| '['			{ LBRACK }		| ']'			{ RBRACK }
 	| "&&"			{ AND }			| "||"			{ OR }
-	| '!'			{ NOT }			
+	| '!'			{ NOT }
+	| "main"		{ MAIN }
+	| "def"			{ DEF }
 	| "int"			{ INT }			| "path"		{ PATH }
+	| "dict"		{ DICT }		| "list"		{ LIST }
 	| "string"		{ STR }			| "bool"		{ BOOL }
 	| "if"			{ IF }			| "else"		{ ELSE }
+	| "then"		{ THEN }
+	| "for"			{ FOR }			| "in"			{ IN }
+	| "do"			{ DO }
 	| "while"		{ WHILE }		| "return"		{ RETURN }
-	| "break"		{ BREAK }		| "continue"	{ BREAK }
-	| "void"		{ VOID }		
+	| "break"		{ BREAK }		| "continue"	{ CONTINUE }
+	| "void"		{ VOID }
 	| "true"		{ TRUE }		| "false"	{ FALSE }
+	| "trash"		{ TRASH }
 	| eof			{ EOF }			(* do as microC *)
 	| digit+ as lit					{ LIT_INT(int_of_string lit) }
 	| quote [^'"']* quote as lit	{ LIT_STR(lit) }
-	| letter | '_' (letter | digit | '_')* as id		{ ID(id) }
+	| letter | (letter | digit | '_')* as id		{ ID(id) }
 	| _ as char 		{ raise (Failure("illegal character " ^ Char.escaped char)) }
 
 and comment = parse
-	"*/"			{ token lexbuf }
+	"//"			{ token lexbuf }
 	| _				{ comment lexbuf}
