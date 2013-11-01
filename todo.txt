@@ -77,3 +77,5 @@ Ex. A variable is used before defined, but it is not defined, then it is a seman
 x = 10;
 
 It is syntaxically correct, but semantically incorrect as it was never defined
+
+end
