@@ -20,7 +20,6 @@ rule token = parse
 	| '['			{ LBRACK }		| ']'			{ RBRACK }
 	| "&&"			{ AND }			| "||"			{ OR }
 	| '!'			{ NOT }
-	| "main"		{ MAIN }
 	| "def"			{ DEF }
 	| "int"			{ INT }			| "path"		{ PATH }
 	| "dict"		{ DICT }		| "list"		{ LIST }
