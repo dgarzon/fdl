@@ -1,22 +1,21 @@
 %{ open Ast %}
 
-%token SEMI LPAREN RPAREN LBRACE RBRACE LBRACK RBRACK COMMA
+%token LPAREN RPAREN LBRACE RBRACE LBRACK RBRACK COMMA
 %token PLUS MINUS TIMES DIVIDE ASSIGN MOVE COPY
-%token EQ NEQ LT LEQ GT GEQ LESS GTR
+%token EQ NEQ LT LEQ GT GEQ NOT
 %token AND OR
 %token CONTINUE BREAK
-%token DEF RETURN IF THEN ELSE FOR IN WHILE INT STR
-%token DICT LIST PATH TRASH MAIN
+%token RETURN IF THEN ELSE FOR IN WHILE
+%token DEF VOID INT STR DICT LIST PATH BOOL TRASH
 %token <int> LIT_INT
 %token <string> LIT_STR
 %token <string> ID
 %token EOF
 
+%nonassoc NOELSE
 %nonassoc ELSE
-%nonassoc DO
-%nonassoc THEN
 
-%right ASSIGN
+%right ASSIGN MOVE COPY NOT
 
 %left EQ NEQ
 %left LT GT LEQ GEQ
@@ -24,101 +23,118 @@
 %left TIMES DIVIDE
 
 %start program
-%type <Ast.main> program
+%type <Ast.program> program
 
 %%
 
 program:
-   /* nothing */ { [], [] }
-   /* | program vdecl { ($2 :: fst $1), snd $1 } */
-   | program fdecl { fst $1, ($2 :: snd $1) }
+    { [], [] }
+    | program vdecl { ($2 :: fst $1), snd $1 }
+    | program fdecl { fst $1, ($2 :: snd $1) }
 
 fdecl:
-    INT ID LPAREN formals_opt RPAREN stmt_list
-        {{
-            return = literal_int;
-            function_name = $2;
-            parameters = $4;
-            body = $6;
-        }}
-    | STR ID LPAREN formals_opt RPAREN stmt_list
-        {{
-            return = literal_str;
-            function_name = $2;
-            parameters = $4;
-            body = List.rev $6;
-        }}
-    | PATH ID LPAREN formals_opt RPAREN stmt_list
-        {{
-            return = path_type;
-            function_name = $2;
-            parameters = $4;
-            body = List.rev $6;
-        }}
-    | DICT ID LPAREN formals_opt RPAREN stmt_list
-        {{
-            return = dict_type;
-            function_name = $2;
-            parameters = $4;
-            body = List.rev $6;
-        }}
-    | LIST ID LPAREN formals_opt RPAREN stmt_list
-        {{
-            return = list_type;
-            function_name = $2;
-            parameters = $4;
-            body = List.rev $6;
-        }}
+    DEF VOID ID LPAREN formals_opt RPAREN LBRACE vdecl_list stmt_list RBRACE
+       {{
+        fname = $3;
+        formals = $5;
+        locals = List.rev $8;
+        body = List.rev $9 }}
+   | DEF INT ID LPAREN formals_opt RPAREN LBRACE vdecl_list stmt_list RBRACE
+      {{
+        return = IntType;
+        fname = $3;
+        formals = $5;
+        locals = List.rev $8;
+        body = List.rev $9 }}
+   | DEF STR ID LPAREN formals_opt RPAREN LBRACE vdecl_list stmt_list RBRACE
+      {{
+        return = StrType;
+        fname = $3;
+        formals = $5;
+        locals = List.rev $8;
+        body = List.rev $9 }}
+   | DEF PATH ID LPAREN formals_opt RPAREN LBRACE vdecl_list stmt_list RBRACE
+      {{
+        return = PathType;
+        fname = $3;
+        formals = $5;
+        locals = List.rev $8;
+        body = List.rev $9 }}
+   | DEF BOOL ID LPAREN formals_opt RPAREN LBRACE vdecl_list stmt_list RBRACE
+      {{
+        return = BoolType;
+        fname = $3;
+        formals = $5;
+        locals = List.rev $8;
+        body = List.rev $9 }}
 
 formals_opt:
     { [] }
-    | formals_list   { List.rev $1 }
+    | formal_list   {{ List.rev $1 }}
 
-formals_list:
-    formal                          { [$1] }
-    | formals_list COMMA formal     { $3 :: $1 }
+formal_list:
+    formal                   {{ [$1] }}
+    | formal_list COMMA formal {{ $3 :: $1 }}
 
 formal:
-    INT ID      {{var_type = lit_int; var_name = $2}}
-    | STR ID    {{var_type = lit_str; var_name = $2}}
-    | PATH ID   {{var_type = path_type; var_name = $2}}
-    | DICT ID   {{var_type = dict_type; var_name = $2}}
-    | LIST ID   {{var_type = list_type; var_name = $2}}
+    INT ID      {{ VarType = IntType; name = $2; }}
+    | BOOL ID     {{ VarType = BoolType; name = $2; }}
+    | PATH ID     {{ VarType = PathType; name = $2; }}
+    | STR ID      {{ VarType = StrType; name = $2; }}
+    | DICT ID     {{ VarType = DictType; name = $2; }}
+    | LIST ID     {{ VarType = ListType; name = $2; }}
+
+
+vdecl_list:
+    { [] }
+    | vdecl_list vdecl { $2 :: $1 }
 
 vdecl:
-    INT ID      {{var_type = Ast.Int; var_name = $2;  data_type = Ast.Int}}
-    | STR ID    {{var_type = Ast.Str; var_name = $2; data_type = Ast.Str}}
-    | PATH ID   {{var_type = Ast.Path; var_name = $2; data_type = Ast.Path}}
-    | DICT ID   {{var_type = Ast.Dict; var_name = $2; data_type = Ast.Dict}}
-    | LIST ID   {{var_type = Ast.List; var_name = $2; data_type = Ast.List}}
+    INT ID    {{VarType = Ast.Int;  VarName = $2; DataType = Ast.Int}}
+    | BOOL ID   {{VarType = Ast.Bool; VarName = $2; DataType = Ast.Bool}}
+    | STR ID    {{VarType = Ast.Str;  VarName = $2; DataType = Ast.Str}}
+    | PATH ID   {{VarType = Ast.Path; VarName = $2; DataType = Ast.Path}}
+    | DICT ID   {{VarType = Ast.Dict; VarName = $2; DataType = Ast.Dict}}
+    | LIST ID   {{VarType = Ast.List; VarName = $2; DataType = Ast.List}}
 
 stmt_list:
     { [] }
     | stmt_list stmt { $2 :: $1 }
 
 stmt:
-    expr                                            { Expr($1) }
-    | RETURN expr                                   { Return($2) }
-    | stmt_list                                     { Block(List.rev $1) }
-    | IF LPAREN expr RPAREN THEN stmt               { If($3, $6, Block([])) }
-    | IF LPAREN expr RPAREN THEN stmt ELSE stmt     { If($3, $6, $8) }
-    | WHILE LPAREN expr RPAREN stmt                 { While($3, $5) }
+    expr { Expr($1) }
+    | RETURN expr                                  { Return($2) }
+    | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
+    | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
+
+expr_opt:
+    { Noexpr }
+    | expr          { $1 }
 
 expr:
-    LIT_INT     { Literal($1) }
-    | LIT_STR   { Literal($1) }
-    | ID        { Id($1) }
-    | expr PLUS   expr { Binop($1, Add,   $3) }
-    | expr MINUS  expr { Binop($1, Sub,   $3) }
-    | expr TIMES  expr { Binop($1, Mult,  $3) }
-    | expr DIVIDE expr { Binop($1, Div,   $3) }
-    | expr EQ     expr { Binop($1, Equal, $3) }
-    | expr NEQ    expr { Binop($1, Neq,   $3) }
-    | expr LT     expr { Binop($1, Less,  $3) }
-    | expr LEQ    expr { Binop($1, Leq,   $3) }
-    | expr GT     expr { Binop($1, Greater,  $3) }
-    | expr GEQ    expr { Binop($1, Geq,   $3) }
-    | ID ASSIGN expr   { Assign($1, $3) }
-    | ID MOVE expr     { Move($1, $3) }
-    | ID COPY expr     { Copy($1, $3) }
-    | ID LPAREN actuals_opt RPAREN { Call($1, $3) }
+    | LIT_INT                      { LitInt($1) }
+    | LIT_STR                      { LitStr($1) }
+    | ID                           { Id($1) }
+    | expr PLUS   expr             { Binop($1, Add,      $3) }
+    | expr MINUS  expr             { Binop($1, Sub,      $3) }
+    | expr TIMES  expr             { Binop($1, Mult,     $3) }
+    | expr DIVIDE expr             { Binop($1, Div,      $3) }
+    | expr EQ     expr             { Binop($1, Equal,    $3) }
+    | expr NEQ    expr             { Binop($1, Neq,      $3) }
+    | expr LT     expr             { Binop($1, Less,     $3) }
+    | expr LEQ    expr             { Binop($1, Leq,      $3) }
+    | expr GT     expr             { Binop($1, Greater,  $3) }
+    | expr GEQ    expr             { Binop($1, Geq,      $3) }
+    | ID ASSIGN expr               { Assign($1, $3) }
+    | ID COPY expr                 { Copy($1,   $3) }
+    | ID MOVE expr                 { Assign($1, $3) }
+    | ID LPAREN actuals_opt RPAREN { Call($1,   $3) }
+
+actuals_opt:
+    /* nothing */ { [] }
+    | actuals_list  { List.rev $1 }
+
+actuals_list:
+    expr                    { [$1] }
+    | actuals_list COMMA expr { $3 :: $1 }
+
