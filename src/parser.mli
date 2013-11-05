@@ -7,6 +7,7 @@ type token =
   | RBRACK
   | COMMA
   | TAB
+  | SEMI
   | PLUS
   | MINUS
   | TIMES

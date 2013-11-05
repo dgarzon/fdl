@@ -11,7 +11,7 @@ rule token = parse
 	| '{'			{ LBRACE }		| '}'			{ RBRACE }		| ','			{ COMMA }
 	| '+'			{ PLUS }		| '-'			{ MINUS }
 	| '*'			{ TIMES }		| '/'			{ DIVIDE }
-	| '='			{ ASSIGN }
+	| '='			{ ASSIGN }		| ';'			{ SEMI }
 	| "<<-"			{ MOVE }
 	| "<-"			{ COPY }
 	| "=="			{ EQ }			| "!="			{ NEQ }
