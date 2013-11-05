@@ -12,7 +12,7 @@ let rec string_of_expr = function
           Add -> "+" | Sub -> "-" | Mult -> "*" | Div -> "/"
         | Equal -> "==" | Neq -> "!="
         | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">="
-      ) 
+      )
       ^ " " ^ string_of_expr e2
   | Assign(v, e) -> v ^ " = " ^ string_of_expr e
   | Noexpr -> ""
@@ -36,7 +36,8 @@ let string_of_vtype = function
   | StrType -> "char *"
   | BoolType -> "int"
   | PathType -> "char *"
-(* Need to match dict and list *)
+  | DictType -> "struct Dictionary *"
+  | ListType -> "struct List *"
 
 (* variable declrarations, has ;*)
 let string_of_vdecl vdecl = string_of_vtype vdecl.vtype ^ " " ^ vdecl.vname ^ ";\n"
@@ -45,7 +46,7 @@ let string_of_vdecl vdecl = string_of_vtype vdecl.vtype ^ " " ^ vdecl.vname ^ ";
 let string_of_formaldecl vdecl = string_of_vtype vdecl.vtype ^ " " ^ vdecl.vname
 
 let string_of_fdecl fdecl =
-  string_of_vtype fdecl.return ^ " " ^ fdecl.fname ^ "(" ^ 
+  string_of_vtype fdecl.return ^ " " ^ fdecl.fname ^ "(" ^
     String.concat ", " (List.map string_of_formaldecl fdecl.formals) ^ ")\n{\n" ^
   String.concat "" (List.map string_of_vdecl fdecl.locals) ^
   String.concat "" (List.map string_of_stmt fdecl.body) ^
