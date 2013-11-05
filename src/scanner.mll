@@ -1,4 +1,4 @@
-{ open parser }
+{ open Parser }
 
 let letter = ['a' - 'z' 'A' - 'Z']
 let digit = ['0' - '9']
@@ -8,8 +8,7 @@ rule token = parse
 	[' ' '\r' '\n']	{ token lexbuf }	| "/*"		{ comment lexbuf }
 	| '\t' 			{ TAB }
 	| '('			{ LPAREN }		| ')'			{ RPAREN }
-	| '{'			{ LBRACE }		| '}'			{ RBRACE }
-	| ';'			{ SEMI }		| ','			{ COMMA }
+	| '{'			{ LBRACE }		| '}'			{ RBRACE }		| ','			{ COMMA }
 	| '+'			{ PLUS }		| '-'			{ MINUS }
 	| '*'			{ TIMES }		| '/'			{ DIVIDE }
 	| '='			{ ASSIGN }
@@ -33,6 +32,7 @@ rule token = parse
 	| "break"		{ BREAK }		| "continue"	{ CONTINUE }
 	| "void"		{ VOID }
 	| "true"		{ TRUE }		| "false"	{ FALSE }
+	(* Do we need true and false? *)
 	| "trash"		{ TRASH }
 	| eof			{ EOF }			(* do as microC *)
 	| digit+ as lit					{ LIT_INT(int_of_string lit) }
@@ -41,5 +41,5 @@ rule token = parse
 	| _ as char 		{ raise (Failure("illegal character " ^ Char.escaped char)) }
 
 and comment = parse
-	"//"			{ token lexbuf }
+	"*/"			{ token lexbuf }
 	| _				{ comment lexbuf}

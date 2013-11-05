@@ -1,12 +1,12 @@
-%{ open ast %}
+%{ open Ast %}
 
-%token LPAREN RPAREN LBRACE RBRACE LBRACK RBRACK COMMA
+%token LPAREN RPAREN LBRACE RBRACE LBRACK RBRACK COMMA TAB
 %token PLUS MINUS TIMES DIVIDE ASSIGN MOVE COPY
 %token EQ NEQ LT LEQ GT GEQ NOT
 %token AND OR
 %token CONTINUE BREAK
-%token RETURN IF THEN ELSE FOR IN WHILE
-%token DEF VOID INT STR DICT LIST PATH BOOL TRASH
+%token RETURN IF THEN ELSE FOR IN WHILE DO
+%token DEF VOID INT STR DICT LIST PATH BOOL TRASH TRUE FALSE
 %token <int> LIT_INT
 %token <string> LIT_STR
 %token <string> ID
@@ -35,6 +35,7 @@ program:
 fdecl:
     DEF VOID ID LPAREN formals_opt RPAREN LBRACE vdecl_list stmt_list RBRACE
        {{
+        return = VoidType;
         fname = $3;
         formals = $5;
         locals = List.rev $8;
@@ -67,22 +68,24 @@ fdecl:
         formals = $5;
         locals = List.rev $8;
         body = List.rev $9 }}
+/* Need to add func declarations for dict and list*/
+
 
 formals_opt:
     { [] }
-    | formal_list   {{ List.rev $1 }}
+    | formal_list   { List.rev $1 }
 
 formal_list:
-    formal                   {{ [$1] }}
-    | formal_list COMMA formal {{ $3 :: $1 }}
+    formal                   { [$1] }
+    | formal_list COMMA formal { $3 :: $1 }
 
 formal:
-    INT ID      {{ VarType = IntType; name = $2; }}
-    | BOOL ID     {{ VarType = BoolType; name = $2; }}
-    | PATH ID     {{ VarType = PathType; name = $2; }}
-    | STR ID      {{ VarType = StrType; name = $2; }}
-    | DICT ID     {{ VarType = DictType; name = $2; }}
-    | LIST ID     {{ VarType = ListType; name = $2; }}
+    INT ID      {{ vtype = IntType; vname = $2; }}
+    | BOOL ID     {{ vtype = BoolType; vname = $2; }}
+    | PATH ID     {{ vtype = PathType; vname = $2; }}
+    | STR ID      {{ vtype = StrType; vname = $2; }}
+    | DICT ID     {{ vtype = DictType; vname = $2; }}
+    | LIST ID     {{ vtype = ListType; vname = $2; }}
 
 
 vdecl_list:
@@ -90,20 +93,20 @@ vdecl_list:
     | vdecl_list vdecl { $2 :: $1 }
 
 vdecl:
-    INT ID    {{VarType = IntType;  VarName = $2; }}
-    | BOOL ID   {{VarType = BoolType; VarName = $2; }}
-    | STR ID    {{VarType = StrType;  VarName = $2; }}
-    | PATH ID   {{VarType = PathType; VarName = $2; }}
-    | DICT ID   {{VarType = DictType; VarName = $2; }}
-    | LIST ID   {{VarType = ListType; VarName = $2; }}
+    INT ID    {{ vtype = IntType;  vname = $2; }}
+    | BOOL ID   {{ vtype = BoolType; vname = $2; }}
+    | STR ID    {{ vtype = StrType;  vname = $2; }}
+    | PATH ID   {{ vtype = PathType; vname = $2; }}
+    | DICT ID   {{ vtype = DictType; vname = $2; }}
+    | LIST ID   {{ vtype = ListType; vname = $2; }}
 
 stmt_list:
     { [] }
     | stmt_list stmt { $2 :: $1 }
-
+/* using TAB to separate stmts  */
 stmt:
-    expr { Expr($1) }
-    | RETURN expr                                  { Return($2) }
+    expr TAB { Expr($1) }
+    | RETURN expr TAB                                { Return($2) }
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
 

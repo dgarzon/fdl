@@ -6,6 +6,7 @@ type token =
   | LBRACK
   | RBRACK
   | COMMA
+  | TAB
   | PLUS
   | MINUS
   | TIMES
@@ -31,6 +32,7 @@ type token =
   | FOR
   | IN
   | WHILE
+  | DO
   | DEF
   | VOID
   | INT
@@ -40,6 +42,8 @@ type token =
   | PATH
   | BOOL
   | TRASH
+  | TRUE
+  | FALSE
   | LIT_INT of (int)
   | LIT_STR of (string)
   | ID of (string)
