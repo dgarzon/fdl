@@ -1,4 +1,4 @@
-%{ open Ast %}
+%{ open ast %}
 
 %token LPAREN RPAREN LBRACE RBRACE LBRACK RBRACK COMMA
 %token PLUS MINUS TIMES DIVIDE ASSIGN MOVE COPY
@@ -90,12 +90,12 @@ vdecl_list:
     | vdecl_list vdecl { $2 :: $1 }
 
 vdecl:
-    INT ID    {{VarType = Ast.Int;  VarName = $2; DataType = Ast.Int}}
-    | BOOL ID   {{VarType = Ast.Bool; VarName = $2; DataType = Ast.Bool}}
-    | STR ID    {{VarType = Ast.Str;  VarName = $2; DataType = Ast.Str}}
-    | PATH ID   {{VarType = Ast.Path; VarName = $2; DataType = Ast.Path}}
-    | DICT ID   {{VarType = Ast.Dict; VarName = $2; DataType = Ast.Dict}}
-    | LIST ID   {{VarType = Ast.List; VarName = $2; DataType = Ast.List}}
+    INT ID    {{VarType = IntType;  VarName = $2; }}
+    | BOOL ID   {{VarType = BoolType; VarName = $2; }}
+    | STR ID    {{VarType = StrType;  VarName = $2; }}
+    | PATH ID   {{VarType = PathType; VarName = $2; }}
+    | DICT ID   {{VarType = DictType; VarName = $2; }}
+    | LIST ID   {{VarType = ListType; VarName = $2; }}
 
 stmt_list:
     { [] }
@@ -106,10 +106,6 @@ stmt:
     | RETURN expr                                  { Return($2) }
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
-
-expr_opt:
-    { Noexpr }
-    | expr          { $1 }
 
 expr:
     | LIT_INT                      { LitInt($1) }

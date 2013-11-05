@@ -1,7 +1,8 @@
 type op = Add | Sub | Mult | Div | Equal | Neq | Less | Leq | Greater | Geq
 
 type expr =
-    Literal of int
+    LitInt of int
+  | LitStr of string
   | Id of string
   | Binop of expr * op * expr
   | Assign of string * expr
@@ -18,9 +19,14 @@ type stmt =
 
 type func_decl = {
     fname : string;
-    formals : string list;
+    formals : var_decl list;
     locals : string list;
     body : stmt list;
   }
+
+type var_decl = {
+  vtype : string;
+  vname : string;
+}
 
 type program = string list * func_decl list
