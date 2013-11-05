@@ -15,10 +15,10 @@ let rec string_of_expr = function
       )
       ^ " " ^ string_of_expr e2
   | Assign(v, e) -> v ^ " = " ^ string_of_expr e
-  | Noexpr -> ""
   (* Maybe used built-in functions for copy and move *)
   | Copy(v, e) -> v ^ " = " ^ string_of_expr e
   | Move(v, e) -> v ^ " = " ^ string_of_expr e
+  | Noexpr -> ""
 
 
 let rec string_of_stmt = function
@@ -31,7 +31,7 @@ let rec string_of_stmt = function
       string_of_stmt s1 ^ "else\n" ^ string_of_stmt s2
   | For(e1, e2, e3, s1) ->  "for (" ^ string_of_expr e1 ^ "; "
       ^ string_of_expr e2 ^ "; " ^ string_of_expr e3 ^ ")\n" ^ string_of_stmt s1
-  | While (e, s) -> "while (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
+  | While(e, s) -> "while (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
 
 let string_of_vtype = function
   VoidType -> "void"
