@@ -18,6 +18,7 @@ type stmt =
   | While of expr * stmt
 
 type func_decl = {
+    return : string;
     fname : string;
     formals : var_decl list;
     locals : string list;
@@ -30,3 +31,17 @@ type var_decl = {
 }
 
 type program = string list * func_decl list
+
+let rec string_of_stmt = function
+  Expr(expr) -> string_of_expr expr ^ ";\n";
+
+let string_of_vdecl vtype id = vtype ^ " " ^ id ^ ";\n"
+
+let string_of_fdecl fdecl =
+  fdecl.return ^ " " ^ fdecl.fname ^ "(" ^ String.concat ", " fdecl.formals ^ ")\n{\n" ^
+  String.concat "" (List.map string_of_vdecl fdecl.locals) ^
+  String.concat "" (List.map string_of_stmt fdecl.body) ^
+  "}\n"
+
+let string_of_program (vars, funcs) =
+  String.concat (List.map string_of_fdecl funcs)
