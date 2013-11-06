@@ -14,6 +14,7 @@ type expr =
   | Move of string * expr
   | Noexpr
 (* Should copy/move be string * string or string * expr? *)
+(* I think it should be string * string -Cara *)
 type stmt =
     Block of stmt list
   | Expr of expr
@@ -38,5 +39,6 @@ type func_decl = {
     body : stmt list;
   }
 
+(* should fname be a var_decl as opposed to a string? where do we specify the return type of the function? -Cara *)
 
 type program = var_decl list * func_decl list
