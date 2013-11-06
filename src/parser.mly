@@ -6,7 +6,7 @@
 %token AND OR
 %token CONTINUE BREAK
 %token RETURN IF THEN ELSE FOR IN WHILE DO
-%token DEF VOID INT STR DICT LIST PATH BOOL TRASH TRUE FALSE
+%token DEF VOID INT STR DICT LIST PATH BOOL TRASH TRUE FALSE PRINT
 %token <int> LIT_INT
 %token <string> LIT_STR
 %token <string> ID
@@ -115,6 +115,7 @@ stmt:
     | RETURN expr SEMI                             { Return($2) }
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
+    | PRINT expr SEMI                              { Print($2) }
 
 expr:
     | LIT_INT                      { LitInt($1) }

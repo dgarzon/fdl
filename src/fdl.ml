@@ -28,6 +28,8 @@ let rec string_of_stmt = function
   | If(e, s, Block([])) -> "if (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
   | If(e, s1, s2) ->  "if (" ^ string_of_expr e ^ ")\n" ^
       string_of_stmt s1 ^ "else\n" ^ string_of_stmt s2
+      (* print needs to be made aware of expr type, otherwise won't work *)
+  | Print(expr) -> "printf(" ^ string_of_expr expr ^ ");\n"
 
 let string_of_vtype = function
   VoidType -> "void"

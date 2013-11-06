@@ -21,6 +21,7 @@ type stmt =
   | If of expr * stmt * stmt
   | For of expr * expr * expr * stmt
   | While of expr * stmt
+  | Print of expr
 
 (* New var_decl type to bind data_type with IDs *)
 type var_decl = {
