@@ -12,13 +12,14 @@ let rec string_of_expr = function
           Add -> "+" | Sub -> "-" | Mult -> "*" | Div -> "/"
         | Equal -> "==" | Neq -> "!="
         | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">="
-      ) 
+      )
       ^ " " ^ string_of_expr e2
   | Assign(v, e) -> v ^ " = " ^ string_of_expr e
-  | Noexpr -> ""
   (* Maybe used built-in functions for copy and move *)
-  (* | Copy(v, e) -> v ^ " = " ^ string_of_expr e
-  | Move(v, e) -> v ^ " = " ^ string_of_expr e *)
+  | Copy(v, e) -> v ^ " = " ^ string_of_expr e
+  | Move(v, e) -> v ^ " = " ^ string_of_expr e
+  | Noexpr -> ""
+
 
 let rec string_of_stmt = function
     Expr(expr) -> string_of_expr expr ^ "\n"
@@ -30,6 +31,9 @@ let rec string_of_stmt = function
       string_of_stmt s1 ^ "else\n" ^ string_of_stmt s2
       (* print needs to be made aware of expr type, otherwise won't work *)
   | Print(expr) -> "printf(" ^ string_of_expr expr ^ ");\n"
+  | For(e1, e2, e3, s1) ->  "for (" ^ string_of_expr e1 ^ "; "
+      ^ string_of_expr e2 ^ "; " ^ string_of_expr e3 ^ ")\n" ^ string_of_stmt s1
+  | While(e, s) -> "while (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
 
 let string_of_vtype = function
   VoidType -> "void"
@@ -37,7 +41,8 @@ let string_of_vtype = function
   | StrType -> "char *"
   | BoolType -> "int"
   | PathType -> "char *"
-(* Need to match dict and list *)
+  | DictType -> "struct Dictionary *"
+  | ListType -> "struct List *"
 
 (* variable declrarations, has ;*)
 let string_of_vdecl vdecl = string_of_vtype vdecl.vtype ^ " " ^ vdecl.vname ^ ";\n"
@@ -46,7 +51,7 @@ let string_of_vdecl vdecl = string_of_vtype vdecl.vtype ^ " " ^ vdecl.vname ^ ";
 let string_of_formaldecl vdecl = string_of_vtype vdecl.vtype ^ " " ^ vdecl.vname
 
 let string_of_fdecl fdecl =
-  string_of_vtype fdecl.return ^ " " ^ fdecl.fname ^ "(" ^ 
+  string_of_vtype fdecl.return ^ " " ^ fdecl.fname ^ "(" ^
     String.concat ", " (List.map string_of_formaldecl fdecl.formals) ^ ")\n{\n" ^
   String.concat "" (List.map string_of_vdecl fdecl.locals) ^
   String.concat "" (List.map string_of_stmt fdecl.body) ^
