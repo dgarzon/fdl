@@ -38,35 +38,35 @@ fdecl:
         return = VoidType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
    | DEF INT ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
       {{
         return = IntType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
    | DEF STR ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
       {{
         return = StrType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
    | DEF PATH ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
       {{
         return = PathType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
    | DEF BOOL ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
       {{
         return = BoolType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
 /* Need to add func declarations for dict and list*/
 

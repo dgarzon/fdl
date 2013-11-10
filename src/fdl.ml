@@ -53,7 +53,7 @@ let string_of_formaldecl vdecl = string_of_vtype vdecl.vtype ^ " " ^ vdecl.vname
 let string_of_fdecl fdecl =
   string_of_vtype fdecl.return ^ " " ^ fdecl.fname ^ "(" ^
     String.concat ", " (List.map string_of_formaldecl fdecl.formals) ^ ")\n{\n" ^
-  String.concat "" (List.map string_of_vdecl fdecl.locals) ^
+  String.concat "" (List.map string_of_vdecl fdecl.fnlocals) ^
   String.concat "" (List.map string_of_stmt fdecl.body) ^
   "}\n"
 
@@ -62,7 +62,24 @@ let string_of_program (vars, funcs) =
   String.concat "\n" (List.map string_of_fdecl funcs)
 
 let _ =
-  let lexbuf = Lexing.from_channel stdin in
+  (* let lexbuf = Lexing.from_channel stdin in
   let program = Parser.program Scanner.token lexbuf in
   let listing = string_of_program program in
-  print_string listing
+  print_string listing *)
+
+  (* first argument is the filename *)
+  let fname = Sys.argv.(1) in 
+      (* check the extension *)
+      let index = (if String.contains fname '.' then String.rindex fname '.' else 0 ) in 
+      let suffix = String.sub fname index 4 in
+      if not (suffix = ".fdl") then raise (Failure ("Invalid type of source file.")) 
+      else 
+        (* lex from the file *)
+        let input = open_in fname in
+        let lexbuf = Lexing.from_channel input in
+        let program = Parser.program Scanner.token lexbuf in
+        (* added the type check *)
+        let program_t = Typecheck.check_program program in        
+        let listing = string_of_program program_t in
+        print_string listing
+  

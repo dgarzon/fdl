@@ -1,6 +1,6 @@
-TARFILES = Makefile scanner.mll parser.mly ast.mli fdl.ml
+TARFILES = Makefile scanner.mll parser.mly ast.mli symboltable.ml typecheck.ml fdl.ml
 
-OBJS = parser.cmo scanner.cmo fdl.cmo
+OBJS = parser.cmo scanner.cmo symboltable.cmo typecheck.cmo fdl.cmo
 
 calc : $(OBJS)
 	ocamlc -o fdl $(OBJS)
