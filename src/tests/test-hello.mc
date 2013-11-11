@@ -1,4 +1,6 @@
 main()
 {
-    print("hello world")
+  print(42);
+  print(71);
+  print(1);
 }
