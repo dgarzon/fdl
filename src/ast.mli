@@ -39,6 +39,5 @@ type func_decl = {
     body : stmt list;
   }
 
-(* should fname be a var_decl as opposed to a string? where do we specify the return type of the function? -Cara *)
 
 type program = var_decl list * func_decl list
