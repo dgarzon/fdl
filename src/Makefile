@@ -1,4 +1,6 @@
-TARFILES = Makefile scanner.mll parser.mly ast.mli fdl.ml
+TARFILES = Makefile testall.sh scanner.mll parser.mly ast.mli fdl.ml \
+	$(TESTS:%=tests/test-%.mc) \
+        $(TESTS:%=tests/test-%.out)
 
 OBJS = parser.cmo scanner.cmo fdl.cmo
 
@@ -41,7 +43,7 @@ calculator.tar.gz : $(TARFILES)
 
 .PHONY : clean
 clean :
-	rm -f fdl parser.ml parser.mli scanner.ml *.cmo *.cmi
+	rm -f fdl parser.ml parser.mli scanner.ml testall.log *.cmo *.cmi
 
 .PHONY : test
 test : fdl testall.sh
