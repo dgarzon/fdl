@@ -1,8 +1,8 @@
-TARFILES = Makefile testall.sh scanner.mll parser.mly ast.mli fdl.ml \
+TARFILES = Makefile testall.sh scanner.mll parser.mly ast.mli symboltable.ml typecheck.ml fdl.ml \
 	$(TESTS:%=tests/test-%.mc) \
         $(TESTS:%=tests/test-%.out)
 
-OBJS = parser.cmo scanner.cmo fdl.cmo
+OBJS = parser.cmo scanner.cmo symboltable.cmo typecheck.cmo fdl.cmo
 
 calc : $(OBJS)
 	ocamlc -o fdl $(OBJS)

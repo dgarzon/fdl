@@ -1,0 +1,7 @@
+int a;
+def void main() {
+int b;
+/*c = 10;*/
+print "Pranav";
+return;
+}

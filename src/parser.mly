@@ -38,35 +38,35 @@ fdecl:
         return = VoidType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
    | DEF INT ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
       {{
         return = IntType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
    | DEF STR ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
       {{
         return = StrType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
    | DEF PATH ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
       {{
         return = PathType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
    | DEF BOOL ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
       {{
         return = BoolType;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
 /* Need to add func declarations for dict and list*/
 
@@ -98,7 +98,9 @@ vdecl_list:
 
 /* Using SEMI to separate variable declarations for now */
 vdecl:
-    INT ID SEMI    { { vtype = IntType;  vname = $2; } }
+/* addded void type to variables so we can give this error in type checking*/
+    VOID ID SEMI    { { vtype = VoidType;  vname = $2; } }
+    | INT ID SEMI    { { vtype = IntType;  vname = $2; } }
     | BOOL ID SEMI { { vtype = BoolType; vname = $2; } }
     | STR ID SEMI  { { vtype = StrType;  vname = $2; } }
     | PATH ID SEMI { { vtype = PathType; vname = $2; } }
@@ -112,10 +114,15 @@ stmt_list:
 /* using SEMI to separate stmts for now */
 stmt:
     expr SEMI                                      { Expr($1) }
-    | RETURN expr SEMI                             { Return($2) }
+    | RETURN expr_opt SEMI                         { Return($2) }
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
     | PRINT expr SEMI                              { Print($2) }
+
+/* expression optional, return; */
+expr_opt:
+    /* nothing */ { Noexpr }
+  | expr          { $1 }
 
 expr:
     | LIT_INT                      { LitInt($1) }
