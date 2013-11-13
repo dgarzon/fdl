@@ -14,10 +14,10 @@ let string_of_vtype = function
 
 (* get variable type according to the name
  * raise error if no name matching in variable list *)
-let get_vartype env id = 
+let get_vtype env id = 
 	(* find_variable method is from the symbol table *)
 	let t = find_variable id env in
-	if t = "" then raise (Failure ("undefined variable " ^ id)) else t
+	if t = "" then raise (Failure ("undefined variable: " ^ id)) else t
 
 (* get the type of expression:
  *  -> string if one of the two operands having string type
@@ -40,7 +40,7 @@ let get_expr_type t1 t2 =
  * return the new expression list in expr_t for sast *)
 let check_func_arg lst expr arg_t =
 	if (snd expr) = arg_t then (fst expr)::lst else
-	raise (Failure("unmatched argument type"))
+	raise (Failure("function arguments do not match"))
 
 let match_oper e1 op e2 =
 	(* snd of expr is type *)
@@ -76,13 +76,13 @@ let rec check_expr env = function
 	| LitStr(s) -> Ast.LitStr(s), "string"
 
 	| Id(id) ->
-		Ast.Id(id), (get_vartype env id)
+		Ast.Id(id), (get_vtype env id)
 
 	| Binop(e1, op, e2) ->
 		match_oper (check_expr env e1) op (check_expr env e2)
 
 	| Assign(id, e) ->
-		let t = get_vartype env id in
+		let t = get_vtype env id in
 		(* if t = "string" then 
 		     Ast.AssignStr(id, (conv_type (check_expr env e))), "void"
 		else  *)
@@ -99,7 +99,6 @@ let rec check_expr env = function
 		(* Need to add type checking for Move and Copy *)
   	| Copy(id, e) -> Ast.Copy(id, e), "void"
   	| Move(id, e) -> Ast.Move(id, e), "void"
-
 	| Noexpr -> Ast.Noexpr, "void"
 
 
@@ -135,6 +134,7 @@ let rec check_stmt env func = function
 	(* | Break -> (Ast.Break), env *)
 	(* need to add type checking for For *)
 	| For (expr1, expr2, expr3, stmt) -> Ast.For(expr1, expr2, expr3, stmt), env
+	| Print(expr) -> (Ast.Print(fst (check_expr env expr))), env
 
 and check_stmt_list env func = function 
 	  [] -> []

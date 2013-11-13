@@ -79,7 +79,7 @@ let _ =
         let lexbuf = Lexing.from_channel input in
         let program = Parser.program Scanner.token lexbuf in
         (* added the type check *)
-        let program_t = Typecheck.check_program program in        
+        let program_t = Typecheck.check_program program in
         let listing = string_of_program program_t in
         print_string listing
   
