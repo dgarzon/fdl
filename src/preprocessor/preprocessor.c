@@ -71,6 +71,12 @@ int main(int argc, char const *argv[])
         else if (strstr(buffer, "list ") != NULL) {
             fprintf(output, "%s;\n", buffer);
         }
+        else if (strstr(buffer, "string ") != NULL) {
+            fprintf(output, "%s;\n", buffer);
+        }
+        else if (strstr(buffer, "bool ") != NULL) {
+            fprintf(output, "%s;\n", buffer);
+        }
         else if (strstr(buffer, "for ") != NULL) {
             fprintf(output, "%s {\n", buffer);
         }
@@ -82,6 +88,8 @@ int main(int argc, char const *argv[])
         } else {
             if (strlen(buffer) > 1)
                 fprintf(output, "%s;\n", buffer);
+            else
+                fprintf(output, "\n");
         }
 
         if (indentLevel < initialIndentLevel) {
