@@ -1,0 +1,16 @@
+def list listAllFiles(path dirPath, int depth) {
+    int currentDepth;
+    list myList;
+    path myPath;
+    dict myDict;
+    bool myBool;
+    string myString;
+
+    for item in myList {
+        print("Something");
+
+    if (something) {
+        print("Something");
+
+    while (something) {
+        print("Something");
