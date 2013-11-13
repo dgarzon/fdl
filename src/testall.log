@@ -1,0 +1,8 @@
+./testall.sh: line 114: CheckFail: command not found
+
+###### Testing test-hello
+./fdl -i < tests/test-hello.fdl > test-hello.i.out
+Fatal error: exception Parsing.Parse_error
+./fdl -c < tests/test-hello.fdl > test-hello.c.out
+Fatal error: exception Parsing.Parse_error
+###### FAILED

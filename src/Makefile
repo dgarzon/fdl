@@ -1,30 +1,13 @@
 OBJS = parser.cmo scanner.cmo fdl.cmo
 
 TESTS = \
-arith1 \
-arith2 \
-arith3 \
-fib \
-for1 \
-func1 \
-func2 \
-func3 \
-gcd \
-global1 \
-hello \
-if1 \
-if2 \
-if3 \
-if4 \
-ops1 \
-var1 \
-while1
+hello 
 
 TARFILES = Makefile testall.sh scanner.mll parser.mly ast.mli fdl.ml \
-        $(TESTS:%=tests/test-%.mc) \
+        $(TESTS:%=tests/test-%.fdl) \
         $(TESTS:%=tests/test-%.out)
 
-calc : $(OBJS)
+fdl : $(OBJS)
 	ocamlc -o fdl $(OBJS)
 
 scanner.ml : scanner.mll
