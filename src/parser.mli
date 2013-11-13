@@ -1,5 +1,5 @@
 type token =
-  | SEMI
+   SEMI
   | LPAREN
   | RPAREN
   | LBRACE
