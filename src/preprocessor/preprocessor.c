@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <assert.h>
 
 #define MAX_BUFFER 4096
 
@@ -49,19 +50,53 @@ int main(int argc, char const *argv[])
     while (fgets(buffer, sizeof(buffer), input) != NULL) {
         int initialIndentLevel = indentLevel;
 
-        if (strncmp("def", buffer, 3) == 0) {
-            strcat(buffer, "{\n");
+        size_t len = strlen(buffer) - 1;
+        if (buffer[len] == '\n') {
+            buffer[len] = '\0';
+        }
+
+        if (strstr(buffer, "def ") != NULL) {
+            fprintf(output, "%s {\n", buffer);
             indentLevel++;
+        }
+        else if (strstr(buffer, "int ") != NULL) {
+            fprintf(output, "%s;\n", buffer);
+        }
+        else if (strstr(buffer, "path ") != NULL) {
+            fprintf(output, "%s;\n", buffer);
+        }
+        else if (strstr(buffer, "dict ") != NULL) {
+            fprintf(output, "%s;\n", buffer);
+        }
+        else if (strstr(buffer, "list ") != NULL) {
+            fprintf(output, "%s;\n", buffer);
+        }
+        else if (strstr(buffer, "string ") != NULL) {
+            fprintf(output, "%s;\n", buffer);
+        }
+        else if (strstr(buffer, "bool ") != NULL) {
+            fprintf(output, "%s;\n", buffer);
+        }
+        else if (strstr(buffer, "for ") != NULL) {
+            fprintf(output, "%s {\n", buffer);
+        }
+        else if (strstr(buffer, "if (") != NULL || strstr(buffer, "if(") != NULL) {
+            fprintf(output, "%s {\n", buffer);
+        }
+        else if (strstr(buffer, "while (") != NULL || strstr(buffer, "while(") != NULL) {
+            fprintf(output, "%s {\n", buffer);
         } else {
-            strcat(buffer, ";\n");
-            indentLevel--;
+            if (strlen(buffer) > 1)
+                fprintf(output, "%s;\n", buffer);
+            else
+                fprintf(output, "\n");
         }
 
         if (indentLevel < initialIndentLevel) {
-            strcat(buffer, "\n}");
+            fprintf(output, "\n}\n");
         }
-        // fwrite (buffer, 1, sizeof(buffer), output);
-        printf("%s", buffer);
+
+        printf("%s\n", buffer);
     }
     fclose(input);
     fclose(output);
