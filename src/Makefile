@@ -1,12 +1,9 @@
-TARFILES = Makefile testall.sh scanner.mll parser.mly ast.mli fdl.ml \
-	$(TESTS:%=tests/test-%.mc) \
-        $(TESTS:%=tests/test-%.out)
-
 OBJS = parser.cmo scanner.cmo fdl.cmo
 
 TESTS = \
 arith1 \
 arith2 \
+arith3 \
 fib \
 for1 \
 func1 \
@@ -22,6 +19,10 @@ if4 \
 ops1 \
 var1 \
 while1
+
+TARFILES = Makefile testall.sh scanner.mll parser.mly ast.mli fdl.ml \
+        $(TESTS:%=tests/test-%.mc) \
+        $(TESTS:%=tests/test-%.out)
 
 calc : $(OBJS)
 	ocamlc -o fdl $(OBJS)
@@ -43,7 +44,7 @@ calculator.tar.gz : $(TARFILES)
 
 .PHONY : clean
 clean :
-	rm -f fdl parser.ml parser.mli scanner.ml testall.log *.cmo *.cmi
+	rm -f fdl parser.ml parser.mli scanner.ml test-*.out testall.log *.cmo *.cmi
 
 .PHONY : test
 test : fdl testall.sh
