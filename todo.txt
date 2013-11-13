@@ -79,3 +79,14 @@ x = 10;
 It is syntaxically correct, but semantically incorrect as it was never defined
 
 end
+
+
+
+Stuff to work on.......
+type data_type = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
+
+data_type is used in variable declaration
+maybe able to declare variable as void
+so might need to have separate, datatype and return type
+
+for is not correct… ours is the in version….
