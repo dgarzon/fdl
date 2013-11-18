@@ -30,7 +30,6 @@ type var_decl = {
   vname : string;
 }
 
-
 type func_decl = {
     return : data_type;
     fname : string;
