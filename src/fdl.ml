@@ -1,4 +1,5 @@
-open Ast
+(* open Ast *)
+open Sast
 
 let rec string_of_expr = function
     LitInt(l) -> string_of_int l
@@ -30,7 +31,10 @@ let rec string_of_stmt = function
   | If(e, s1, s2) ->  "if (" ^ string_of_expr e ^ ")\n" ^
       string_of_stmt s1 ^ "else\n" ^ string_of_stmt s2
       (* print needs to be made aware of expr type, otherwise won't work *)
-  | Print(expr) -> "printf(" ^ string_of_expr expr ^ ");\n"
+  | Print(expr, expr_type) -> if expr_type = "string" then
+                                "printf(\"%s\"," ^ string_of_expr expr ^ ");\n"
+                              else
+                                "printf(\"%d\"," ^ string_of_expr expr ^ ");\n"
   | For(e1, e2, e3, s1) ->  "for (" ^ string_of_expr e1 ^ "; "
       ^ string_of_expr e2 ^ "; " ^ string_of_expr e3 ^ ")\n" ^ string_of_stmt s1
   | While(e, s) -> "while (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
