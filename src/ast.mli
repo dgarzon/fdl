@@ -35,7 +35,7 @@ type func_decl = {
     return : data_type;
     fname : string;
     formals : var_decl list;
-    locals : var_decl list;
+    fnlocals : var_decl list;
     body : stmt list;
   }
 
