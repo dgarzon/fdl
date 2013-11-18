@@ -1,0 +1,26 @@
+#!/bin/bash
+# compile all files that end with .fdl
+
+COMPILER="./fdl2c"
+
+if [ -e "./fdl2c.d.byte" ]; then
+    COMPILER="./fdlc.d.byte"
+fi
+
+if [ $# -gt 1];then
+    make
+fi
+
+for file in $@
+do
+    filename=$(basename "$file")
+    fileext="${filename##*.}"
+    filename="${filename%.*}
+
+    if [ "$fileext" == "fdl" ]; then
+        compile $file $filename
+    fi
+done
+exit
+
+
