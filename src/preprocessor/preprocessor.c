@@ -25,8 +25,6 @@ int main(int argc, char const *argv[])
         exit(1);
     }
     char *fileName = (char *) argv[1];
-    printf("File Name: %s\n", fileName);
-    printf("%s\n", getFileExtension(fileName));
 
     if (strcmp("fdl", getFileExtension(fileName)) != 0)
     {
@@ -83,9 +81,37 @@ int main(int argc, char const *argv[])
         else if (strstr(buffer, "if (") != NULL || strstr(buffer, "if(") != NULL) {
             fprintf(output, "%s {\n", buffer);
         }
+        else if (strstr(buffer, "else") != NULL) {
+            int i;
+            int counter = 0;
+            for (i = 0; i < strlen(buffer); ++i)
+            {
+                if (buffer[i] == ' ') {
+                    fprintf(output, "%c", buffer[i]);
+                    counter++;
+                }
+            }
+            fprintf(output, "} %s {\n", buffer + counter);
+        }
         else if (strstr(buffer, "while (") != NULL || strstr(buffer, "while(") != NULL) {
             fprintf(output, "%s {\n", buffer);
-        } else {
+        }
+        else if (strstr(buffer, "end") != NULL) {
+            int i;
+            for (i = 0; i < strlen(buffer); i++){
+                if (buffer[i] == 'e') {
+                    buffer[i] = '}';
+                } else if (buffer[i] == 'n') {
+                    buffer[i] = '\n';
+                } else if (buffer[i] == 'd') {
+                    buffer[i] = '\0';
+                } else {
+
+                }
+            }
+            fprintf(output, "%s", buffer);
+        }
+        else {
             if (strlen(buffer) > 1)
                 fprintf(output, "%s;\n", buffer);
             else
@@ -95,8 +121,6 @@ int main(int argc, char const *argv[])
         if (indentLevel < initialIndentLevel) {
             fprintf(output, "\n}\n");
         }
-
-        printf("%s\n", buffer);
     }
     fclose(input);
     fclose(output);

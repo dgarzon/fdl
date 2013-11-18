@@ -8,9 +8,21 @@ def list listAllFiles(path dirPath, int depth)
 
     for item in myList
         print("Something")
+    end
+
+    if (something)
+        for item in myList
+            print("Something")
+        end
+    end
 
     if (something)
         print("Something")
+    else
+        print("Something")
+    end
 
     while (something)
         print("Something")
+    end
+end
