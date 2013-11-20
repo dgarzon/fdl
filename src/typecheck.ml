@@ -137,6 +137,8 @@ let rec check_stmt env func = function
 	        				else let env = {locals = ret; globals = env.globals; functions = env.functions } in
 	        				if s1 = "string" && (snd e = "int" || snd e = "boolean") then (Sast.Decl(s1, s2, Sast.ToStr(fst e))), env 
 							else (Sast.Decl(s1, s2, fst e)), env *)
+	(*| Ast.VarDecl(vardecl) -> let l,e = check_local env vardecl in
+								(Sast.VarDecl(l)),e *)
 	(* will pick only fst of the expr, since need onlt the expr and not the type *)
 	| Ast.Expr(expr) -> (Sast.Expr(fst (check_expr env expr))), env
 	| Ast.Return(expr) -> let e = check_expr env expr in
@@ -172,6 +174,21 @@ let rec check_formals env formals =
 	  [] -> []
 	| hd::tl -> let f, e = (check_formal env hd) in (f, e)::(check_formals e tl) 
 
+
+let check_local env local =
+	let ret = add_local local.vname local.vtype env in
+	if (string_of_vtype local.vtype) = "void" then raise (Failure("cannot use void as variable type")) else
+	if StringMap.is_empty ret then raise (Failure ("local variable " ^ local.vname ^ " is already defined"))
+	(* update the env with globals from ret *)
+	else let env = {locals = ret; globals = env.globals; functions = env.functions } in
+	convert_to_sast_type local, env
+
+let rec check_locals env locals = 
+	match locals with
+	  [] -> []
+	| hd::tl -> let l, e = (check_local env hd) in (l, e)::(check_locals e tl)
+
+
 (* this function will return the updated formals and body as per the abstract syntax tree, the return type, name and locals *)
 let check_function env func =
 	(* if List.length func.body = 0 then raise (Failure ("The last statement must be return statement"))
@@ -187,33 +204,43 @@ let check_function env func =
 		let ret = add_function func.fname func.return func.formals env in
 		if StringMap.is_empty ret then raise (Failure ("function " ^ func.fname ^ " is already defined"))
 		(* update the env with functions from ret *)
-		(* TODO: locals of the function need to be added to the env as well *)
 		else let env = {locals = env.locals; globals = env.globals; functions = ret } in
 		(* check the formal arguments, returns formal list appended with their env *)
 		let f = check_formals env func.formals in
 		(* get the list of formals from f *)
 		let formals = List.map (fun formal -> fst formal) f in
-
+		
+		(* get the final env from the last formal *)
+		let l, env = 
 		(match f with
-			(* empty f, no fomal args *)
-			[] -> let body = check_stmt_list env func func.body in
-				{	Sast.return = get_sast_type func.return; 
-					Sast.fname = func.fname; 
-					Sast.formals = formals; 
-					Sast.fnlocals = List.map convert_to_sast_type func.fnlocals; 
-					Sast.body = body
-				}, env
+			  [] -> let l = check_locals env func.fnlocals in
+					 l, env
+			| _ -> 	let env = snd (List.hd (List.rev f)) in
+					let l = check_locals env func.fnlocals in
+					l, env
+		) in
+		let fnlocals = List.map (fun fnlocal -> fst fnlocal) l in
+		 (match l with
+		 	(* empty f, no fomal args *)
+	            [] -> let body = check_stmt_list env func func.body in
+	                { Sast.return = get_sast_type func.return; 
+	                  Sast.fname = func.fname; 
+	                  Sast.formals = formals; 
+	                  Sast.fnlocals = List.map convert_to_sast_type func.fnlocals; 
+	                  Sast.body = body
+	                }, env
 
-				(* get the final env from the last formal *)
-			| _ -> 	let e = snd (List.hd (List.rev f)) in
-				let body = check_stmt_list e func func.body in
-				{	Sast.return = get_sast_type func.return; 
-					Sast.fname = func.fname; 
-					Sast.formals = formals; 
-					Sast.fnlocals = List.map convert_to_sast_type func.fnlocals; 
-					Sast.body = body
-				}, e 
-		)
+	            (* get the final env from the last formal *)
+	            | _ -> let e = snd (List.hd (List.rev l)) in
+	                   let body = check_stmt_list e func func.body in
+	                  { Sast.return = get_sast_type func.return; 
+	                    Sast.fname = func.fname; 
+	                    Sast.formals = formals; 
+	                    Sast.fnlocals = List.map convert_to_sast_type func.fnlocals; 
+	                    Sast.body = body
+	                  }, e 
+          )
+
 	| _ -> raise (Failure ("The last statement must be return statement"))
 
 
@@ -252,3 +279,6 @@ let check_program (globals, funcs) =
 	 [] -> (globals, (check_functions env (List.rev funcs)))
 	(* get the envirnment from the last global *)
 	| _ -> let e = snd (List.hd (List.rev g)) in (globals, (check_functions e (List.rev funcs)))
+
+
+
