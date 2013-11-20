@@ -1,6 +1,5 @@
 type op_t = Add | Sub | Mult | Div | Equal | Neq | Less | Leq | Greater | Geq
 
-(* data_type can be matched with C types *)
 type data_type_t = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
 
 type expr_t =
@@ -13,7 +12,6 @@ type expr_t =
   | Copy of string * expr_t
   | Move of string * expr_t
   | Noexpr
-(* Should copy/move be string * string or string * expr? *)
 
 type stmt_t =
     Block of stmt_t list
@@ -25,7 +23,6 @@ type stmt_t =
   | Print of expr_t * string
   (* the string in Print represents its type, need to change to data_type_t *)
 
-(* New var_decl type to bind data_type with IDs *)
 type var_decl_t = {
   vtype : data_type_t;
   vname : string;

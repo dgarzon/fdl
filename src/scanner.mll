@@ -5,8 +5,7 @@ let digit = ['0' - '9']
 let quote = '"'
 
 rule token = parse
-	[' ' '\r' '\n']	{ token lexbuf }	| "/*"		{ comment lexbuf }
-	| '\t' 			{ TAB }
+	[' ' '\r' '\n' '\t']	{ token lexbuf }	| "/*"		{ comment lexbuf }
 	| '('			{ LPAREN }		| ')'			{ RPAREN }
 	| '{'			{ LBRACE }		| '}'			{ RBRACE }		| ','			{ COMMA }
 	| '+'			{ PLUS }		| '-'			{ MINUS }
