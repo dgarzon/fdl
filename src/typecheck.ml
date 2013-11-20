@@ -125,22 +125,6 @@ let rec check_expr env = function
 and get_expr_with_type env expr t = 
 	let e = check_expr env expr in
 	if not((snd e) = t) then raise (Failure ("type error")) else (fst e)
-(*)
-let check_local env local =
-	if (string_of_vtype local.vtype) = "void" then raise (Failure("cannot use void as variable type"))
-	(*  ret is new env *)
-	else let ret = add_local local.vname local.vtype env in
-	if StringMap.is_empty ret then raise (Failure ("local variable " ^ local.vname ^ " is already defined"))
-	(* update the env with globals from ret *)
-	else let env = {locals = ret; globals = env.globals; functions = env.functions } in
-	convert_to_sast_type local, env
-
- we do not have list of local var decls- 
-let rec check_locals env locals = 
-	match locals with
-	  [] -> []
-	| hd::tl -> let l, e = (check_local env hd) in (l, e)::(check_locals e tl)
-*)
 
 let rec check_stmt env func = function
 	  Ast.Block(stmt_list) -> (Sast.Block(check_stmt_list env func stmt_list)), env
@@ -190,6 +174,21 @@ let rec check_formals env formals =
 	  [] -> []
 	| hd::tl -> let f, e = (check_formal env hd) in (f, e)::(check_formals e tl) 
 
+
+let check_local env local =
+	let ret = add_local local.vname local.vtype env in
+	if (string_of_vtype local.vtype) = "void" then raise (Failure("cannot use void as variable type")) else
+	if StringMap.is_empty ret then raise (Failure ("local variable " ^ local.vname ^ " is already defined"))
+	(* update the env with globals from ret *)
+	else let env = {locals = ret; globals = env.globals; functions = env.functions } in
+	convert_to_sast_type local, env
+
+let rec check_locals env locals = 
+	match locals with
+	  [] -> []
+	| hd::tl -> let l, e = (check_local env hd) in (l, e)::(check_locals e tl)
+
+
 (* this function will return the updated formals and body as per the abstract syntax tree, the return type, name and locals *)
 let check_function env func =
 	(* if List.length func.body = 0 then raise (Failure ("The last statement must be return statement"))
@@ -210,27 +209,38 @@ let check_function env func =
 		let f = check_formals env func.formals in
 		(* get the list of formals from f *)
 		let formals = List.map (fun formal -> fst formal) f in
-
+		
+		(* get the final env from the last formal *)
+		let l, env = 
 		(match f with
-			(* empty f, no fomal args *)
-			[] -> let body = check_stmt_list env func func.body in
-				{	Sast.return = get_sast_type func.return; 
-					Sast.fname = func.fname; 
-					Sast.formals = formals; 
-					Sast.fnlocals = List.map convert_to_sast_type func.fnlocals;
-					Sast.body = body
-				}, env
+			  [] -> let l = check_locals env func.fnlocals in
+					 l, env
+			| _ -> 	let env = snd (List.hd (List.rev f)) in
+					let l = check_locals env func.fnlocals in
+					l, env
+		) in
+		let fnlocals = List.map (fun fnlocal -> fst fnlocal) l in
+		 (match l with
+		 	(* empty f, no fomal args *)
+	            [] -> let body = check_stmt_list env func func.body in
+	                { Sast.return = get_sast_type func.return; 
+	                  Sast.fname = func.fname; 
+	                  Sast.formals = formals; 
+	                  Sast.fnlocals = List.map convert_to_sast_type func.fnlocals; 
+	                  Sast.body = body
+	                }, env
 
-				(* get the final env from the last formal *)
-			| _ -> 	let e = snd (List.hd (List.rev f)) in
-				let body = check_stmt_list e func func.body in
-				{	Sast.return = get_sast_type func.return; 
-					Sast.fname = func.fname; 
-					Sast.formals = formals; 
-					Sast.fnlocals = List.map convert_to_sast_type func.fnlocals;
-					Sast.body = body
-				}, e 
-		)
+	            (* get the final env from the last formal *)
+	            | _ -> let e = snd (List.hd (List.rev l)) in
+	                   let body = check_stmt_list e func func.body in
+	                  { Sast.return = get_sast_type func.return; 
+	                    Sast.fname = func.fname; 
+	                    Sast.formals = formals; 
+	                    Sast.fnlocals = List.map convert_to_sast_type func.fnlocals; 
+	                    Sast.body = body
+	                  }, e 
+          )
+
 	| _ -> raise (Failure ("The last statement must be return statement"))
 
 
