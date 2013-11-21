@@ -24,8 +24,9 @@ parser.ml parser.mli : parser.mly
 %.cmi : %.mli
         ocamlc -c $<
 
-calculator.tar.gz : $(TARFILES)
-        cd .. && tar zcf fdl/fdl.tar.gz $(TARFILES:%=fdl/%)
+#why do we need a "calculator"? 
+#calculator.tar.gz : $(TARFILES)
+#        cd .. && tar zcf fdl/fdl.tar.gz $(TARFILES:%=fdl/%)
 
 .PHONY : clean
 clean :
