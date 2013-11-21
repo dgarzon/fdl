@@ -14,7 +14,6 @@ type expr =
   | Move of string * expr
   | Noexpr
 (* Should copy/move be string * string or string * expr? *)
-(* I think it should be string * string -Cara *)
 type stmt =
     Block of stmt list
   | Expr of expr

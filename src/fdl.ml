@@ -44,10 +44,11 @@ let string_of_vtype = function
   | IntType -> "int"
   | StrType -> "char *"
   | BoolType -> "int"
-  | PathType -> "char *"
+  | PathType -> "struct Path *"
   | DictType -> "struct Dictionary *"
   | ListType -> "struct List *"
 
+(*PathType should be a struct * not char * because need to check validity*)
 (* variable declrarations, has ;*)
 let string_of_vdecl vdecl = string_of_vtype vdecl.vtype ^ " " ^ vdecl.vname ^ ";\n"
 
