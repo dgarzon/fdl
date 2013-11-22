@@ -226,7 +226,7 @@ let check_function env func =
 	                { Sast.return = get_sast_type func.return; 
 	                  Sast.fname = func.fname; 
 	                  Sast.formals = formals; 
-	                  Sast.fnlocals = List.map convert_to_sast_type func.fnlocals; 
+	                  Sast.fnlocals = fnlocals; 
 	                  Sast.body = body
 	                }, env
 
@@ -236,7 +236,7 @@ let check_function env func =
 	                  { Sast.return = get_sast_type func.return; 
 	                    Sast.fname = func.fname; 
 	                    Sast.formals = formals; 
-	                    Sast.fnlocals = List.map convert_to_sast_type func.fnlocals; 
+	                    Sast.fnlocals = fnlocals; 
 	                    Sast.body = body
 	                  }, e 
           )
