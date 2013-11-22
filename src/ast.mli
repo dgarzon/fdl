@@ -35,9 +35,9 @@ type func_decl = {
     body : stmt list;
   }
 
-<<<<<<< HEAD
+(*<<<<<<< HEAD*)
 
 type program = var_decl list * func_decl list
-=======
-type program = var_decl list * func_decl list
->>>>>>> 4eafce65d1c11e4faad6474e68f1fbe99958c973
+(*=======*)
+(*type program = var_decl list * func_decl list*)
+(*>>>>>>> 4eafce65d1c11e4faad6474e68f1fbe99958c973*)

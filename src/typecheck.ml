@@ -279,9 +279,9 @@ let check_program (globals, funcs) =
 	 [] -> (globals, (check_functions env (List.rev funcs)))
 	(* get the envirnment from the last global *)
 	| _ -> let e = snd (List.hd (List.rev g)) in (globals, (check_functions e (List.rev funcs)))
-<<<<<<< HEAD
-=======
+(*<<<<<<< HEAD*)
+(*=======*)
 
 
 
->>>>>>> 4eafce65d1c11e4faad6474e68f1fbe99958c973
+(* >>>>>>> 4eafce65d1c11e4faad6474e68f1fbe99958c973 *)
