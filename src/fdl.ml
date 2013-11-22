@@ -12,13 +12,16 @@ let rec string_of_expr = function
       ( match o with
           Add -> "+" | Sub -> "-" | Mult -> "*" | Div -> "/"
         | Equal -> "==" | Neq -> "!="
-        | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">="
+        | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">=" | 
       )
       ^ " " ^ string_of_expr e2
   | Assign(v, e) -> v ^ " = " ^ string_of_expr e
   (* Maybe used built-in functions for copy and move *)
   | Copy(v, e) -> v ^ " = " ^ string_of_expr e
+(*        "execl("/bin/cp", "/bin/cp"," ^  string_of_expr e ^ "," ^ string_of_expr v ^ ", (char star) 0)" *)
+(* --must deal with quotes in expression definition, replace 'star' with actual symbol    *)
   | Move(v, e) -> v ^ " = " ^ string_of_expr e
+(*"rename(" ^ string_of_expr e ^ "," ^ string_of_expr v ^ ")"  *)
   | Noexpr -> ""
 
 
