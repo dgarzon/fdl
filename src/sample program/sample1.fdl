@@ -2,6 +2,6 @@ int a;
 def void main() {
 int b;
 /*c = 10;*/
-print "Pranav";
+print 1+2;
 return;
 }

@@ -8,9 +8,21 @@ def list listAllFiles(path dirPath, int depth) {
 
     for item in myList {
         print("Something");
+    }
+
+    if (something) {
+        for item in myList {
+            print("Something");
+        }
+    }
 
     if (something) {
         print("Something");
+    } else {
+        print("Something");
+    }
 
     while (something) {
         print("Something");
+    }
+}

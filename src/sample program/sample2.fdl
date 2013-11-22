@@ -1,0 +1,10 @@
+/* using local var b */
+int a;
+
+def int main() {
+	int b;
+	a = 2;
+	b = a + 1;
+	print b;
+	return 0;
+}
