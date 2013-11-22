@@ -13,7 +13,7 @@ let string_of_vtype = function
   | IntType -> "int"
   | StrType -> "char *"
   | BoolType -> "int"
-  | PathType -> "char *"
+  | PathType -> "struct Path *"
   | DictType -> "struct Dictionary *"
   | ListType -> "struct List *"
 

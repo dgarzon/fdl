@@ -23,7 +23,7 @@ let rec string_of_expr = function
 
 
 let rec string_of_stmt = function
-    Expr(expr) -> string_of_expr expr ^ "\n"
+    Expr(expr) -> string_of_expr expr ^ ";\n"
   | Block(stmts) ->
       "{\n" ^ String.concat "" (List.map string_of_stmt stmts) ^ "}\n"
   | Return(expr) -> "return " ^ string_of_expr expr ^ ";\n"
@@ -63,6 +63,7 @@ let string_of_fdecl fdecl =
   "}\n"
 
 let string_of_program (vars, funcs) =
+  "\n#include<stdio.h>\n" ^ 
   String.concat "\n" (List.map string_of_vdecl vars) ^ "\n" ^
   String.concat "\n" (List.map string_of_fdecl funcs)
 

@@ -1,6 +1,5 @@
 type op = Add | Sub | Mult | Div | Equal | Neq | Less | Leq | Greater | Geq
 
-(* data_type can be matched with C types *)
 type data_type = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
 
 type expr =
@@ -13,7 +12,7 @@ type expr =
   | Copy of string * expr
   | Move of string * expr
   | Noexpr
-(* Should copy/move be string * string or string * expr? *)
+
 type stmt =
     Block of stmt list
   | Expr of expr
@@ -23,7 +22,6 @@ type stmt =
   | While of expr * stmt
   | Print of expr
 
-(* New var_decl type to bind data_type with IDs *)
 type var_decl = {
   vtype : data_type;
   vname : string;
@@ -37,5 +35,9 @@ type func_decl = {
     body : stmt list;
   }
 
+<<<<<<< HEAD
 
 type program = var_decl list * func_decl list
+=======
+type program = var_decl list * func_decl list
+>>>>>>> 4eafce65d1c11e4faad6474e68f1fbe99958c973
