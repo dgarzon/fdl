@@ -6,11 +6,11 @@ module StringMap = Map.Make(String)
 let string_of_vtype = function
   VoidType -> "void"
   | IntType -> "int"
-  | StrType -> "char *"
-  | BoolType -> "int"
-  | PathType -> "char *"
-  | DictType -> "struct Dictionary *"
-  | ListType -> "struct List *"
+  | StrType -> "string"
+  | BoolType -> "boolean"
+  | PathType -> "path"
+  | DictType -> "dict"
+  | ListType -> "list"
   | _ -> raise (Failure ("Unknown type"))
 
 let get_sast_type = function
@@ -117,13 +117,19 @@ let rec check_expr env = function
 		(* Need to add type checking for Move and Copy *)
   	(* | Ast.Move(id, e) -> Sast.Move(id, e), "void"
   	| Ast.Copy(id, e) -> Sast.Copy(id, e), "void" *)
+	| Ast.List(items) -> Sast.List(check_list_items env items), "list"
 	| Ast.Noexpr -> Sast.Noexpr, "void"
 
+and check_list_items env = function
+	  Ast.Item(e) ->let i,t = check_expr env e in 
+	  				Sast.Item(i)
+	| Ast.Seq(e1, sep, e2) -> Sast.Seq((check_list_items env e1), Sast.Comma, (check_list_items env e2))
 
 (* get expr_t(sast type) by expr(ast type) with given type
  * raise error if the expression type does match requirement, snd e has the type and fst has the expr *)
 and get_expr_with_type env expr t = 
 	let e = check_expr env expr in
+	print_string (snd e);
 	if not((snd e) = t) then raise (Failure ("type error")) else (fst e)
 
 let rec check_stmt env func = function
