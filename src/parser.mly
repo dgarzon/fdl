@@ -106,7 +106,6 @@ expr_opt:
 expr:
     | LIT_INT                      { LitInt($1) }
     | LIT_STR                      { LitStr($1) }
-    | LBRACK list_items RBRACK     { List($2) }
     | ID                           { Id($1) }
     | expr PLUS   expr             { Binop($1, Add,      $3) }
     | expr MINUS  expr             { Binop($1, Sub,      $3) }
@@ -123,10 +122,6 @@ expr:
     | ID MOVE expr                 { Assign($1, $3) }
     | ID LPAREN actuals_opt RPAREN { Call($1,   $3) }
 
-list_items:
-      expr                         { Item($1) }
-    | list_items COMMA list_items  { Seq($1, Comma, $3) }           
-    
 actuals_opt:
     /* nothing */   { [] }
     | actuals_list  { List.rev $1 }
