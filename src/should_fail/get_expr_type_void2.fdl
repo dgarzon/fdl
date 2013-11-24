@@ -1,0 +1,12 @@
+/* void is not a variable type */
+int a;
+
+def int main() {
+    int b;
+    void c;
+    a = 5;
+    b = 6;
+    c = a + b;
+    print c;
+    return 0;
+}

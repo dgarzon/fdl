@@ -1,8 +1,13 @@
 type op_t = Add | Sub | Mult | Div | Equal | Neq | Less | Leq | Greater | Geq
 
+type sep_t = Comma
+
 type data_type_t = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
 
-type expr_t =
+type items_t = 
+    Item of expr_t
+  | Seq of items_t * sep_t * items_t
+and expr_t =
     LitInt of int
   | LitStr of string
   | Id of string
@@ -11,6 +16,7 @@ type expr_t =
   | Call of string * expr_t list
   | Copy of string * expr_t
   | Move of string * expr_t
+  | List of items_t
   | Noexpr
 
 type stmt_t =

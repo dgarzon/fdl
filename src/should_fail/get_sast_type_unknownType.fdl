@@ -1,0 +1,10 @@
+/* all variables are of type void, int, string, boolean, path, dict, or list */
+/* currently gives: Fatal error: exception Parsing.Parse_error */
+/* Do we want "Unknown type" error instead (from string_of_vtype) */
+
+def int main() {
+    char a;
+    a = "hello";
+    print a;
+    return 0;
+}

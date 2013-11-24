@@ -1,0 +1,13 @@
+/* should not be able to concatenate two strings with + operator */
+/* + only applies to ints */
+string a;
+
+def int main() {
+    string b;
+    string c;
+    a = "hello";
+    b = "world";
+    c = a + b;
+    print c;
+    return 0;
+}

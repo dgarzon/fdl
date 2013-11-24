@@ -1,0 +1,14 @@
+/* should not be able to concatenate two strings with + operator */
+/* + only applies to ints */
+/* Fatal error: exception Failure("type error") */
+string a;
+
+def int main() {
+    string b;
+    string c;
+    a = "hello";
+    b = "world";
+    c = a + b;
+    print c;
+    return 0;
+}

@@ -1,8 +1,14 @@
 type op = Add | Sub | Mult | Div | Equal | Neq | Less | Leq | Greater | Geq
 
+type sep = Comma
+
 type data_type = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
 
-type expr =
+(* mutually recursive types *)
+type items = 
+    Item of expr
+  | Seq of items * sep * items
+and expr =
     LitInt of int
   | LitStr of string
   | Id of string
@@ -11,6 +17,7 @@ type expr =
   | Call of string * expr list
   | Copy of string * expr
   | Move of string * expr
+  | List of items
   | Noexpr
 
 type stmt =

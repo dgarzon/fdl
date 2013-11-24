@@ -1,0 +1,12 @@
+/* Less, Leq, Greater, Geq only applies to only? int */
+
+def int main() {
+    string a;
+    string b;
+    boolean c;
+    a = "abc";
+    b = "xyz";
+    c = a<b; 
+    print c;
+    return 0;
+}
