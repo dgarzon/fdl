@@ -88,7 +88,7 @@ let match_oper e1 op e2 =
 	 	    (Sast.Binop(fst e1, Sast.Geq, fst e2), "boolean")
 	)
 
-(* returns the expr and its type *)
+(* it returns the expr and its type *)
 let rec check_expr env = function
 	Ast.LitInt(i) -> Sast.LitInt(i), "int"
 	| Ast.LitStr(s) -> Sast.LitStr(s), "string"
