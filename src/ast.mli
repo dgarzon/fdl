@@ -9,7 +9,7 @@ type expr =
   | Binop of expr * op * expr
   | Assign of string * expr
   | Call of string * expr list
-  | Copy of expr * expr
+  | Copy of string * expr
   | Move of string * expr
   | Noexpr
 
