@@ -1,6 +1,6 @@
 open Ast
 open Symboltable
-
+(*adding testing comment *)
 module StringMap = Map.Make(String)
 
 let string_of_vtype = function
