@@ -1,6 +1,7 @@
 Git help
 
 http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging
+http://www.gitguys.com/topics/merging-with-a-conflict-conflicts-and-resolutions/
 
 Simple commands....
 git init
