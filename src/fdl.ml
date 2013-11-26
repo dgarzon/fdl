@@ -1,7 +1,11 @@
 (* open Ast *)
 open Sast
 
-let rec string_of_expr = function
+let rec string_of_items = function
+    Item(e) -> "/*TODO*/"
+  | Seq(i1, sep, i2) -> "/*TODO*/"
+
+and string_of_expr = function
     LitInt(l) -> string_of_int l
   | LitStr(l) -> l
   | Id(s) -> s
@@ -20,6 +24,7 @@ let rec string_of_expr = function
 (* --must deal with quotes in expression definition, replace 'star' with actual symbol    *)
   | Move(v, e) -> v ^ " = " ^ string_of_expr e
 (*"rename(" ^ string_of_expr e ^ "," ^ string_of_expr v ^ ")"  *)
+  | List(i) -> "/*TODO*/"
   | Noexpr -> ""
 
 
@@ -63,7 +68,7 @@ let string_of_fdecl fdecl =
   "}\n"
 
 let string_of_program (vars, funcs) =
-  "\n#include<stdio.h>\n" ^ 
+  "\n#include<stdio.h>\n#include<stdlib.h>\n" ^ 
   String.concat "\n" (List.map string_of_vdecl vars) ^ "\n" ^
   String.concat "\n" (List.map string_of_fdecl funcs)
 

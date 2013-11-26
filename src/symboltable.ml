@@ -11,11 +11,11 @@ type env = {
 let string_of_vtype = function
   VoidType -> "void"
   | IntType -> "int"
-  | StrType -> "char *"
-  | BoolType -> "int"
-  | PathType -> "char *"
-  | DictType -> "struct Dictionary *"
-  | ListType -> "struct List *"
+  | StrType -> "string"
+  | BoolType -> "boolean"
+  | PathType -> "path"
+  | DictType -> "dict"
+  | ListType -> "list"
 
 let find_variable name env =
 	try StringMap.find name env.locals

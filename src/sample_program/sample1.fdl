@@ -1,7 +1,7 @@
 int a;
-def void main() {
+def int main() {
 int b;
 /*c = 10;*/
 print 1+2;
-return;
+return 1;
 }
