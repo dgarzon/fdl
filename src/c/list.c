@@ -24,9 +24,14 @@ void traverseList(struct List *list, void (*f)(void *))
     }
 }
 
-void flipSignDouble(void *data)
+static void printInteger(void *p)
 {
-    *(double *)data = *(double *)data * -1;
+    printf("%d \n", *(int *)p);
+}
+
+static void printString(void *p)
+{
+    printf("%s \n", (char *)p);
 }
 
 int compareInteger(const void *data1, const void *data2)
@@ -109,25 +114,21 @@ void reverseList(struct List *list)
 
 struct Node *addBack(struct List *list, void *data)
 {
-    // make the new node that will go to the end of list
     struct Node *node = (struct Node *)malloc(sizeof(struct Node));
     if (node == NULL)
 	return NULL;
     node->data = data;
     node->next = NULL;
 
-    // if the list is empty, this node is the head
     if (list->head == NULL) {
 	list->head = node;
 	return node;
     }
 
-    // find the last node
     struct Node *end = list->head;
     while (end->next != NULL)
 	end = end->next;
 
-    // 'end' is the last node at this point
     end->next = node;
     return node;
 }
