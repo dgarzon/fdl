@@ -4,6 +4,8 @@ type sep_t = Comma
 
 type data_type_t = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
 
+type pathattr_type_t = Pathname | Pathcreated | Pathkind
+
 type items_t = 
     Item of expr_t
   | Seq of items_t * sep_t * items_t
@@ -17,6 +19,7 @@ and expr_t =
   | Copy of string * expr_t
   | Move of string * expr_t
   | List of items_t
+  | Pathattr of string * pathattr_type_t
   | Noexpr
 
 type stmt_t =

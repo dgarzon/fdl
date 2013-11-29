@@ -25,6 +25,11 @@ and string_of_expr = function
   | Move(v, e) -> v ^ " = " ^ string_of_expr e
 (*"rename(" ^ string_of_expr e ^ "," ^ string_of_expr v ^ ")"  *)
   | List(i) -> "/*TODO*/"
+  | Pathattr(id, e) -> ( match e with
+                          Pathname -> "getPathName(" ^ id ^ ")"
+                          | Pathcreated -> "getCreatedAt(" ^ id ^ ")"
+                          | Pathkind -> "getPathType(" ^ id ^ ")"
+                        )
   | Noexpr -> ""
 
 
@@ -37,7 +42,7 @@ let rec string_of_stmt = function
   | If(e, s1, s2) ->  "if (" ^ string_of_expr e ^ ")\n" ^
       string_of_stmt s1 ^ "else\n" ^ string_of_stmt s2
       (* print needs to be made aware of expr type, otherwise won't work *)
-  | Print(expr, expr_type) -> if expr_type = "string" then
+  | Print(expr, expr_type) -> if expr_type = "string" or expr_type = "path" then
                                 "printf(\"%s\"," ^ string_of_expr expr ^ ");\n"
                               else
                                 "printf(\"%d\"," ^ string_of_expr expr ^ ");\n"

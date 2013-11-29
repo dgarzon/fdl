@@ -4,6 +4,8 @@ type sep = Comma
 
 type data_type = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
 
+type pathattr_type = Pathname | Pathcreated | Pathkind
+
 (* mutually recursive types *)
 type items = 
     Item of expr
@@ -18,6 +20,7 @@ and expr =
   | Copy of string * expr
   | Move of string * expr
   | List of items
+  | Pathattr of string * pathattr_type
   | Noexpr
 
 type stmt =

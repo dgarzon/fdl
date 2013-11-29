@@ -7,6 +7,7 @@
 %token CONTINUE BREAK
 %token RETURN IF THEN ELSE FOR IN WHILE DO
 %token DEF VOID INT STR DICT LIST PATH BOOL TRASH TRUE FALSE PRINT
+%token PATHNAME PATHCREATED PATHKIND
 %token <int> LIT_INT
 %token <string> LIT_STR
 %token <string> ID
@@ -122,6 +123,12 @@ expr:
     | ID COPY expr                 { Copy($1,   $3) }
     | ID MOVE expr                 { Assign($1, $3) }
     | ID LPAREN actuals_opt RPAREN { Call($1,   $3) }
+    | ID pathattributes            { Pathattr($1, $2) }
+
+pathattributes:
+    | PATHNAME                     { Pathname }
+    | PATHCREATED                  { Pathcreated }
+    | PATHKIND                     { Pathkind }
 
 list_items:
       expr                         { Item($1) }

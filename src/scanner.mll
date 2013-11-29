@@ -18,15 +18,15 @@ rule token = parse
 	| '>'			{ GT }			| ">="			{ GEQ }
 	| '['			{ LBRACK }		| ']'			{ RBRACK }
 	| "&&"			{ AND }			| "||"			{ OR }
-	| '!'			{ NOT }
-	| "def"			{ DEF }			| "print"		{ PRINT }
-	| "int"			{ INT }			| "path"		{ PATH }
-	| "dict"		{ DICT }		| "list"		{ LIST }
-	| "string"		{ STR }			| "bool"		{ BOOL }
+	| '!'			{ NOT }			| ".name"		{ PATHNAME }
+	| "def"			{ DEF }			| ".created_at"	{ PATHCREATED }
+	| "int"			{ INT }			| ".kind"		{ PATHKIND }
+	| "dict"		{ DICT }		| "path"		{ PATH }
+	| "string"		{ STR }			| "list"		{ LIST }
 	| "if"			{ IF }			| "else"		{ ELSE }
-	| "then"		{ THEN }
+	| "then"		{ THEN }		| "print"		{ PRINT }
 	| "for"			{ FOR }			| "in"			{ IN }
-	| "do"			{ DO }
+	| "do"			{ DO }			| "bool"		{ BOOL }
 	| "while"		{ WHILE }		| "return"		{ RETURN }
 	| "break"		{ BREAK }		| "continue"	{ CONTINUE }
 	| "void"		{ VOID }

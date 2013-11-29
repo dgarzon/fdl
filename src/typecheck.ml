@@ -23,6 +23,12 @@ let get_sast_type = function
 	| Ast.ListType -> Sast.ListType
 	| _ -> raise (Failure ("Unknown type"))
 
+let get_sast_pathattrtype = function
+	Ast.Pathname -> Sast.Pathname
+	| Ast.Pathcreated -> Sast.Pathcreated
+	| Ast.Pathkind -> Sast.Pathkind
+	| _ -> raise (Failure ("Unknown path attribute type"))
+
 (* convert a variable to its SAST type *)
 let convert_to_sast_type x = 
 	{
@@ -118,6 +124,12 @@ let rec check_expr env = function
   	(* | Ast.Move(id, e) -> Sast.Move(id, e), "void"
   	| Ast.Copy(id, e) -> Sast.Copy(id, e), "void" *)
 	| Ast.List(items) -> Sast.List(check_list_items env items), "list"
+	| Ast.Pathattr(id, e) ->
+		if not ((get_vtype env id) = "path")
+			then raise(Failure("cannot use path attributes on non-path variable " ^ id))
+		else
+		(* return type is string assuming path attributes will be treated that way *)
+			Sast.Pathattr(id, get_sast_pathattrtype e), "string"
 	| Ast.Noexpr -> Sast.Noexpr, "void"
 
 and check_list_items env = function
@@ -130,7 +142,9 @@ and check_list_items env = function
 and get_expr_with_type env expr t = 
 	let e = check_expr env expr in
 	print_string (snd e);
-	if not((snd e) = t) then raise (Failure ("type error")) else (fst e)
+	(* added special case for the path variable *)
+	if ((snd e) = "string" && t = "path") then (fst e)
+	else if not((snd e) = t) then raise (Failure ("type error")) else (fst e)
 
 let rec check_stmt env func = function
 	  Ast.Block(stmt_list) -> (Sast.Block(check_stmt_list env func stmt_list)), env
