@@ -1,0 +1,6 @@
+def int main(){
+	path file = "/Users/cjborenstein/Desktop/file.txt";
+	path file2 = "/Users/cjborenstein/Desktop/file2.txt";
+	path dir = "/Users/cjborenstein/Desktop/";
+	return 0;
+}
