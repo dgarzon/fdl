@@ -10,6 +10,7 @@
 %token PATHNAME PATHCREATED PATHKIND
 %token <int> LIT_INT
 %token <string> LIT_STR
+%token <bool> LIT_BOOL
 %token <string> ID
 %token EOF
 
@@ -108,6 +109,7 @@ expr_opt:
 expr:
     | LIT_INT                      { LitInt($1) }
     | LIT_STR                      { LitStr($1) }
+    | LIT_BOOL			   { LitBool($1) }
     | LBRACK list_items RBRACK     { List($2) }
     | ID                           { Id($1) }
     | expr PLUS   expr             { Binop($1, Add,      $3) }

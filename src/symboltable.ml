@@ -12,7 +12,7 @@ let string_of_vtype = function
   VoidType -> "void"
   | IntType -> "int"
   | StrType -> "string"
-  | BoolType -> "boolean"
+  | BoolType -> "bool"
   | PathType -> "path"
   | DictType -> "dict"
   | ListType -> "list"

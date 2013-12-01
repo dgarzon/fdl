@@ -51,6 +51,7 @@ type token =
   | PATHKIND
   | LIT_INT of (int)
   | LIT_STR of (string)
+  | LIT_BOOL of (bool)
   | ID of (string)
   | EOF
 

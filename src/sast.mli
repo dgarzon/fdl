@@ -12,6 +12,7 @@ type items_t =
 and expr_t =
     LitInt of int
   | LitStr of string
+  | LitBool of bool
   | Id of string
   | Binop of expr_t * op_t * expr_t
   | Assign of string * expr_t

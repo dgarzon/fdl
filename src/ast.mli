@@ -13,6 +13,7 @@ type items =
 and expr =
     LitInt of int
   | LitStr of string
+  | LitBool of bool
   | Id of string
   | Binop of expr * op * expr
   | Assign of string * expr

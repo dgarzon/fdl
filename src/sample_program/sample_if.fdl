@@ -4,7 +4,7 @@ def int main() {
         int b;
         a = 0;
         b = 3;
-        if(a==0)
+        if(a == 0)
         {
                 print a;
         }
