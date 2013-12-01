@@ -83,10 +83,27 @@ end
 
 
 Stuff to work on.......
-type data_type = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
+1.  type data_type = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
 
-data_type is used in variable declaration
-maybe able to declare variable as void
-so might need to have separate, datatype and return type
+2.  data_type is used in variable declaration
+    maybe able to declare variable as void
+    so might need to have separate, datatype and return type
 
-for is not correct… ours is the in version….
+3.  for is not correct… ours is the in version….
+
+4.  our func type has local decl in-built
+    may have problem because then we don't allow blocks of code inside function to have var decl
+    def void main(){
+      int a; // this works
+      {
+        int b; // this fails, because statement doesn't have declaration
+      }
+    }
+    // if we make this change, then we will also need to update the typecheck and parser and fdl string // statements
+5.  add Break to our list of statements
+6.  SAST can be used to differentiate between overloaded operators, like + on int and + on strings ??
+    should we add overload ??
+7.  string_of_vtype is in typecheck and symboltable and fdl, need in a central place, maybe AST
+8.  add symboltable and typecheck to makefile
+9.  char* need to give it memory or max size,....
+    can we use length of string from OCaml

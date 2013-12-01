@@ -7,6 +7,7 @@
 %token CONTINUE BREAK
 %token RETURN IF THEN ELSE FOR IN WHILE DO
 %token DEF VOID INT STR DICT LIST PATH BOOL TRASH TRUE FALSE PRINT
+%token PATHNAME PATHCREATED PATHKIND
 %token <int> LIT_INT
 %token <string> LIT_STR
 %token <string> ID
@@ -33,43 +34,22 @@ program:
     | program fdecl { fst $1, ($2 :: snd $1) }
 
 fdecl:
-    DEF VOID ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
+    DEF return_type ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
        {{
-        return = VoidType;
+        return = $2;
         fname = $3;
         formals = $5;
-        locals = List.rev $8;
+        fnlocals = List.rev $8;
         body = List.rev $9 }}
-   | DEF INT ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
-      {{
-        return = IntType;
-        fname = $3;
-        formals = $5;
-        locals = List.rev $8;
-        body = List.rev $9 }}
-   | DEF STR ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
-      {{
-        return = StrType;
-        fname = $3;
-        formals = $5;
-        locals = List.rev $8;
-        body = List.rev $9 }}
-   | DEF PATH ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
-      {{
-        return = PathType;
-        fname = $3;
-        formals = $5;
-        locals = List.rev $8;
-        body = List.rev $9 }}
-   | DEF BOOL ID LPAREN formals_opt RPAREN LBRACE vdecl_opt stmt_list RBRACE
-      {{
-        return = BoolType;
-        fname = $3;
-        formals = $5;
-        locals = List.rev $8;
-        body = List.rev $9 }}
-/* Need to add func declarations for dict and list*/
 
+return_type:
+      VOID      { VoidType }
+    | INT       { IntType }
+    | BOOL      { BoolType }
+    | PATH      { PathType }
+    | STR       { StrType }
+    | DICT      { DictType }
+    | LIST      { ListType }
 
 formals_opt:
     { [] }
@@ -98,7 +78,9 @@ vdecl_list:
 
 /* Using SEMI to separate variable declarations for now */
 vdecl:
-    INT ID SEMI    { { vtype = IntType;  vname = $2; } }
+/* addded void type to variables so we can give this error in type checking*/
+    VOID ID SEMI    { { vtype = VoidType;  vname = $2; } }
+    | INT ID SEMI    { { vtype = IntType;  vname = $2; } }
     | BOOL ID SEMI { { vtype = BoolType; vname = $2; } }
     | STR ID SEMI  { { vtype = StrType;  vname = $2; } }
     | PATH ID SEMI { { vtype = PathType; vname = $2; } }
@@ -112,14 +94,20 @@ stmt_list:
 /* using SEMI to separate stmts for now */
 stmt:
     expr SEMI                                      { Expr($1) }
-    | RETURN expr SEMI                             { Return($2) }
+    | RETURN expr_opt SEMI                         { Return($2) }
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
     | PRINT expr SEMI                              { Print($2) }
 
+/* expression optional, return; */
+expr_opt:
+    /* nothing */ { Noexpr }
+  | expr          { $1 }
+
 expr:
     | LIT_INT                      { LitInt($1) }
     | LIT_STR                      { LitStr($1) }
+    | LBRACK list_items RBRACK     { List($2) }
     | ID                           { Id($1) }
     | expr PLUS   expr             { Binop($1, Add,      $3) }
     | expr MINUS  expr             { Binop($1, Sub,      $3) }
@@ -135,7 +123,17 @@ expr:
     | ID COPY expr                 { Copy($1,   $3) }
     | ID MOVE expr                 { Assign($1, $3) }
     | ID LPAREN actuals_opt RPAREN { Call($1,   $3) }
+    | ID pathattributes            { Pathattr($1, $2) }
 
+pathattributes:
+    | PATHNAME                     { Pathname }
+    | PATHCREATED                  { Pathcreated }
+    | PATHKIND                     { Pathkind }
+
+list_items:
+      expr                         { Item($1) }
+    | list_items COMMA list_items  { Seq($1, Comma, $3) }           
+    
 actuals_opt:
     /* nothing */   { [] }
     | actuals_list  { List.rev $1 }
