@@ -1,7 +1,7 @@
 %{ open Ast %}
 
 %token LPAREN RPAREN LBRACE RBRACE LBRACK RBRACK COMMA TAB SEMI
-%token PLUS MINUS TIMES DIVIDE ASSIGN MOVE COPY
+%token PLUS MINUS TIMES DIVIDE IN ASSIGN MOVE COPY
 %token EQ NEQ LT LEQ GT GEQ NOT
 %token AND OR
 %token CONTINUE BREAK
@@ -20,6 +20,7 @@
 
 %left EQ NEQ
 %left LT GT LEQ GEQ
+%left IN
 %left PLUS MINUS
 %left TIMES DIVIDE
 
@@ -113,6 +114,7 @@ expr:
     | expr MINUS  expr             { Binop($1, Sub,      $3) }
     | expr TIMES  expr             { Binop($1, Mult,     $3) }
     | expr DIVIDE expr             { Binop($1, Div,      $3) }
+    | expr IN expr                 { Binop($1, In,       $3) }
     | expr EQ     expr             { Binop($1, Equal,    $3) }
     | expr NEQ    expr             { Binop($1, Neq,      $3) }
     | expr LT     expr             { Binop($1, Less,     $3) }
