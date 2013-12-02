@@ -100,7 +100,7 @@ stmt:
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
     | PRINT expr SEMI                              { Print($2) }
-/*    | WHILE LPAREN expr RPAREN stmt 	   	   { While($3, $6) } */
+    | WHILE LPAREN expr RPAREN stmt 	   	   { While($3, Block([])) } 
 
 /* expression optional, return; */
 expr_opt:
