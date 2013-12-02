@@ -7,7 +7,7 @@ let string_of_vtype = function
   VoidType -> "void"
   | IntType -> "int"
   | StrType -> "string"
-  | BoolType -> "boolean"
+  | BoolType -> "bool"
   | PathType -> "path"
   | DictType -> "dict"
   | ListType -> "list"
@@ -50,7 +50,7 @@ let get_expr_type t1 t2 =
 	if t1 = "void" || t2 = "void" then raise (Failure ("cannot use void type inside expression")) else
 	if t1 = "string" || t2 = "string" then "string" else
 	if t1 = "int" && t2 = "int" then "int" else
-	if t1 = "boolean" && t2 = "boolean" then "boolean" else
+	if t1 = "bool" && t2 = "bool" then "bool" else
 	raise (Failure ("type error"))
 
 (* mark int & boolean expression to string type *)
