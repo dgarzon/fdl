@@ -147,13 +147,12 @@ let rec check_expr env = function
 and check_list_items env = function
 	  Ast.Item(e) ->let i,t = check_expr env e in 
 	  				Sast.Item(i)
-	| Ast.Seq(e1, sep, e2) -> Sast.Seq((check_list_items env e1), Sast.Comma, (check_list_items env e2))
+	| Ast.Seq(e1, sep, e2) -> Sast.Seq(fst (check_expr env e1), Sast.Comma, (check_list_items env e2))
 
 (* get expr_t(sast type) by expr(ast type) with given type
  * raise error if the expression type does match requirement, snd e has the type and fst has the expr *)
 and get_expr_with_type env expr t = 
 	let e = check_expr env expr in
-	print_string (snd e);
 	(* added special case for the path variable *)
 	if ((snd e) = "string" && t = "path") then (fst e)
 	else if not((snd e) = t) then raise (Failure ("type error")) else (fst e)
