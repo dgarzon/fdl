@@ -1,29 +1,29 @@
-C  = gcc
+CC  = gcc
 CXX = g++
 
-INCLUDES =
+# Include directories:
+INCLUDES = -I libraries/
 
+# Compilation options: are automatically, or implicitly called by our Makefile.
 CFLAGS   = -g -Wall $(INCLUDES)
 CXXFLAGS = -g -Wall $(INCLUDES)
 
-LDFLAGS = -g
+# Linking options:
+LDFLAGS = -g -L libraries/
 
-LDLIBS =
+# Libraries needed: Additional librarie
+LDLIBS = -llist -lpath
 
-# mylist-test: mylist-test.o libmylist.a
+# Target:
+stat_calls: stat_calls.o
 
-# mylist-test.o: mylist-test.c mylist.h
+# Depends:
+stat_calls.o: stat_calls.c
 
-libmylist.a: list.o
-	ar rc liblist.a list.o
-	ranlib liblist.a
-
-list.o: list.c list.h
-
+# Clean:
 .PHONY: clean
 clean:
-	rm -f *.o a.out core liblist.a
+		rm -f *.o a.out core stat_calls
 
 .PHONY: all
-all: clean
-
+all: clean stat_calls
