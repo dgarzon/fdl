@@ -6,7 +6,6 @@ def int main() {
         a = 0;
         b = 3;
 	c = a < b;
-	while ( a < b )
-		print a;
+	while ( a < b ) print a;
         return 1;
 }
