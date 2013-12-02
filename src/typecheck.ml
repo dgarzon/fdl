@@ -84,13 +84,13 @@ let match_oper e1 op e2 =
 	 	    (Sast.Binop(fst e1, Sast.Equal, fst e2), "boolean")
 	 | Ast.Neq -> (* if expr_t = "string" then (Ast.StrOp(conv_type e1, Ast.Neqs, conv_type e2), "boolean") else *)
 	 	  (Sast.Binop(fst e1, Sast.Neq, fst e2), "boolean")
-	 | Ast.Less ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Less, fst e2), "int") else
+	 | Ast.Less ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Less, fst e2), "bool") else
                   raise (Failure ("type error")) 
-	 | Ast.Leq ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Leq, fst e2), "int") else
+	 | Ast.Leq ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Leq, fst e2), "bool") else
                   raise (Failure ("type error"))
-	 | Ast.Greater ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Greater, fst e2), "int") else
+	 | Ast.Greater ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Greater, fst e2), "bool") else
                   raise (Failure ("type error"))
-	 | Ast.Geq ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Geq, fst e2), "int") else
+	 | Ast.Geq ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Geq, fst e2), "bool") else
                   raise (Failure ("type error")) 
 	)
 
