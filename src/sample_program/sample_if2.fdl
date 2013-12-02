@@ -5,9 +5,8 @@ def int main() {
     a = 1;
     b = 2;
     c = a < b;
-    if( c==1 )
-    {
-        print c;
-    }
+    if( c == true ) 
+    then 
+    print c;
     return 0;
  }

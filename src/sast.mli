@@ -27,7 +27,7 @@ type stmt_t =
     Block of stmt_t list
   | Expr of expr_t
   | Return of expr_t
-  | If of expr_t * stmt_t * stmt_t
+  | If of expr_t * stmt_t * stmt_t 
   | For of expr_t * expr_t * expr_t * stmt_t
   | While of expr_t * stmt_t
   | Print of expr_t * string

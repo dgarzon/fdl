@@ -165,7 +165,7 @@ let rec check_stmt env func = function
 					  if not(snd e = string_of_vtype func.return) then raise (Failure ("The return type doesn't match!"))
 					  else (Sast.Return(fst e)), env 
 	| Ast.If(expr, stmt1, stmt2) ->	let e = check_expr env expr in
-								if not(snd e = "boolean") then raise (Failure ("The type of the condition in If statement must be boolean!")) 
+								if not(snd e = "bool") then raise (Failure ("The type of the condition in If statement must be boolean!")) 
 								else (Sast.If(fst e, fst (check_stmt env func stmt1), fst (check_stmt env func stmt2))), env	(* if() {} else{} *)
 	| Ast.While(expr, stmt) -> let e = check_expr env expr in
 						   if not (snd e = "boolean") then raise (Failure ("The type of the condition in While statement must be boolean!"))
