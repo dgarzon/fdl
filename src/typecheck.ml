@@ -80,10 +80,10 @@ let match_oper e1 op e2 =
 		  raise (Failure ("type error"))
 		  (* equal and not equal have special case for string comparison 
 		  		we may need to add SAST and Eqs and Neqs *)
-	 | Ast.Equal -> (* if expr_t = "string" then (Ast.StrOp(conv_type e1, Ast.Eqs, conv_type e2), "boolean") else *)
-	 	    (Sast.Binop(fst e1, Sast.Equal, fst e2), "boolean")
-	 | Ast.Neq -> (* if expr_t = "string" then (Ast.StrOp(conv_type e1, Ast.Neqs, conv_type e2), "boolean") else *)
-	 	  (Sast.Binop(fst e1, Sast.Neq, fst e2), "boolean")
+	 | Ast.Equal -> if expr_t = "int" then (Sast.Binop(fst e1, Sast.Equal, fst e2), "bool") else
+                  raise (Failure ("type error"))
+	 | Ast.Neq -> if expr_t = "int" then (Sast.Binop(fst e1, Sast.Neq, fst e2), "bool") else
+                  raise (Failure ("type error"))
 	 | Ast.Less ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Less, fst e2), "bool") else
                   raise (Failure ("type error")) 
 	 | Ast.Leq ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Leq, fst e2), "bool") else
