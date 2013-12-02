@@ -46,8 +46,8 @@ let rec string_of_stmt = function
                                 "printf(\"%s\"," ^ string_of_expr expr ^ ");\n"
                               else
                                 "printf(\"%d\"," ^ string_of_expr expr ^ ");\n"
-  | For(e1, e2, e3, s1) ->  "for (" ^ string_of_expr e1 ^ "; "
-      ^ string_of_expr e2 ^ "; " ^ string_of_expr e3 ^ ")\n" ^ string_of_stmt s1
+  | For(e1, e2, s1) ->  "for (" ^ string_of_expr e1 ^ " in "
+      ^ string_of_expr e2 ^ ")\n" ^ string_of_stmt s1
   | While(e, s) -> "while (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
 
 let string_of_vtype = function
