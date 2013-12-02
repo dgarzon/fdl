@@ -17,8 +17,8 @@ and expr_t =
   | Binop of expr_t * op_t * expr_t
   | Assign of string * expr_t
   | Call of string * expr_t list
-  | Copy of string * expr_t
-  | Move of string * expr_t
+  | Copy of expr_t * expr_t
+  | Move of expr_t * expr_t
   | List of items_t
   | Pathattr of string * pathattr_type_t
   | Noexpr

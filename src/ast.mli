@@ -18,8 +18,8 @@ and expr =
   | Binop of expr * op * expr
   | Assign of string * expr
   | Call of string * expr list
-  | Copy of string * expr
-  | Move of string * expr
+  | Copy of expr * expr
+  | Move of expr * expr
   | List of items
   | Pathattr of string * pathattr_type
   | Noexpr

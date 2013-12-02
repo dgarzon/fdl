@@ -121,8 +121,20 @@ let rec check_expr env = function
 						   with Invalid_argument "arg" -> raise(Failure("unmatched argument list"))
 				    in Sast.Call(func, List.rev new_list ), hd )
 		(* Need to add type checking for Move and Copy *)
-  	(* | Ast.Move(id, e) -> Sast.Move(id, e), "void"
-  	| Ast.Copy(id, e) -> Sast.Copy(id, e), "void" *)
+  	| Ast.Move(e1, e2) -> 
+		let e_t1 = check_expr env e1 in
+		let e_t2 = check_expr env e2 in
+		if (snd e_t1 = "path") and (snd e_t2 = "path")
+			then Sast.Move(fst e_t1, fst e_t2), "void"
+		else 
+			raise(Failure("cannot use path function on non-path variables"))
+  	| Ast.Copy(e1, e2) -> 
+	 	let e_t1 = check_expr env e1 in
+                let e_t2 = check_expr env e2 in
+                if (snd e_t1 = "path") and (snd e_t2 = "path")
+                        then Sast.Copy(fst e_t1, fst e_t2), "void"
+                else
+                        raise(Failure("cannot use path function on non-path variables"))
 	| Ast.List(items) -> Sast.List(check_list_items env items), "list"
 	| Ast.Pathattr(id, e) ->
 		if not ((get_vtype env id) = "path")
