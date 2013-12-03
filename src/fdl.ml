@@ -15,7 +15,14 @@ and string_of_items = function
                (get_temp_decl e) ^                
                 "addBack(&temp_list," ^ params ^ ");\n"
                 
-  | Seq(i1, sep, i2) -> (string_of_items i1) ^ (string_of_items i2)
+  | Seq(e, sep, i2) -> let params = ( match e with
+                       LitInt(l) -> "&temp" ^ string_of_expr e ^ ", fdl_int"
+                     | LitStr(l) -> string_of_expr e ^ ",fdl_str"
+                     | _ -> ""
+                      ) in
+                    (get_temp_decl e) ^                
+                    "addBack(&temp_list," ^ params ^ ");\n" 
+                    ^ (string_of_items i2)
 
 and string_of_expr = function
     LitInt(l) -> string_of_int l
