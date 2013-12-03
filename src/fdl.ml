@@ -54,7 +54,7 @@ and string_of_expr = function
 
 
 let rec string_of_stmt = function
-    Expr(expr) -> if string_of_expr expr = "" then "\n" else string_of_expr expr ^ ";\n"
+    Expr(expr) -> if compare (string_of_expr expr) "" = 0 then "\n" else string_of_expr expr ^ ";\n"
   | Block(stmts) ->
       "{\n" ^ String.concat "" (List.map string_of_stmt stmts) ^ "}\n"
   | Return(expr) -> "return " ^ string_of_expr expr ^ ";\n"
