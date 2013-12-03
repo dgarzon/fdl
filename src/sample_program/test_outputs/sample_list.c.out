@@ -1,0 +1,9 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+struct List * l;
+l = /*TODO*/;
+return 0;
+}
