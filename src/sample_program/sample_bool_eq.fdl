@@ -1,7 +1,0 @@
-int a;
-
-def int main() {
-        a = 0;
-	a == 0;
-        return 0;
-}

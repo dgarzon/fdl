@@ -1,9 +1,22 @@
 (* open Ast *)
 open Sast
 
-let rec string_of_items = function
-    Item(e) -> "/*TODO*/"
-  | Seq(i1, sep, i2) -> "/*TODO*/"
+let rec get_temp_decl e = match e 
+    with
+     LitInt(l) -> "int temp"  ^ string_of_expr e ^ " = " ^ string_of_expr e ^";\n"
+    | _ -> ""
+    
+
+and string_of_items = function
+    Item(e) ->  let params = ( match e with
+                  LitInt(l) -> "&temp" ^ string_of_expr e ^ ", fdl_int"
+                | LitStr(l) -> string_of_expr e ^ ",fdl_str"
+                | _ -> ""
+              ) in
+               (get_temp_decl e) ^                
+                "addBack(&temp_list," ^ params ^ ");\n"
+                
+  | Seq(i1, sep, i2) -> (string_of_items i1) ^ (string_of_items i2)
 
 and string_of_expr = function
     LitInt(l) -> string_of_int l
@@ -24,7 +37,7 @@ and string_of_expr = function
 (* --must deal with quotes in expression definition, replace 'star' with actual symbol    *)
   | Move(v, e) -> v ^ " = " ^ string_of_expr e
 (*"rename(" ^ string_of_expr e ^ "," ^ string_of_expr v ^ ")"  *)
-  | List(i) -> "/*TODO*/"
+  | List(i) -> "&temp_list;\ninitList(&temp_list);\n" ^ string_of_items i
   | Pathattr(id, e) -> ( match e with
                           Pathname -> "getPathName(" ^ id ^ ")"
                           | Pathcreated -> "getCreatedAt(" ^ id ^ ")"
@@ -73,7 +86,8 @@ let string_of_fdecl fdecl =
   "}\n"
 
 let string_of_program (vars, funcs) =
-  "\n#include<stdio.h>\n#include<stdlib.h>\n" ^ 
+  "\n#include<stdio.h>\n#include<stdlib.h>\n#include<string.h>\n#include \"list.h\"\n" ^ 
+  "struct List temp_list;\n int tempint;\n" ^
   String.concat "\n" (List.map string_of_vdecl vars) ^ "\n" ^
   String.concat "\n" (List.map string_of_fdecl funcs)
 

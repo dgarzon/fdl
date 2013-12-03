@@ -1,6 +1,0 @@
-def int main(){
-	list l;
-	l = ["a","b",1,2,3];
-	
-	return 0;
-}
