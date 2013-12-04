@@ -145,6 +145,13 @@ and get_expr_with_type env expr t =
 	if ((snd e) = "string" && t = "path") then (fst e)
 	else if not((snd e) = t) then raise (Failure ("type error")) else (fst e)
 
+let check_listexpr env = function
+	| Ast.ListId(id) ->
+		Sast.ListId(id, get_vtype env id), get_vtype env id
+	| Ast.ListItemInt(i) -> Sast.ListItemInt(i), "int"
+	| Ast.ListItemStr(s) -> Sast.ListItemStr(s), "string"
+
+	
 let rec check_stmt env func = function
 	  Ast.Block(stmt_list) -> (Sast.Block(check_stmt_list env func stmt_list)), env
 	(* | Decl(s1, s2, expr) -> let e = check_expr env expr in
@@ -166,6 +173,11 @@ let rec check_stmt env func = function
 	| Ast.If(expr, stmt1, stmt2) ->	let e = check_expr env expr in
 								if not(snd e = "bool") then raise (Failure ("The type of the condition in If statement must be boolean!")) 
 								else (Sast.If(fst e, fst (check_stmt env func stmt1), fst (check_stmt env func stmt2))), env	(* if() {} else{} *)
+	| Ast.Ifin(lexpr1, lexpr2, stmt1, stmt2) -> let e1 = check_listexpr env lexpr1 in
+								if (snd e1 = "list") then raise (Failure ("Cannot have list in list!")) 
+							else let e2 = check_listexpr env lexpr2 in
+							if not(snd e2 = "list") then raise (Failure ("\'in\' operator works with list type expression only!"))
+						else (Sast.Ifin(fst e1, fst e2, fst (check_stmt env func stmt1), fst (check_stmt env func stmt2))), env
 	| Ast.While(expr, stmt) -> let e = check_expr env expr in
 						   if not (snd e = "bool") then raise (Failure ("The type of the condition in While statement must be boolean!"))
 						   else (Sast.While(fst e, fst (check_stmt env func stmt))), env				(* while() {} *)

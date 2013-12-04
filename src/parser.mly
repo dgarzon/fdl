@@ -1,7 +1,7 @@
 %{ open Ast %}
 
 %token LPAREN RPAREN LBRACE RBRACE LBRACK RBRACK COMMA TAB SEMI
-%token PLUS MINUS TIMES DIVIDE IN ASSIGN MOVE COPY
+%token PLUS MINUS TIMES DIVIDE ASSIGN MOVE COPY
 %token EQ NEQ LT LEQ GT GEQ NOT
 %token AND OR
 %token CONTINUE BREAK
@@ -12,6 +12,7 @@
 %token <string> LIT_STR
 %token <bool> LIT_BOOL
 %token <string> ID
+%token IN
 %token EOF
 
 %nonassoc NOELSE
@@ -102,7 +103,14 @@ stmt:
     | PRINT expr SEMI                              { Print($2) }
     | WHILE LPAREN expr RPAREN stmt 	   	       { While($3, Block([$5])) } 
     | FOR LPAREN expr IN expr RPAREN stmt	       { For($3, $5, $7) } 
+    | IF list_expr IN list_expr THEN stmt %prec NOELSE  { Ifin($2, $4, $6, Block([])) }
+    | IF list_expr IN list_expr THEN stmt ELSE stmt     { Ifin($2, $4, $6, $8) }
 
+list_expr:
+    ID                            { ListId($1) }
+    | LIT_INT                      { ListItemInt($1) }
+    | LIT_STR                      { ListItemStr($1) }
+    | LIT_BOOL                     { ListItemBool($1) }
 /* expression optional, return; */
 expr_opt:
     /* nothing */ { Noexpr }

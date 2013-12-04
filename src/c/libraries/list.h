@@ -1,26 +1,61 @@
 #ifndef _LIST_H_
 #define _LIST_H_
 
-enum fdl_type { fdl_str, fdl_int };
+enum fdl_type { fdl_str, fdl_path, fdl_int, fdl_bool };
 
 struct Node {
 	enum fdl_type type;
-    void *data;
+    union {
+        int int_item;
+        int bool_item;
+        char *string_item;
+        char *path_item;
+    };
     struct Node *next;
 };
-
 
 struct List {
     struct Node *head;
 };
 
+struct Node *createIntNode(int data, enum fdl_type type){
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    if(newNode == NULL){
+        printf("Could not create new node!\n");
+        exit(1);
+    }
+
+    newNode->type = type;
+    newNode->next = NULL;
+    switch(newNode->type){
+        case fdl_int: newNode->int_item = data; break;
+        case fdl_bool: newNode->bool_item = data; break;
+        default: fdl_int: newNode->int_item = data; 
+    }
+    return newNode;
+}
+
+struct Node *createStrNode(char *data, enum fdl_type type){
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    if(newNode == NULL){
+        printf("Could not create new node!\n");
+        exit(1);
+    }
+
+    newNode->type = type;
+    newNode->next = NULL;
+    switch(newNode->type){
+        case fdl_str: newNode->string_item = data; break;
+        case fdl_path: newNode->path_item = data; break;
+        default: fdl_str: newNode->string_item = data; break;
+    }
+    return newNode;
+}
 
 static inline void initList(struct List *list)
 {
     list->head = 0;
 }
-
-
 
 static inline int isEmptyList(struct List *list)
 {
@@ -28,16 +63,10 @@ static inline int isEmptyList(struct List *list)
 }
 
 
-struct Node *addFront(struct List *list, void *data)
+void addFront(struct List *list, struct Node *node)
 {
-    struct Node *node = (struct Node *)malloc(sizeof(struct Node));
-    if (node == NULL)
-	return NULL;
-
-    node->data = data;
     node->next = list->head;
     list->head = node;
-    return node;
 }
 
 void traverseList(struct List *list, void (*f)(struct Node *))
@@ -49,86 +78,56 @@ void traverseList(struct List *list, void (*f)(struct Node *))
     }
 }
 
-
-
-static void printInteger(void *p)
-{
-    printf("%d \n", *(int *)p);
-}
-
-static void printString(void *p)
-{
-    printf("%s \n", (char *)p);
-}
-
-static void checkNodeType(struct Node *node)
+static void printNode(struct Node *node)
 {
 	switch(node->type){
-		case fdl_int: printInteger(node->data); break;
-		case fdl_str: printString(node->data); break;
+		case fdl_int: printf("%d ",node->int_item); break;
+        case fdl_bool: if(node->bool_item == 1) printf("True ");
+                        else printf("False "); break;
+		case fdl_str: printf("%s ",node->string_item); break;
+        case fdl_path: printf("%s ",node->path_item); break;
 	}
 }
 
-int compareInteger(const void *data1, const void *data2)
-{
-    if (*(int *)data1 == *(int *)data2)
-	return 0;
-    else
-	return 1;
-}
-
-int compareString(const void *data1, const void *data2) {
-    if (strcmp((const char *)data1, (const char *)data2) == 0) {
-        return 0;
+int findNode(struct List *list, struct Node *node1) {
+    struct Node *node2 = list->head;
+    while (node2) {
+        if(node1->type == node2->type){
+            switch(node1->type){
+                case fdl_int: if (node1->int_item == node2->int_item) return 0; else break;
+                case fdl_str: if (strcmp(node1->string_item, node2->string_item) == 0) return 0; else break;
+                case fdl_bool: if (node1->bool_item == node2->bool_item) return 0; else break;
+                case fdl_path: if (strcmp(node1->path_item, node2->path_item) == 0) return 0; else break;
+                default: return 1;
+            }
+	    }
+        node2 = node2->next;
     }
-    else
-        return 1;
+    return 1;
 }
 
-struct Node *findNode(struct List *list, const void *dataSought,
-	int (*compar)(const void *, const void *))
-{
-    struct Node *node = list->head;
-    while (node) {
-	if (compar(dataSought, node->data) == 0)
-	    return node;
-	node = node->next;
-    }
-    return NULL;
-}
-
-void *popFront(struct List *list)
-{
-    if (isEmptyList(list))
-	return NULL;
-
+struct Node popFront(struct List *list){
     struct Node *oldHead = list->head;
+    struct Node node = *oldHead;
     list->head = oldHead->next;
-    void *data = oldHead->data;
     free(oldHead);
-    return data;
+    return node;
 }
 
-void removeAllNodes(struct List *list)
+void removeAllNodes(struct List *list) 
 {
     while (!isEmptyList(list))
-	popFront(list);
+    popFront(list);
 }
 
-struct Node *addAfter(struct List *list,
-	struct Node *prevNode, void *data)
+void addAfter(struct List *list,
+	struct Node *prevNode, struct Node *newNode)
 {
     if (prevNode == NULL)
-	return addFront(list, data);
+	   addFront(list, newNode);
 
-    struct Node *node = (struct Node *)malloc(sizeof(struct Node));
-    if (node == NULL)
-	return NULL;
-
-    node->data = data;
-    node->next = prevNode->next;
-    prevNode->next = node;
-    return node;
+    newNode->next = prevNode->next;
+    prevNode->next = newNode;
 }
 
 void reverseList(struct List *list)
@@ -147,26 +146,20 @@ void reverseList(struct List *list)
     list->head = prv;
 }
 
-struct Node *addBack(struct List *list, void *data, enum fdl_type t)
+void addBack(struct List *list, struct Node *newNode)
 {
-    struct Node *node = (struct Node *)malloc(sizeof(struct Node));
-    if (node == NULL)
-	return NULL;
-    node->data = data;
-    node->type = t;
-    node->next = NULL;
+    newNode->next = NULL;
 
     if (list->head == NULL) {
-	list->head = node;
-	return node;
-    }
+	   list->head = newNode;
+       return;
+	}
 
     struct Node *end = list->head;
     while (end->next != NULL)
-	end = end->next;
+	   end = end->next;
 
-    end->next = node;
-    return node;
+    end->next = newNode;
 }
 
 

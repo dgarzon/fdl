@@ -24,6 +24,13 @@ and expr =
   | Pathattr of string * pathattr_type
   | Noexpr
 
+(*Need a separate list_expr for handling "if expr in list" *)
+type list_expr = 
+    ListId of string 
+  | ListItemInt of int
+  | ListItemStr of string
+  | ListItemBool of bool
+
 type stmt =
     Block of stmt list
   | Expr of expr
@@ -32,6 +39,7 @@ type stmt =
   | For of expr * expr * stmt
   | While of expr * stmt
   | Print of expr
+  | Ifin of list_expr * list_expr * stmt * stmt
 
 type var_decl = {
   vtype : data_type;
