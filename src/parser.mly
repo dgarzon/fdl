@@ -100,8 +100,12 @@ stmt:
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
     | PRINT expr SEMI                              { Print($2) }
+<<<<<<< HEAD
     | WHILE LPAREN expr RPAREN stmt 	   	   { While($3, Block([$5])) } 
     | FOR LPAREN expr IN expr RPAREN stmt	   { For($3, $5, $7) } 
+=======
+    | WHILE LPAREN expr RPAREN stmt 	   	   { While($3, Block([$5])) }
+>>>>>>> 0a04c78a826b01816287ccb011928aea846e8480
 
 /* expression optional, return; */
 expr_opt:
@@ -138,7 +142,7 @@ pathattributes:
 
 list_items:
       expr                         { Item($1) }
-    | list_items COMMA list_items  { Seq($1, Comma, $3) }           
+    | expr COMMA list_items  { Seq($1, Comma, $3) }           
     
 actuals_opt:
     /* nothing */   { [] }

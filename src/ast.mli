@@ -9,7 +9,7 @@ type pathattr_type = Pathname | Pathcreated | Pathkind
 (* mutually recursive types *)
 type items = 
     Item of expr
-  | Seq of items * sep * items
+  | Seq of expr * sep * items
 and expr =
     LitInt of int
   | LitStr of string

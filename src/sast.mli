@@ -8,7 +8,7 @@ type pathattr_type_t = Pathname | Pathcreated | Pathkind
 
 type items_t = 
     Item of expr_t
-  | Seq of items_t * sep_t * items_t
+  | Seq of expr_t * sep_t * items_t
 and expr_t =
     LitInt of int
   | LitStr of string
