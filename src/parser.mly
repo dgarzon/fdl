@@ -100,12 +100,8 @@ stmt:
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
     | PRINT expr SEMI                              { Print($2) }
-<<<<<<< HEAD
-    | WHILE LPAREN expr RPAREN stmt 	   	   { While($3, Block([$5])) } 
-    | FOR LPAREN expr IN expr RPAREN stmt	   { For($3, $5, $7) } 
-=======
-    | WHILE LPAREN expr RPAREN stmt 	   	   { While($3, Block([$5])) }
->>>>>>> 0a04c78a826b01816287ccb011928aea846e8480
+    | WHILE LPAREN expr RPAREN stmt 	   	       { While($3, Block([$5])) } 
+    | FOR LPAREN expr IN expr RPAREN stmt	       { For($3, $5, $7) } 
 
 /* expression optional, return; */
 expr_opt:
@@ -115,7 +111,7 @@ expr_opt:
 expr:
     | LIT_INT                      { LitInt($1) }
     | LIT_STR                      { LitStr($1) }
-    | LIT_BOOL			   { LitBool($1) }
+    | LIT_BOOL			           { LitBool($1) }
     | LBRACK list_items RBRACK     { List($2) }
     | ID                           { Id($1) }
     | expr PLUS   expr             { Binop($1, Add,      $3) }
@@ -142,7 +138,7 @@ pathattributes:
 
 list_items:
       expr                         { Item($1) }
-    | expr COMMA list_items  { Seq($1, Comma, $3) }           
+    | expr COMMA list_items        { Seq($1, Comma, $3) }           
     
 actuals_opt:
     /* nothing */   { [] }
