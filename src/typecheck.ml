@@ -170,9 +170,9 @@ let rec check_stmt env func = function
 	| Ast.While(expr, stmt) -> let e = check_expr env expr in
 						   if not (snd e = "bool") then raise (Failure ("The type of the condition in While statement must be boolean!"))
 						   else (Sast.While(fst e, fst (check_stmt env func stmt))), env				(* while() {} *)
-        (*| Ast.For(expr1, expr2, stmt) -> let e1 = check_expr env expr1 in let e2 = check_expr env expr2 in
+        | Ast.For(expr1, expr2, stmt) -> let e1 = check_expr env expr1 in let e2 = check_expr env expr2 in
 						   if not (snd e1 = "path" && snd e2 = "path" ) then raise (Failure("The type of the expression in a For statement must be path"))
-						   else (Sast.For(e1, e2, fst (check_stmt env func stmt))), env *)
+						   else (Sast.For(fst e1, fst e2, fst (check_stmt env func stmt))), env 
 	(* break statement to be added to AST *)
 	(* | Break -> (Ast.Break), env *)
 	(* need to add type checking for For *)

@@ -28,7 +28,7 @@ type stmt_t =
   | Expr of expr_t
   | Return of expr_t
   | If of expr_t * stmt_t * stmt_t 
-  | For of expr_t * expr_t * stmt_t
+  | For of expr_t * expr_t * stmt_t (* first expr_t should possibly be string *)
   | While of expr_t * stmt_t
   | Print of expr_t * string
   (* the string in Print represents its type, need to change to data_type_t *)
