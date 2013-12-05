@@ -28,11 +28,10 @@ and string_of_expr = function
         | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">=" ) ^ " " ^ string_of_expr e2
   | Assign(v, e) -> v ^ " = " ^ string_of_expr e
   (* Maybe used built-in functions for copy and move *)
-  | Copy(v, e) -> "execl(\"/bin/cp\",\"/bin/cp\"," ^  v ^ "," ^ string_of_expr e ^ ", (char *) 0)"
+   | Copy(e_dest, e_src) -> "execl(\"/bin/cp\",\"/bin/cp\"," ^ string_of_expr e_src ^ "," ^ string_of_expr e_dest ^ ", (char *) 0)"
 (*        "execl("/bin/cp", "/bin/cp"," ^  string_of_expr e ^ "," ^ string_of_expr v ^ ", (char star) 0)" *)
 (* --must deal with quotes in expression definition, replace 'star' with actual symbol    *)
-  | Move(v, e) -> v ^ " = " ^ string_of_expr e
-(*"rename(" ^ string_of_expr e ^ "," ^ string_of_expr v ^ ")"  *)
+  | Move(e_dest, e_src) -> "execl(\"/bin/mv\",\"/bin/mv\"," ^ string_of_expr e_src ^ "," ^ string_of_expr e_dest ^ ", (char *) 0)"
   | List(i) -> "&temp_list;\ninitList(&temp_list);\n" ^ string_of_items i
   | Pathattr(id, e) -> ( match e with
                           Pathname -> "getPathName(" ^ id ^ ")"

@@ -134,8 +134,8 @@ expr:
     | expr GT     expr             { Binop($1, Greater,  $3) }
     | expr GEQ    expr             { Binop($1, Geq,      $3) }
     | ID ASSIGN expr               { Assign($1, $3) }
-    | ID COPY expr                 { Copy($1,   $3) }
-    | ID MOVE expr                 { Assign($1, $3) }
+    | expr COPY expr                 { Copy($1,   $3) }
+    | expr MOVE expr                 { Move($1,  $3) }
     | ID LPAREN actuals_opt RPAREN { Call($1,   $3) }
     | ID pathattributes            { Pathattr($1, $2) }
 
