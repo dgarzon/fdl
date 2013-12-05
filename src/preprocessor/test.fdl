@@ -5,6 +5,7 @@ def list listAllFiles(path dirPath, int depth)
     dict myDict
     bool myBool
     string myString
+    bool something
 
     for item in myList
         print("Something")

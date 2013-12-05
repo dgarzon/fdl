@@ -20,15 +20,23 @@ const char *getFileExtension(const char *fileName) {
 
 int main(int argc, char const *argv[])
 {
-    if (argc != 2) {
-        fprintf(stderr, "%s\n", "usage: ./preprocessor <fdl file>");
+    if (argc != 3) {
+        fprintf(stderr, "%s\n", "usage: ./preprocessor <fdl file> <fdlp file>");
         exit(1);
     }
     char *fileName = (char *) argv[1];
+    char *outputFileName = (char *) argv[2];
 
+    // check input file extension
     if (strcmp("fdl", getFileExtension(fileName)) != 0)
     {
         die("file extension must be fdl");
+    }
+
+    // check output file extension
+    if (strcmp("fdlp", getFileExtension(outputFileName)) != 0)
+    {
+        die("output file extension must be fdlp");
     }
 
     FILE *input;
@@ -36,7 +44,7 @@ int main(int argc, char const *argv[])
         die("fpen() failed");
     }
 
-    char *outputFileName = "output.fdlp";
+    // char *outputFileName = "output.fdlp";
     FILE *output;
     if ((output = fopen(outputFileName, "w")) == NULL) {
         die("fpen() failed");

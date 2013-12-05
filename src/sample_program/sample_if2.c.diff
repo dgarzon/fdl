@@ -1,0 +1,1 @@
+1,15c1 < #include<stdio.h> < #include<stdlib.h> < < int main() < { < int c; < int b; < int a; < a = 1; < b = 2; < c = a < b; < if (a < b) < printf("%d",b); < return 1; < } --- > 2 \ No newline at end of file

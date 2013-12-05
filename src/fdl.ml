@@ -112,8 +112,8 @@ let _ =
   let fname = Sys.argv.(1) in
       (* check the extension *)
       let index = (if String.contains fname '.' then String.rindex fname '.' else 0 ) in
-      let suffix = String.sub fname index 4 in
-      if not (suffix = ".fdl") then raise (Failure ("Invalid type of source file."))
+      let suffix = String.sub fname index 5 in
+      if not (suffix = ".fdlp") then raise (Failure ("Invalid type of source file."))
       else
         (* lex from the file *)
         let input = open_in fname in
