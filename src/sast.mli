@@ -23,14 +23,21 @@ and expr_t =
   | Pathattr of string * pathattr_type_t
   | Noexpr
 
+type list_expr_t = 
+    ListId of string * string
+  | ListItemInt of int
+  | ListItemStr of string
+  | ListItemBool of bool
+  
 type stmt_t =
     Block of stmt_t list
   | Expr of expr_t
   | Return of expr_t
   | If of expr_t * stmt_t * stmt_t 
-  | For of expr_t * expr_t * expr_t * stmt_t
+  | For of expr_t * expr_t * stmt_t (* first expr_t should possibly be string *)
   | While of expr_t * stmt_t
   | Print of expr_t * string
+  | Ifin of list_expr_t * list_expr_t * stmt_t * stmt_t
   (* the string in Print represents its type, need to change to data_type_t *)
 
 type var_decl_t = {

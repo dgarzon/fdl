@@ -1,6 +1,12 @@
 def int main(){
+
 	list l;
+	int a;
+
+	a = 2;
 	l = ["a","b",1,2,3];
-	
+
+	if "a" in l then print "yes";
+
 	return 0;
 }
