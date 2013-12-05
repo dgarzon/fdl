@@ -124,14 +124,14 @@ let rec check_expr env = function
   	| Ast.Move(e1, e2) -> 
 		let e_t1 = check_expr env e1 in
 		let e_t2 = check_expr env e2 in
-		if (snd e_t1 = "path") and (snd e_t2 = "path")
+		if snd e_t1 = "path" && snd e_t2 = "path"
 			then Sast.Move(fst e_t1, fst e_t2), "void"
 		else 
 			raise(Failure("cannot use path function on non-path variables"))
   	| Ast.Copy(e1, e2) -> 
 	 	let e_t1 = check_expr env e1 in
                 let e_t2 = check_expr env e2 in
-                if (snd e_t1 = "path") and (snd e_t2 = "path")
+                if snd e_t1 = "path" && snd e_t2 = "path"
                         then Sast.Copy(fst e_t1, fst e_t2), "void"
                 else
                         raise(Failure("cannot use path function on non-path variables"))
