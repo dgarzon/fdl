@@ -35,6 +35,9 @@ function compileAndRun() {
 	$PREPROCESSOR $1 $preprocessorOutputFileName
 
 	echo "Compiling '$preprocessorOutputFileName'"
+	if [ -f $preprocessorOutputFileName ]; then
+		echo "$preprocessorOutputFileName exists"
+	fi
 	# converting from fdl to C
     $FDL $preprocessorOutputFileName > "${reffile}.c" && echo "Ocaml to C of $1 succeeded"
 
@@ -59,7 +62,7 @@ function compileAndRun() {
 if [ -f $1 ]; then
 	compileAndRun $1
 else
-	echo "file doesnt exist"
+	echo "$1 doesnt exist"
 fi
 
 
