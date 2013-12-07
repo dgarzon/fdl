@@ -5,10 +5,10 @@ FDL="./fdl"
 # Compare <outfile> <reffile> <difffile>
 # Compares the outfile with reffile.  Differences, if any, written to difffile
 Compare() {
-	difference=$(diff -b $1 $2) 
+	difference=$(diff -b $1 $2)
 	echo $difference
 	if [ "$difference" != "" ]; then
-		echo $difference > $3	
+		echo $difference > $3
 	fi
 }
 
@@ -17,7 +17,7 @@ function compile() {
                              s/.fdl//'`
 	reffile=`echo $1 | sed 's/.fdl$//'`
     basedir="`echo $1 | sed 's/\/[^\/]*$//'`/"
-	
+
 	# gets the path of the test output file
 	testoutput=`echo ${basedir}test_outputs/$basename.c.out`
 	# echo $basename
@@ -32,7 +32,7 @@ function compile() {
 
     # compliling the C file
     if [ -f "${reffile}.c" ]; then
-    	gcc -o "${reffile}" "${reffile}.c" && echo "COMPILATION of ${reffile}.c succeeded"
+    	gcc -Lc/libraries -llist -lpath "${reffile}.c" -o "${reffile}" && echo "COMPILATION of ${reffile}.c succeeded"
     else
     	echo "Ocaml to C of $1 failed"
     	return
