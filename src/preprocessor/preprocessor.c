@@ -86,6 +86,9 @@ int main(int argc, char const *argv[])
         else if (strstr(buffer, "for ") != NULL) {
             fprintf(output, "%s {\n", buffer);
         }
+        else if (strstr(buffer, "*/") != NULL) {
+            fprintf(output, "%s\n", buffer);
+        }
         else if (strstr(buffer, "if (") != NULL || strstr(buffer, "if(") != NULL) {
             fprintf(output, "%s {\n", buffer);
         }
