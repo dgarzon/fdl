@@ -58,8 +58,18 @@ let rec string_of_stmt = function
                                 "printf(\"%s\"," ^ string_of_expr expr ^ ");\n"
                               else
                                 "printf(\"%d\"," ^ string_of_expr expr ^ ");\n"
-  | For(e1, e2, s1) ->  "for (" ^ string_of_expr e1 ^ " in "
-      ^ string_of_expr e2 ^ ")\n" ^ string_of_stmt s1
+  (*| For(e1, e2, s1) ->  "for (" ^ string_of_expr e1 ^ " in "
+      ^ string_of_expr e2 ^ ")\n" ^ string_of_stmt s1*)
+  | For(le1, le2, s1) ->  let arg = (match le1 with
+			  	ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"
+                                  | ListItemStr(l) -> "createStrNode("^l^",fdl_str)"
+                                  | ListId(i, t) -> if t = "path" || t = "string" then
+                                        "createStrNode("^i^",fdl_str)"
+                                      else if t = "int" || t = "bool" then
+                                        "createIntNode("^i^",fdl_int)"
+                                      else raise (Failure ("Invalid id type used in For statement."))
+                                  ) in
+				"for(findNode(" ^ (get_list_arg le2) ^","^arg^") == 0)\n"^string_of_stmt s1
   | While(e, s) -> "while (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
   | Ifin(le1,le2,s1,s2) -> let arg = (match le1 with
                                     ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"

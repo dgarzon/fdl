@@ -36,7 +36,8 @@ type stmt =
   | Expr of expr
   | Return of expr
   | If of expr * stmt * stmt 
-  | For of expr * expr * stmt
+  | For of list_expr * list_expr * stmt
+  (* | For of expr * expr * stmt*)
   | While of expr * stmt
   | Print of expr
   | Ifin of list_expr * list_expr * stmt * stmt
