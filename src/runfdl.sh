@@ -31,7 +31,6 @@ function compileAndRun() {
 	preprocessorOutputFileName=$basename".fdlp"
 	# echo $preprocessorOutputFileName
 
-	echo "Preprocessing '$1'"
 	$PREPROCESSOR $1 $preprocessorOutputFileName
 
 	echo "Compiling '$preprocessorOutputFileName'"
@@ -43,11 +42,22 @@ function compileAndRun() {
 
     # compliling the C file
     if [ -f "${reffile}.c" ]; then
-    	gcc -o "${reffile}" "${reffile}.c" && echo "COMPILATION of ${reffile}.c succeeded"
+    	gcc -Ic/libraries -Lc/libraries -llist -lpath -o "${reffile}" "${reffile}.c" && echo "COMPILATION of ${reffile}.c succeeded"
     else
     	echo "Ocaml to C of $1 failed"
     	return
     fi
+
+    # running the binary
+    if [ -f "${reffile}" ]; then
+    	eval "${reffile}"
+    	rm -rf $preprocessorOutputFileName
+    	rm -rf ${reffile}.c
+    	rm -rf ${reffile}
+    else
+    	echo "Could not run the C program at ${reffile}"
+    fi
+
 
 	# # running the binary
  #    if [ -f "${reffile}" ]; then
