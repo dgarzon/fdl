@@ -1,1 +1,0 @@
-1,16d0 < #include<stdio.h> < #include<stdlib.h> < int a; < < int main() < { < int c; < int b; < a = 0; < b = 3; < c = a < b; < while (a < b) < { < } < return 1; < }
