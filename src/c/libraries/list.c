@@ -2,6 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 #include "list.h"
+#include "dirent.h"
+
+void loadDirectoryToList(char *path, struct List *subPath){
+    char buffer[1000];
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir (path)) != NULL) {
+        /* print all the files and directories within directory */
+        while ((ent = readdir (dir)) != NULL) {
+            strcpy(buffer, path);
+            strcat(buffer, "/");
+            strcat(buffer, ent->d_name);
+            struct Node * node = createStrNode(buffer, fdl_path);
+            addBack(subPath, node);
+        }
+        closedir (dir);
+    } else {
+        /* could not open directory */
+        perror ("");
+        exit(0);
+    }
+}
 
 struct Node *createIntNode(int data, enum fdl_type type) {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));

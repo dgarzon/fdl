@@ -33,13 +33,14 @@ static inline int isEmptyList(struct List *list)
 
 void addFront(struct List *list, struct Node *node);
 void traverseList(struct List *list, void (*f)(struct Node *));
-static void printNode(struct Node *node);
+void printNode(struct Node *node);
 int findNode(struct List *list, struct Node *node1);
 struct Node popFront(struct List *list);
 void removeAllNodes(struct List *list);
 void addAfter(struct List *list, struct Node *prevNode, struct Node *newNode);
 void reverseList(struct List *list);
 void addBack(struct List *list, struct Node *newNode);
+void loadDirectoryToList(char *path, struct List *subPath);
 
 
 
