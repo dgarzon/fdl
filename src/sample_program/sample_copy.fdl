@@ -1,11 +1,11 @@
-int a;
+int a
 
-def int main() {
-        path s;
-	path d;
-	s = "./sample.txt";
-        d =  "..";
-	d <- s;
-        return 0;
-}
+def int main()
+        path s
+	path d
+	s = "./sample.txt"
+        d =  ".."
+	d <- s
+        return 0
+end
 

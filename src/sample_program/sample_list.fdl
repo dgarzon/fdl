@@ -1,10 +1,10 @@
-def int main(){
+def int main()
 
-	list l;
-	
-	l = ["a","b",1,2,3];
-
-	if "a" in l then print "yes";
-
-	return 0;
-}
+	list l
+	l = ["a","b",1,2,3]
+	if "a" in l 
+	then 
+		print "yes"
+	end
+	return 0
+end

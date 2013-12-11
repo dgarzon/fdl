@@ -1,8 +1,17 @@
-int a;
-def int main() {
-	path home;
-	home = "./sample_program";
-	print home;
-	print home.name;
-	return 1;
-}
+int a
+<<<<<<< HEAD
+def int main()
+	path home
+	home = "./sample_program"
+	print home
+	print home.name
+	return 1
+end
+=======
+def int main() 
+	path home
+	home = "./sample_program"
+	return 1
+end
+
+>>>>>>> master

@@ -6,9 +6,13 @@ def int main()
         file = "/Users/cjborenstein/Desktop/file.txt"
         file2 = "/Users/cjborenstein/Desktop/file2.txt"
         dir = "/Users/cjborenstein/Desktop/"
+<<<<<<< HEAD
 
 	for ( f in dir ) 
-		print a
+		print 1
 	end
+=======
+	for ( f in dir ) print 1
+>>>>>>> master
 	return 1
 end

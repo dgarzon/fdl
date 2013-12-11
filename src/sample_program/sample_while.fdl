@@ -1,11 +1,13 @@
-int a;
+int a
 
-def int main() {
-        int b;
-	bool c;
-        a = 0;
-        b = 3;
-	c = a < b;
-	while ( a < b ) b=a;
-        return 1;
-}
+def int main()
+        int b
+	bool c
+        a = 0
+        b = 3
+	c = a < b
+	while ( a < b )
+		b=a
+	end
+        return 1
+end
