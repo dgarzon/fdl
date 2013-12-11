@@ -32,7 +32,7 @@ function compile() {
 
     # compliling the C file
     if [ -f "${reffile}.c" ]; then
-    	gcc -Lc/libraries -llist -lpath "${reffile}.c" -o "${reffile}" && echo "COMPILATION of ${reffile}.c succeeded"
+    	gcc -Ic/libraries -Lc/libraries -llist -lpath "${reffile}.c" -o "${reffile}" && echo "COMPILATION of ${reffile}.c succeeded"
     else
     	echo "Ocaml to C of $1 failed"
     	return
@@ -41,6 +41,7 @@ function compile() {
 	# running the binary
     if [ -f "${reffile}" ]; then
     	eval "${reffile}" > ${reffile}.generated.out
+      cp ${reffile}.generated.out ${basedir}test_outputs/$basename.c.out
     	Compare ${testoutput} ${reffile}.generated.out ${reffile}.c.diff
     else
     	echo "C to binary of ${reffile}.c failed"
