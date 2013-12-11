@@ -101,10 +101,11 @@ stmt:
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
     | PRINT expr SEMI                              { Print($2) }
-    | WHILE LPAREN expr RPAREN stmt 	   	       { While($3, Block([$5])) } 
+    | WHILE LPAREN expr RPAREN stmt 	   	       { While($3, $5) } 
     | FOR LPAREN list_expr IN list_expr RPAREN stmt	       { For($3, $5, $7) } 
     | IF list_expr IN list_expr THEN stmt %prec NOELSE  { Ifin($2, $4, $6, Block([])) }
     | IF list_expr IN list_expr THEN stmt ELSE stmt     { Ifin($2, $4, $6, $8) }
+    | LBRACE stmt_list RBRACE                       { Block($2) }
 
 list_expr:
     ID                            { ListId($1) }
