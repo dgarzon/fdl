@@ -1,6 +1,11 @@
-def int main(){
-	path file = "/Users/cjborenstein/Desktop/file.txt";
-	path file2 = "/Users/cjborenstein/Desktop/file2.txt";
-	path dir = "/Users/cjborenstein/Desktop/";
-	return 1;
-}
+def int main()
+	path file
+	path file2
+	path dir
+
+	file = "/Users/cjborenstein/Desktop/file.txt"
+	file2 = "/Users/cjborenstein/Desktop/file2.txt"
+	dir = "/Users/cjborenstein/Desktop/"
+	
+	return 1
+end
