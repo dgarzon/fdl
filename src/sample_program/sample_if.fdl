@@ -4,9 +4,13 @@ def int main()
         int b
         a = 0
         b = 3
+<<<<<<< HEAD
         if ( a == 0 ) 
 	then
 		print b
 	end
+=======
+        if ( a == 0 ) then print b
+>>>>>>> master
         return 1
 end

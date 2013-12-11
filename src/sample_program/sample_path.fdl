@@ -1,4 +1,5 @@
 int a
+<<<<<<< HEAD
 def int main()
 	path home
 	home = "./sample_program"
@@ -6,3 +7,11 @@ def int main()
 	print home.name
 	return 1
 end
+=======
+def int main() 
+	path home
+	home = "./sample_program"
+	return 1
+end
+
+>>>>>>> master

@@ -6,9 +6,6 @@ def int main() {
         file = "/Users/cjborenstein/Desktop/file.txt";
         file2 = "/Users/cjborenstein/Desktop/file2.txt";
         dir = "/Users/cjborenstein/Desktop/";
-
-	for ( f in dir )  {
-		print a;
-	}
+	for ( f in dir ) print 1;
 	return 1;
 }
