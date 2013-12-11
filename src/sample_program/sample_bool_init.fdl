@@ -1,7 +1,6 @@
-/* parsing error */
-bool b;
+bool b
 
-def int main() {
-	b = false;
-        return 0;
-}
+def int main() 
+	b = false
+        return 0
+end

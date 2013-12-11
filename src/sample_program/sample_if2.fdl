@@ -1,10 +1,13 @@
-def int main() {
-    int a;
-    int b;
-    bool c;
-    a = 1;
-    b = 2;
-    c = a < b;
-    if ( a < b ) then print b;
-    return 1;
- }
+def int main()
+	int a
+	int b
+	bool c
+	a = 1
+	b = 2
+	c = a < b
+	if ( a < b )
+	then 
+		print b
+	end
+	return 1
+end

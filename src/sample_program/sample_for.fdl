@@ -8,7 +8,7 @@ def int main()
         dir = "/Users/cjborenstein/Desktop/"
 
 	for ( f in dir ) 
-		print a
+		print 1
 	end
 	return 1
 end
