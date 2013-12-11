@@ -69,7 +69,7 @@ let rec string_of_stmt = function
                                         "createIntNode("^i^",fdl_int)"
                                       else raise (Failure ("Invalid id type used in For statement."))
                                   ) in
-				"for(findNode(" ^ (get_list_arg le2) ^","^arg^") == 0)\n"^string_of_stmt s1
+				"while (" ^ (get_list_arg le2) ^")\n if(findNode(" ^ (get_list_arg le2) ^","^arg^") == 0)\n"^string_of_stmt s1
   | While(e, s) -> "while (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
   | Ifin(le1,le2,s1,s2) -> let arg = (match le1 with
                                     ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"
