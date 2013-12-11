@@ -48,7 +48,7 @@ let get_list_arg le = match le
 let rec string_of_stmt = function
     Expr(expr) -> if compare (string_of_expr expr) "" = 0 then "\n" else string_of_expr expr ^ ";\n"
   | Block(stmts) ->
-      "{\n" ^ String.concat "" (List.map string_of_stmt stmts) ^ "}\n"
+      "{\n" ^ String.concat "" (List.map string_of_stmt stmts) ^ "\n}"
   | Return(expr) -> "return " ^ string_of_expr expr ^ ";\n"
   | If(e, s, Block([])) -> "if (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
   | If(e, s1, s2) ->  "if (" ^ string_of_expr e ^ ")\n" ^
