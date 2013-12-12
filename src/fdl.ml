@@ -45,6 +45,11 @@ let get_list_arg le = match le
   ListId(i, t) -> i
   | _ -> raise (Failure ("If-in second argument must be of type list."))
 
+let get_for_id e = match e
+    with
+    Forid(id) -> id
+  | _ -> raise (Failure("For loops work only with type path!"))
+
 let rec string_of_stmt = function
     Expr(expr) -> if compare (string_of_expr expr) "" = 0 then "\n" else string_of_expr expr ^ ";\n"
   | Block(stmts) ->
@@ -60,16 +65,17 @@ let rec string_of_stmt = function
                                 "printf(\"%d\"," ^ string_of_expr expr ^ ");\n"
   (*| For(e1, e2, s1) ->  "for (" ^ string_of_expr e1 ^ " in "
       ^ string_of_expr e2 ^ ")\n" ^ string_of_stmt s1*)
-  | For(le1, le2, s1) ->  let arg = (match le1 with
-			  	ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"
-                                  | ListItemStr(l) -> "createStrNode("^l^",fdl_str)"
-                                  | ListId(i, t) -> if t = "path" || t = "string" then
-                                        "createStrNode("^i^",fdl_str)"
-                                      else if t = "int" || t = "bool" then
-                                        "createIntNode("^i^",fdl_int)"
-                                      else raise (Failure ("Invalid id type used in For statement."))
-                                  ) in
-				"while (" ^ (get_list_arg le2) ^")\n if(findNode(" ^ (get_list_arg le2) ^","^arg^") == 0)\n"^string_of_stmt s1
+  | For(e1, e2, s1) ->  (*"while (" ^ (get_list_arg le2) ^")\n if(findNode(" ^ (get_list_arg le2) ^","^arg^") == 0)\n"^string_of_stmt s1*)
+        "struct List subPathList; \n" ^
+      "initList(&subPathList);\n" ^
+      "loadDirectoryToList(" ^ get_for_id e2 ^ ", &subPathList);\n" ^
+      "struct Node *node = subPathList.head;\n"^
+      (*"char *"^get_for_id e1^";\n"^*)
+      "while(node){\n"^
+      get_for_id e1 ^" = node->string_item;\n"^
+      string_of_stmt s1 ^
+      "node = node->next;\n"^
+      "}\n"
   | While(e, s) -> "while (" ^ string_of_expr e ^ ")\n" ^ string_of_stmt s
   | Ifin(le1,le2,s1,s2) -> let arg = (match le1 with
                                     ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"

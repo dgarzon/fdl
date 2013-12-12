@@ -28,6 +28,9 @@ type list_expr_t =
   | ListItemInt of int
   | ListItemStr of string
   | ListItemBool of bool
+
+type for_expr_t = 
+    Forid of string
   
 type stmt_t =
     Block of stmt_t list
@@ -35,7 +38,7 @@ type stmt_t =
   | Return of expr_t
   | If of expr_t * stmt_t * stmt_t 
   (*| For of expr_t * expr_t * stmt_t *)
-  | For of list_expr_t * list_expr_t * stmt_t
+  | For of for_expr_t * for_expr_t * stmt_t
   | While of expr_t * stmt_t
   | Print of expr_t * string
   | Ifin of list_expr_t * list_expr_t * stmt_t * stmt_t

@@ -1,18 +1,14 @@
 def int main() {
    	path file;
-        path file2;
-        path dir;
-	path f;
-        file = "/Users/cjborenstein/Desktop/file.txt";
-        file2 = "/Users/cjborenstein/Desktop/file2.txt";
-        dir = "/Users/cjborenstein/Desktop/";
-<<<<<<< HEAD;
+    path file2;
+    path dir;
+    path f;
 
+    file = "/Users/cjborenstein/Desktop/file.txt";
+    file2 = "/Users/cjborenstein/Desktop/file2.txt";
+    dir = "./c";
 	for ( f in dir )  {
-		print 1;
+		print f;
 	}
-=======;
-	for ( f in dir ) print 1;
->>>>>>> master;
 	return 1;
 }

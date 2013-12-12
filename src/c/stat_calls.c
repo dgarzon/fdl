@@ -59,7 +59,7 @@ int main(int argc, char const *argv[])
     	// testDirent();
     	struct List subPathList;
     	initList(&subPathList);
-    	loadDirectoryToList("libraries", &subPathList);
+    	loadDirectoryToList("file pathe here", &subPathList);
     	printf("here \n");
     	traverseList(&subPathList, &printNode);
 	}

@@ -31,12 +31,15 @@ type list_expr =
   | ListItemStr of string
   | ListItemBool of bool
 
+type for_expr = 
+    Forid of string
+
 type stmt =
     Block of stmt list
   | Expr of expr
   | Return of expr
   | If of expr * stmt * stmt 
-  | For of list_expr * list_expr * stmt
+  | For of for_expr * for_expr * stmt
   (* | For of expr * expr * stmt*)
   | While of expr * stmt
   | Print of expr
