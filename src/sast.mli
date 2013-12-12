@@ -4,7 +4,7 @@ type sep_t = Comma
 
 type data_type_t = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
 
-type pathattr_type_t = Pathname | Pathcreated | Pathkind
+type pathattr_type_t = Pathname | Pathcreated | Pathkind | Pathext
 
 type list_expr_t = 
     ListId of string * string

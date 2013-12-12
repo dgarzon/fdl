@@ -7,7 +7,7 @@
 %token CONTINUE BREAK
 %token RETURN IF THEN ELSE FOR IN WHILE DO
 %token DEF VOID INT STR DICT LIST PATH BOOL TRASH TRUE FALSE PRINT
-%token PATHNAME PATHCREATED PATHKIND ADD REMOVE
+%token PATHNAME PATHCREATED PATHKIND PATHEXT ADD REMOVE
 %token <int> LIT_INT
 %token <string> LIT_STR
 %token <bool> LIT_BOOL
@@ -152,6 +152,7 @@ pathattributes:
     | PATHNAME                     { Pathname }
     | PATHCREATED                  { Pathcreated }
     | PATHKIND                     { Pathkind }
+    | PATHEXT                      { Pathext }
 
 list_items:
     { Noitem }

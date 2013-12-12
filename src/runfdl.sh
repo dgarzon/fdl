@@ -51,9 +51,9 @@ function compileAndRun() {
     # running the binary
     if [ -f "${reffile}" ]; then
     	eval "${reffile}"
-    	#rm -rf $preprocessorOutputFileName
-    	#rm -rf ${reffile}.c
-    	#rm -rf ${reffile}
+    	rm -rf $preprocessorOutputFileName
+    	rm -rf ${reffile}.c
+    	rm -rf ${reffile}
     else
     	echo "Could not run the C program at ${reffile}"
     fi

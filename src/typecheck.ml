@@ -27,6 +27,7 @@ let get_sast_pathattrtype = function
 	Ast.Pathname -> Sast.Pathname, "string"
 	| Ast.Pathcreated -> Sast.Pathcreated, "int"
 	| Ast.Pathkind -> Sast.Pathkind, "int"
+	| Ast.Pathext -> Sast.Pathext, "string"
 	| _ -> raise (Failure ("Unknown path attribute type"))
 
 (* convert a variable to its SAST type *)

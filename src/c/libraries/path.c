@@ -72,3 +72,8 @@ int moveFile(char* src, char *dest){
 	sprintf(movecommand, "/bin/mv %s %s", src, dest);
 	return system(movecommand);
 }
+
+char* getExtension(char *path){
+	char *ptr = rindex(path, '.');
+	return strdup(ptr);
+}

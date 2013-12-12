@@ -31,7 +31,7 @@ rule token = parse
 	| "break"		{ BREAK }		| "continue"	{ CONTINUE }
 	| "void"		{ VOID } 		| ".add"		{ ADD }
 	| "true"		{ TRUE }		| ".remove"		{ REMOVE }
-	| "false"		{ FALSE }
+	| "false"		{ FALSE }		| ".type"		{ PATHEXT }
 	| "trash"		{ TRASH }
 	| eof			{ EOF }			(* do as microC *)
 	| digit+ as lit					{ LIT_INT(int_of_string lit) }

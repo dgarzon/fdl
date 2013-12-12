@@ -58,8 +58,15 @@ int main(int argc, char const *argv[])
         if (buffer[len] == '\n') {
             buffer[len] = '\0';
         }
-
-        if (strstr(buffer, "def ") != NULL) {
+        if (strstr(buffer, "*/") != NULL) {
+            printf("Close Comment");
+            fprintf(output, "%s\n", buffer);
+        }
+        else if (strstr(buffer, "/*") != NULL) {
+            printf("Close Comment");
+            fprintf(output, "%s\n", buffer);
+        }
+        else if (strstr(buffer, "def ") != NULL) {
             fprintf(output, "%s {\n", buffer);
         }
         else if (strstr(buffer, "int ") != NULL) {
@@ -82,9 +89,6 @@ int main(int argc, char const *argv[])
         }
         else if (strstr(buffer, "for ") != NULL) {
             fprintf(output, "%s {\n", buffer);
-        }
-        else if (strstr(buffer, "*/") != NULL) {
-            fprintf(output, "%s\n", buffer);
         }
         else if ((strstr(buffer, "if (") != NULL || strstr(buffer, "if(") != NULL) && (strstr(buffer, "then") != NULL)) {
             fprintf(output, "%s {\n", buffer);
@@ -129,8 +133,10 @@ int main(int argc, char const *argv[])
             if (strcmp(buffer, "\n") == 1) {
                 fprintf(output, "\n");
             }
-            else if (strlen(buffer) > 1)
+            else if (strlen(buffer) > 1) {
+                printf("In Buffer > 1");
                 fprintf(output, "%s;\n", buffer);
+            }
             else
                 fprintf(output, "\n");
         }
