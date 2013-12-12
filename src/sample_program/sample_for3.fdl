@@ -1,0 +1,16 @@
+def int main()
+   	path f
+    path dir
+    path dest
+    int count
+
+    dir = "."
+    dest = "./test"
+    count = 0
+
+	for ( dir in f ) 
+        	print count
+		print f
+	end
+	return 1
+end

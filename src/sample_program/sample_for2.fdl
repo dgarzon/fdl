@@ -5,13 +5,19 @@ def int main()
     int count
 
     dir = "."
-    dest = "test"
+    dest = "./test"
     count = 0
 
-	for ( dir in f ) 
-        print count
-		print f
-        print f.kind
+    print "destination "
+    print dest.kind
+    print "\n"
+	for ( f in dir ) 
+        print "file path "
+        print f
+        if (f.kind == 0) then
+            print f
+            dest <- f
+        end
         print "\n"
         count = count + 1    
 	end
