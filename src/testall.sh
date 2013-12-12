@@ -53,6 +53,7 @@ function compile() {
         rm -rf ${basedir}test_outputs/$basename.c.out
         rm -rf ${reffile}.generated.out
         rm -rf ${reffile}.c
+        rm -rf ${reffile}
     else
     	echo "C to binary of ${reffile}.c failed"
     fi

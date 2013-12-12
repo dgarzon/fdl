@@ -1,0 +1,7 @@
+def int main()
+	list l
+	l = [3]
+	l.remove(1)
+	print l
+	return 0
+end
