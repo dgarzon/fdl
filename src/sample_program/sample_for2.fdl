@@ -8,7 +8,7 @@ def int main()
     dest = "test"
     count = 0
 
-	for ( f in dir ) 
+	for ( dir in f ) 
         print count
 		print f
         print f.kind

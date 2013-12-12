@@ -3,7 +3,8 @@
 #include<stdlib.h>
 #include<string.h>
 #include "list.h"
-struct List temp_list;
+#include "path.h"
+ struct List temp_list;
 int tempint;
 
 int main()
@@ -11,7 +12,6 @@ int main()
 struct List * l;
 l = &temp_list;
 initList(&temp_list);
-addBack(&temp_list,createIntNode(1,fdl_int));
 addBack(&temp_list,createIntNode(2,fdl_int));
 ;
 addBack(l, createIntNode(3,fdl_int));
