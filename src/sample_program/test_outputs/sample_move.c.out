@@ -1,0 +1,18 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include "list.h"
+struct List temp_list;
+int tempint;
+int a;
+
+int main()
+{
+char * d;
+char * s;
+s = "./sample_move.txt";
+d = "..";
+execl("/bin/mv","/bin/mv",s,d, (char *) 0);
+return 0;
+}

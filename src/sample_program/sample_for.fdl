@@ -5,10 +5,10 @@ def int main()
     dir = "/Users/rupayanbasu/Documents/Courses/PLT/fdl/fdl/src"
     count = 0
 	for ( f in dir ) 
-        print count
+        	print count
 		print f
-        print "\n"
-        count = count + 1
+        	print "\n"
+        	count = count + 1
 	end
 
 	return 1
