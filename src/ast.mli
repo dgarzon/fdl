@@ -6,7 +6,12 @@ type data_type = PathType | StrType | IntType | BoolType | VoidType | DictType |
 
 type pathattr_type = Pathname | Pathcreated | Pathkind
 
-(* mutually recursive types *)
+type list_expr = 
+    ListId of string 
+  | ListItemInt of int
+  | ListItemStr of string
+  | ListItemBool of bool
+
 type items = 
     Item of expr
   | Seq of expr * sep * items
@@ -21,15 +26,11 @@ and expr =
   | Copy of expr * expr
   | Move of expr * expr
   | List of items
+  | ListAppend of string * list_expr
+  | ListRemove of string * list_expr
   | Pathattr of string * pathattr_type
   | Noexpr
 
-(*Need a separate list_expr for handling "if expr in list" *)
-type list_expr = 
-    ListId of string 
-  | ListItemInt of int
-  | ListItemStr of string
-  | ListItemBool of bool
 
 type for_expr = 
     Forid of string

@@ -53,6 +53,12 @@ let get_expr_type t1 t2 =
 	if t1 = "bool" && t2 = "bool" then "bool" else
 	raise (Failure ("type error"))
 
+
+let check_listexpr env = function
+	| Ast.ListId(id) ->
+		Sast.ListId(id, get_vtype env id), get_vtype env id
+	| Ast.ListItemInt(i) -> Sast.ListItemInt(i), "int"
+	| Ast.ListItemStr(s) -> Sast.ListItemStr(s), "string"
 (* mark int & boolean expression to string type *)
 (* let conv_type = function 
 	(expr, t) -> if t = "void" then raise (Failure ("cannot use void type inside expression")) else
@@ -136,6 +142,22 @@ let rec check_expr env = function
                 else
                         raise(Failure("cannot use path function on non-path variables"))
 	| Ast.List(items) -> Sast.List(check_list_items env items), "list"
+	| Ast.ListAppend(id, item) -> let t1 = get_vtype env id in
+								  let t2 = check_listexpr env item in
+								if not (t1 = "list") 
+									then raise(Failure("Can append only to id of type list."))
+								else if ((snd t2) = "list")
+									then raise(Failure("Cannot append list to list."))
+								else
+									Sast.ListAppend( id, (fst t2)), "void"
+	| Ast.ListRemove(id, item) -> let t1 = get_vtype env id in
+								  let t2 = check_listexpr env item in
+								if not (t1 = "list") 
+									then raise(Failure("Can call remove only on type list."))
+								else if ((snd t2) = "list")
+									then raise(Failure("Cannot remove a list from list."))
+								else
+									Sast.ListRemove(id, (fst t2)), "void"
 	| Ast.Pathattr(id, e) ->
 		if not ((get_vtype env id) = "path")
 			then raise(Failure("cannot use path attributes on non-path variable " ^ id))
@@ -157,11 +179,6 @@ and get_expr_with_type env expr t =
 	if ((snd e) = "string" && t = "path") then (fst e)
 	else if not((snd e) = t) then raise (Failure ("type error")) else (fst e)
 
-let check_listexpr env = function
-	| Ast.ListId(id) ->
-		Sast.ListId(id, get_vtype env id), get_vtype env id
-	| Ast.ListItemInt(i) -> Sast.ListItemInt(i), "int"
-	| Ast.ListItemStr(s) -> Sast.ListItemStr(s), "string"
 
 let check_forexpr env = function
 	Ast.Forid(id) -> Sast.Forid(id), get_vtype env id

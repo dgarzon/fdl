@@ -29,9 +29,9 @@ rule token = parse
 	| "do"			{ DO }			| "bool"		{ BOOL }
 	| "while"		{ WHILE }		| "return"		{ RETURN }
 	| "break"		{ BREAK }		| "continue"	{ CONTINUE }
-	| "void"		{ VOID }
-	| "true"		{ TRUE }		| "false"	{ FALSE }
-	(* Do we need true and false? *)
+	| "void"		{ VOID } 		| ".add"		{ ADD }
+	| "true"		{ TRUE }		| ".remove"		{ REMOVE }
+	| "false"		{ FALSE }
 	| "trash"		{ TRASH }
 	| eof			{ EOF }			(* do as microC *)
 	| digit+ as lit					{ LIT_INT(int_of_string lit) }

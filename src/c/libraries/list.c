@@ -107,6 +107,33 @@ int findNode(struct List *list, struct Node *node1) {
     return 1;
 }
 
+void removeNode(struct List *list, struct Node *node1) {
+    struct Node *node2 = list->head;
+    int del = 0;
+    struct Node *prev = list->head;
+    while (node2) {
+        if(node1->type == node2->type){
+            switch(node1->type){
+                case fdl_int: if (node1->int_item == node2->int_item) { del = 1; break; } else break;
+                case fdl_str: if (strcmp(node1->string_item, node2->string_item) == 0) { del = 1; break; } else break;
+                case fdl_bool: if (node1->bool_item == node2->bool_item) { del = 1; break; } else break;
+                case fdl_path: if (strcmp(node1->path_item, node2->path_item) == 0) { del = 1; break; } else break;
+                default: del = 0;
+            }
+        }
+        if(del == 0){
+            prev = node2;
+            node2 = node2->next;
+        }
+        else break;
+    }
+    if(node2 == list->head)
+        list->head = node2->next;
+    else
+        prev->next = node2->next;
+    free(node2);
+}
+
 struct Node popFront(struct List *list) {
     struct Node *oldHead = list->head;
     struct Node node = *oldHead;

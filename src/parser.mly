@@ -1,13 +1,13 @@
 %{ open Ast %}
 
 %token LPAREN RPAREN LBRACE RBRACE LBRACK RBRACK COMMA TAB SEMI
-%token PLUS MINUS TIMES DIVIDE ASSIGN MOVE COPY
+%token PLUS MINUS TIMES DIVIDE ASSIGN MOVE COPY 
 %token EQ NEQ LT LEQ GT GEQ NOT
 %token AND OR
 %token CONTINUE BREAK
 %token RETURN IF THEN ELSE FOR IN WHILE DO
 %token DEF VOID INT STR DICT LIST PATH BOOL TRASH TRUE FALSE PRINT
-%token PATHNAME PATHCREATED PATHKIND
+%token PATHNAME PATHCREATED PATHKIND ADD REMOVE
 %token <int> LIT_INT
 %token <string> LIT_STR
 %token <bool> LIT_BOOL
@@ -145,6 +145,8 @@ expr:
     | expr MOVE expr                 { Move($1,  $3) }
     | ID LPAREN actuals_opt RPAREN { Call($1,   $3) }
     | ID pathattributes            { Pathattr($1, $2) }
+    | ID ADD LPAREN list_expr RPAREN { ListAppend($1, $4) }
+    | ID REMOVE LPAREN list_expr RPAREN { ListRemove($1, $4) }
 
 pathattributes:
     | PATHNAME                     { Pathname }

@@ -33,6 +33,26 @@ and string_of_expr = function
 (* --must deal with quotes in expression definition, replace 'star' with actual symbol    *)
   | Move(e_dest, e_src) -> "execl(\"/bin/mv\",\"/bin/mv\"," ^ string_of_expr e_src ^ "," ^ string_of_expr e_dest ^ ", (char *) 0)"
   | List(i) -> "&temp_list;\ninitList(&temp_list);\n" ^ string_of_items i
+  | ListAppend(id, e) -> let arg = (match e with
+                          ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"
+                        | ListItemStr(l) -> "createStrNode("^l^",fdl_str)"
+                        | ListId(i, t) -> if t = "path" || t = "string" then
+                                        "createStrNode("^i^",fdl_str)"
+                                      else if t = "int" || t = "bool" then
+                                        "createIntNode("^i^",fdl_int)"
+                                      else raise (Failure ("Invalid id type used in If-in statement."))
+                      ) in
+                        "addBack("^ id ^ ", " ^ arg ^ ");\n"
+  | ListRemove(id, e) -> let arg = (match e with
+                          ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"
+                        | ListItemStr(l) -> "createStrNode("^l^",fdl_str)"
+                        | ListId(i, t) -> if t = "path" || t = "string" then
+                                        "createStrNode("^i^",fdl_str)"
+                                      else if t = "int" || t = "bool" then
+                                        "createIntNode("^i^",fdl_int)"
+                                      else raise (Failure ("Invalid id type used in If-in statement."))
+                      ) in
+                        "removeNode("^ id ^ ", " ^ arg ^ ");\n"
   | Pathattr(id, e) -> ( match e with
                           Pathname -> "getPathName(" ^ id ^ ")"
                           | Pathcreated -> "getCreatedAt(" ^ id ^ ")"

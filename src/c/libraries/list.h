@@ -35,6 +35,7 @@ void addFront(struct List *list, struct Node *node);
 void traverseList(struct List *list, void (*f)(struct Node *));
 void printNode(struct Node *node);
 int findNode(struct List *list, struct Node *node1);
+void removeNode(struct List *list, struct Node *node1);
 struct Node popFront(struct List *list);
 void removeAllNodes(struct List *list);
 void addAfter(struct List *list, struct Node *prevNode, struct Node *newNode);
