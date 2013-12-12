@@ -59,6 +59,7 @@ and string_of_expr = function
                           Pathname -> "getPathName(" ^ id ^ ")"
                           | Pathcreated -> "getCreatedAt(" ^ id ^ ")"
                           | Pathkind -> "getPathType(" ^ id ^ ")"
+                          | Pathext -> "getExtension(" ^ id ^ ")"
                         )
   | Noexpr -> ""
 
@@ -121,7 +122,6 @@ let string_of_vtype = function
   | StrType -> "char *"
   | BoolType -> "int"
   | PathType -> "char *"
-  | DictType -> "struct Dictionary *"
   | ListType -> "struct List *"
 
 (* variable declrarations, has ;*)

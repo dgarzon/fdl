@@ -2,8 +2,11 @@ int a
 
 def int main()
 	path home
-	home = "./sample_program"
-	print home
-	print home.name
+	home = "./sample_program/sample_path.fdl"
+	
+	/*print home
+	print home.name*/
+	
+	print home.type
 	return 1
 end

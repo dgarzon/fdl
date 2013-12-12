@@ -21,7 +21,7 @@ rule token = parse
 	| '!'			{ NOT }			| ".name"		{ PATHNAME }
 	| "def"			{ DEF }			| ".created_at"	{ PATHCREATED }
 	| "int"			{ INT }			| ".kind"		{ PATHKIND }
-	| "dict"		{ DICT }		| "path"		{ PATH }
+	| "path"		{ PATH }
 	| "string"		{ STR }			| "list"		{ LIST }
 	| "if"			{ IF }			| "else"		{ ELSE }
 	| "then"		{ THEN }		| "print"		{ PRINT }
@@ -31,7 +31,7 @@ rule token = parse
 	| "break"		{ BREAK }		| "continue"	{ CONTINUE }
 	| "void"		{ VOID } 		| ".add"		{ ADD }
 	| "true"		{ TRUE }		| ".remove"		{ REMOVE }
-	| "false"		{ FALSE }
+	| "false"		{ FALSE }		| ".type"		{ PATHEXT }
 	| "trash"		{ TRASH }
 	| eof			{ EOF }			(* do as microC *)
 	| digit+ as lit					{ LIT_INT(int_of_string lit) }
