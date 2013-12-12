@@ -24,9 +24,9 @@ let get_sast_type = function
 	| _ -> raise (Failure ("Unknown type"))
 
 let get_sast_pathattrtype = function
-	Ast.Pathname -> Sast.Pathname
-	| Ast.Pathcreated -> Sast.Pathcreated
-	| Ast.Pathkind -> Sast.Pathkind
+	Ast.Pathname -> Sast.Pathname, "string"
+	| Ast.Pathcreated -> Sast.Pathcreated, "int"
+	| Ast.Pathkind -> Sast.Pathkind, "int"
 	| _ -> raise (Failure ("Unknown path attribute type"))
 
 (* convert a variable to its SAST type *)
@@ -163,7 +163,7 @@ let rec check_expr env = function
 			then raise(Failure("cannot use path attributes on non-path variable " ^ id))
 		else
 		(* return type is string assuming path attributes will be treated that way *)
-			Sast.Pathattr(id, get_sast_pathattrtype e), "string"
+			Sast.Pathattr(id, fst (get_sast_pathattrtype e)), snd (get_sast_pathattrtype e)
 	| Ast.Noexpr -> Sast.Noexpr, "void"
 
 and check_list_items env = function

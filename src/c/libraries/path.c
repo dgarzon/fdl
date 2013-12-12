@@ -61,3 +61,14 @@ char* getPathName(char* path){
 
 }
 
+int copyFile(char* src, char *dest){
+	char copycommand[1000];
+	sprintf(copycommand, "/bin/cp %s %s", src, dest);
+	return system(copycommand);
+}
+
+int moveFile(char* src, char *dest){
+	char movecommand[1000];
+	sprintf(movecommand, "/bin/mv %s %s", src, dest);
+	return system(movecommand);
+}

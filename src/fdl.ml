@@ -28,10 +28,11 @@ and string_of_expr = function
         | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">=" ) ^ " " ^ string_of_expr e2
   | Assign(v, e) -> v ^ " = " ^ string_of_expr e
   (* Maybe used built-in functions for copy and move *)
-   | Copy(e_dest, e_src) -> "execl(\"/bin/cp\",\"/bin/cp\"," ^ string_of_expr e_src ^ "," ^ string_of_expr e_dest ^ ", (char *) 0)"
+   (* | Copy(e_dest, e_src) -> "execl(\"/bin/cp\",\"/bin/cp\"," ^ string_of_expr e_src ^ "," ^ string_of_expr e_dest ^ ", (char *) 0)" *)
+   | Copy(e_dest, e_src) -> "copyFile(" ^ string_of_expr e_src ^ ", " ^ string_of_expr e_dest ^ ")"
 (*        "execl("/bin/cp", "/bin/cp"," ^  string_of_expr e ^ "," ^ string_of_expr v ^ ", (char star) 0)" *)
 (* --must deal with quotes in expression definition, replace 'star' with actual symbol    *)
-  | Move(e_dest, e_src) -> "execl(\"/bin/mv\",\"/bin/mv\"," ^ string_of_expr e_src ^ "," ^ string_of_expr e_dest ^ ", (char *) 0)"
+  | Move(e_dest, e_src) -> "moveFile(" ^ string_of_expr e_src ^ ", " ^ string_of_expr e_dest ^ ")"
   | List(i) -> "&temp_list;\ninitList(&temp_list);\n" ^ string_of_items i
   | ListAppend(id, e) -> let arg = (match e with
                           ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"
