@@ -6,5 +6,7 @@ int checkValid(char *path);
 int getCreatedAt(char *path);
 int getPathType(char *path);
 char* getPathName(char *path);
+int copyFile(char* src, char *dest);
+int moveFile(char* src, char *dest);
 
 #endif
