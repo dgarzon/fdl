@@ -170,6 +170,7 @@ and check_list_items env = function
 	  Ast.Item(e) ->let i,t = check_expr env e in 
 	  				Sast.Item(i)
 	| Ast.Seq(e1, sep, e2) -> Sast.Seq(fst (check_expr env e1), Sast.Comma, (check_list_items env e2))
+	| Ast.Noitem -> Sast.Noitem
 
 (* get expr_t(sast type) by expr(ast type) with given type
  * raise error if the expression type does match requirement, snd e has the type and fst has the expr *)

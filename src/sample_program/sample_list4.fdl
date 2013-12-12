@@ -1,6 +1,6 @@
 def int main()
 	list l
-	l = [2]
+	l = []
 	l.add(3)
 	l.remove(1)
 	print l

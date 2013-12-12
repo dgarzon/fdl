@@ -104,8 +104,8 @@ stmt:
     | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
     | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
     | PRINT expr SEMI                              { Print($2) }
-    | WHILE LPAREN expr RPAREN stmt 	   	       { While($3, $5) } 
-    | FOR LPAREN for_expr IN for_expr RPAREN stmt	       { For($3, $5, $7 ) } 
+    | WHILE LPAREN expr RPAREN stmt                           { While($3, $5) } 
+    | FOR LPAREN for_expr IN for_expr RPAREN stmt               { For($3, $5, $7 ) } 
     | IF list_expr IN list_expr THEN stmt %prec NOELSE  { Ifin($2, $4, $6, Block([])) }
     | IF list_expr IN list_expr THEN stmt ELSE stmt     { Ifin($2, $4, $6, $8) }
     | LBRACE rev_stmt_list RBRACE                       { Block($2) }
@@ -126,7 +126,7 @@ expr_opt:
 expr:
     | LIT_INT                      { LitInt($1) }
     | LIT_STR                      { LitStr($1) }
-    | LIT_BOOL			           { LitBool($1) }
+    | LIT_BOOL                                   { LitBool($1) }
     | LBRACK list_items RBRACK     { List($2) }
     | ID                           { Id($1) }
     | expr PLUS   expr             { Binop($1, Add,      $3) }
@@ -154,8 +154,10 @@ pathattributes:
     | PATHKIND                     { Pathkind }
 
 list_items:
-      expr                         { Item($1) }
-    | expr COMMA list_items        { Seq($1, Comma, $3) }           
+    { Noitem }
+    |  expr                         { Item($1) }
+    | expr COMMA list_items        { Seq($1, Comma, $3) }   
+
     
 actuals_opt:
     /* nothing */   { [] }
@@ -164,4 +166,3 @@ actuals_opt:
 actuals_list:
     expr                      { [$1] }
     | actuals_list COMMA expr { $3 :: $1 }
-
