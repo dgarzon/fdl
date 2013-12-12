@@ -12,6 +12,7 @@ and string_of_items = function
 
   | Seq(e, sep, i2) -> "addBack(&temp_list," ^ create_node_string e ^ ");\n"
                     ^ (string_of_items i2)
+  | Noitem -> ""
 
 and string_of_expr = function
     LitInt(l) -> string_of_int l

@@ -15,6 +15,7 @@ type list_expr =
 type items = 
     Item of expr
   | Seq of expr * sep * items
+  | Noitem
 and expr =
     LitInt of int
   | LitStr of string
