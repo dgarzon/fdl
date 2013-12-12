@@ -9,4 +9,5 @@ def int main()
     if ( a == 0 ) then
 		print b
 	end
+	return 0
 end
