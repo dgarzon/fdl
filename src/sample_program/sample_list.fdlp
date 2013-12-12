@@ -1,7 +1,0 @@
-def int main() {
-
-	list l;
-	l = ["a","b",1,2,3];
-	if "a" in l then print l;
-	return 0;
-}
