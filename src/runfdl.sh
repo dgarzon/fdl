@@ -3,42 +3,24 @@
 # fdl exectutable
 FDL="./fdl"
 # preprocessor executable
-PREPROCESSOR="./preprocessor/preprocessor"
-
-# Compare <outfile> <reffile> <difffile>
-# Compares the outfile with reffile.  Differences, if any, written to difffile
-Compare() {
-	difference=$(diff -b $1 $2) 
-	echo $difference
-	if [ "$difference" != "" ]; then
-		echo $difference > $3	
-	fi
-}
+PRE="./preprocessor/preprocessor"
 
 function compileAndRun() {
 	basename=`echo $1 | sed 's/.*\\///
                              s/.fdl//'`
 	reffile=`echo $1 | sed 's/.fdl$//'`
+    prepfile=$reffile'.fdlp'
     basedir="`echo $1 | sed 's/\/[^\/]*$//'`/"
-	
-	# gets the path of the test output file
-	# testoutput=`echo ${basedir}test_outputs/$basename.c.out`
-	# echo $basename
-	# echo $reffile
-	# echo $basedir
-	# echo $testoutput
 
-	preprocessorOutputFileName=$basename".fdlp"
-	# echo $preprocessorOutputFileName
 
-	$PREPROCESSOR $1 $preprocessorOutputFileName
+	$PRE $1 $prepfile
 
-	echo "Compiling '$preprocessorOutputFileName'"
-	if [ -f $preprocessorOutputFileName ]; then
-		echo "$preprocessorOutputFileName exists"
+	echo "Compiling '$prepfile'"
+	if [ -f $prepfile ]; then
+		echo "$prepfile exists"
 	fi
-	# converting from fdl to C
-    $FDL $preprocessorOutputFileName > "${reffile}.c" && echo "Ocaml to C of $1 succeeded"
+	# converting from fdlp to C
+    $FDL $prepfile > "${reffile}.c" && echo "Ocaml to C of $1 succeeded"
 
     # compliling the C file
     if [ -f "${reffile}.c" ]; then
@@ -51,7 +33,7 @@ function compileAndRun() {
     # running the binary
     if [ -f "${reffile}" ]; then
     	eval "${reffile}"
-    	#rm -rf $preprocessorOutputFileName
+    	#rm -rf $prepfile
     	#rm -rf ${reffile}.c
     	#rm -rf ${reffile}
     else
@@ -60,12 +42,15 @@ function compileAndRun() {
 
 
 	# # running the binary
- #    if [ -f "${reffile}" ]; then
- #    	eval "${reffile}" > ${reffile}.generated.out
- #    	Compare ${testoutput} ${reffile}.generated.out ${reffile}.c.diff
- #    else
- #    	echo "C to binary of ${reffile}.c failed"
- #    fi
+    if [ -f "${reffile}" ]; then
+        eval "${reffile}" > ${reffile}.generated.out
+        rm -rf ${basedir}test_outputs/$basename.c.out
+        rm -rf ${reffile}.generated.out
+        rm -rf ${reffile}.c
+        rm -rf ${reffile}
+    else
+        echo "C to binary of ${reffile}.c failed"
+    fi
 }
 
 # the path to the .fdl file
@@ -74,9 +59,3 @@ if [ -f $1 ]; then
 else
 	echo "$1 doesnt exist"
 fi
-
-
-# for file in $files
-# do
-# 	compile $file
-# done
