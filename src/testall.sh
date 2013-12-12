@@ -1,5 +1,21 @@
 #!/bin/sh
 
+if [ ! -f "./fdl" ]; then
+    make
+fi
+
+if [ ! -f "preprocessor/./preprocessor" ]; then
+    cd preprocessor
+    make
+    cd ..
+fi
+
+if [ ! -f "c/libraries/libpath.a" && ! -f "c/libraries/liblist.a"  ]; then
+    cd c/libraries/
+    make
+    cd ../..
+fi
+
 FDL="./fdl"
 PRE="preprocessor/./preprocessor"
 
@@ -57,6 +73,7 @@ function compile() {
     	echo "C to binary of ${reffile}.c failed"
     fi
 }
+
 
 files=sample_program/*.fdl
 
