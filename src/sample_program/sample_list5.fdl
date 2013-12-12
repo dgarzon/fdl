@@ -1,0 +1,6 @@
+def int main()
+
+	list l
+	l = []
+	return 0
+end

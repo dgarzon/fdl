@@ -2,7 +2,7 @@ type op_t = Add | Sub | Mult | Div | In | Equal | Neq | Less | Leq | Greater | G
 
 type sep_t = Comma
 
-type data_type_t = PathType | StrType | IntType | BoolType | VoidType | DictType | ListType
+type data_type_t = PathType | StrType | IntType | BoolType | VoidType | ListType
 
 type pathattr_type_t = Pathname | Pathcreated | Pathkind | Pathext
 

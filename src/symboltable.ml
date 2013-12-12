@@ -14,7 +14,6 @@ let string_of_vtype = function
   | StrType -> "string"
   | BoolType -> "bool"
   | PathType -> "path"
-  | DictType -> "dict"
   | ListType -> "list"
 
 let find_variable name env =

@@ -6,7 +6,7 @@
 %token AND OR
 %token CONTINUE BREAK
 %token RETURN IF THEN ELSE FOR IN WHILE DO
-%token DEF VOID INT STR DICT LIST PATH BOOL TRASH TRUE FALSE PRINT
+%token DEF VOID INT STR LIST PATH BOOL TRASH TRUE FALSE PRINT
 %token PATHNAME PATHCREATED PATHKIND PATHEXT ADD REMOVE
 %token <int> LIT_INT
 %token <string> LIT_STR
@@ -51,7 +51,6 @@ return_type:
     | BOOL      { BoolType }
     | PATH      { PathType }
     | STR       { StrType }
-    | DICT      { DictType }
     | LIST      { ListType }
 
 formals_opt:
@@ -67,7 +66,6 @@ formal:
     | BOOL ID     { { vtype = BoolType; vname = $2; } }
     | PATH ID     { { vtype = PathType; vname = $2; } }
     | STR ID      { { vtype = StrType;  vname = $2; } }
-    | DICT ID     { { vtype = DictType; vname = $2; } }
     | LIST ID     { { vtype = ListType; vname = $2; } }
 
 /* Var declarations can also be optional */
@@ -87,7 +85,6 @@ vdecl:
     | BOOL ID SEMI { { vtype = BoolType; vname = $2; } }
     | STR ID SEMI  { { vtype = StrType;  vname = $2; } }
     | PATH ID SEMI { { vtype = PathType; vname = $2; } }
-    | DICT ID SEMI { { vtype = DictType; vname = $2; } }
     | LIST ID SEMI { { vtype = ListType; vname = $2; } }
 
 stmt_list:

@@ -1,0 +1,7 @@
+def int main()
+
+	list l
+	l = ["a","b",1,2,3]
+	if 1 in l then print l
+	return 0
+end

@@ -9,7 +9,6 @@ let string_of_vtype = function
   | StrType -> "string"
   | BoolType -> "bool"
   | PathType -> "path"
-  | DictType -> "dict"
   | ListType -> "list"
   | _ -> raise (Failure ("Unknown type"))
 
@@ -19,7 +18,6 @@ let get_sast_type = function
 	| Ast.IntType -> Sast.IntType
 	| Ast.BoolType -> Sast.BoolType
 	| Ast.VoidType -> Sast.VoidType
-	| Ast.DictType -> Sast.DictType
 	| Ast.ListType -> Sast.ListType
 	| _ -> raise (Failure ("Unknown type"))
 
