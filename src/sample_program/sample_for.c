@@ -8,26 +8,22 @@ int tempint;
 
 int main()
 {
-char * f;
+int count;
 char * dir;
-char * file2;
-char * file;
-file = "/Users/cjborenstein/Desktop/file.txt";
-file2 = "/Users/cjborenstein/Desktop/file2.txt";
-dir = "./c";
-
+char * f;
+dir = "/Users/rupayanbasu/Documents/Courses/PLT/fdl/fdl/src";
+count = 0;
 struct List subPathList; 
-
 initList(&subPathList);
-
 loadDirectoryToList(dir, &subPathList);
-
 struct Node *node = subPathList.head;
-
 while(node){
 f = node->string_item;
 {
-printf("%s\n",f);
+printf("%d",count);
+printf("%s",f);
+printf("%s","\n");
+count = count + 1;
 
 }node = node->next;
 }

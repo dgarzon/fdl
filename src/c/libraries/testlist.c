@@ -16,7 +16,7 @@ addBack(&temp_list,createIntNode(1,fdl_int));
 addBack(&temp_list,createIntNode(2,fdl_int));
 addBack(&temp_list,createIntNode(3,fdl_int));
 ;
-if(findNode(l,createStrNode("a",fdl_str)) == 0)
+if(findNode(l,createStrNode("z",fdl_str)) == 0)
 printf("%s","yes");
 else
 {

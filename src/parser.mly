@@ -94,6 +94,9 @@ stmt_list:
     { [] }
     | stmt_list stmt { $2 :: $1 }
 
+rev_stmt_list:
+    stmt_list          { List.rev $1 }
+
 /* using SEMI to separate stmts for now */
 stmt:
     expr SEMI                                      { Expr($1) }
@@ -105,7 +108,7 @@ stmt:
     | FOR LPAREN for_expr IN for_expr RPAREN stmt	       { For($3, $5, $7 ) } 
     | IF list_expr IN list_expr THEN stmt %prec NOELSE  { Ifin($2, $4, $6, Block([])) }
     | IF list_expr IN list_expr THEN stmt ELSE stmt     { Ifin($2, $4, $6, $8) }
-    | LBRACE stmt_list RBRACE                       { Block($2) }
+    | LBRACE rev_stmt_list RBRACE                       { Block($2) }
 
 for_expr:
     ID                              { Forid($1) }

@@ -5,17 +5,22 @@
 #include "dirent.h"
 
 void loadDirectoryToList(char *path, struct List *subPath){
-    char buffer[1000];
+    char *buffer;
     DIR *dir;
     struct dirent *ent;
+    int len;
     if ((dir = opendir (path)) != NULL) {
         /* print all the files and directories within directory */
         while ((ent = readdir (dir)) != NULL) {
+            len = strlen(path) + strlen(ent->d_name) + 2;
+            buffer = (char *)malloc(sizeof(char)*len);
+            //printf("%s\n",ent->d_name);
             strcpy(buffer, path);
             strcat(buffer, "/");
             strcat(buffer, ent->d_name);
             struct Node * node = createStrNode(buffer, fdl_path);
             addBack(subPath, node);
+            //buffer = "\0";
         }
         closedir (dir);
     } else {
