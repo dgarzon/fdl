@@ -137,7 +137,7 @@ let string_of_fdecl fdecl =
 
 let string_of_program (vars, funcs) =
   "\n#include<stdio.h>\n#include<stdlib.h>\n#include<string.h>\n#include \"list.h\"\n" ^
-  "struct List temp_list;\nint tempint;\n" ^
+  "#include \"path.h\"\n struct List temp_list;\nint tempint;\n" ^
   String.concat "\n" (List.map string_of_vdecl vars) ^ "\n" ^
   String.concat "\n" (List.map string_of_fdecl funcs)
 
