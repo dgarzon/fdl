@@ -3,7 +3,7 @@
 #include <string.h>
 #include "sys/stat.h"
 #include "time.h"
-#include "libgen.h"
+#include<libgen.h>
 
 // test function
 char* getName(char *path, char *output){
@@ -51,13 +51,13 @@ int getPathType(char *path){
 }
 
 // get the last directory or filename
-char* getPathName(char *path, char *output){
+char* getPathName(char* path){
 	if(checkValid(path)){
-		char *basec = strdup(path);
-		char *bname = basename(basec);
-		strcpy(output, bname);
-		printf("\noutput %s\n", output);
-		return output;
-	}else
-		return NULL;
+        char *basec = strdup(path);
+        char *bname = basename(basec);
+        return bname;
+    }else
+        return NULL;
+
 }
+

@@ -54,8 +54,7 @@ and string_of_expr = function
                       ) in
                         "removeNode("^ id ^ ", " ^ arg ^ ");\n"
   | Pathattr(id, e) -> ( match e with
-                          Pathname -> "char *output = (char *)malloc(sizeof(char)*strlen(home));" ^
-                                      "getPathName(" ^ id ^ ")"
+                          Pathname -> "getPathName(" ^ id ^ ")"
                           | Pathcreated -> "getCreatedAt(" ^ id ^ ")"
                           | Pathkind -> "getPathType(" ^ id ^ ")"
                         )

@@ -5,6 +5,6 @@ char* getName(char *path, char *output);
 int checkValid(char *path);
 int getCreatedAt(char *path);
 int getPathType(char *path);
-char* getPathName(char *path, char *output);
+char* getPathName(char *path);
 
 #endif
