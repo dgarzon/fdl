@@ -50,6 +50,7 @@ function compile() {
     	eval "${reffile}" > ${reffile}.generated.out
         cp ${reffile}.generated.out ${basedir}test_outputs/$basename.c.out
     	Compare ${testoutput} ${reffile}.generated.out ${reffile}.c.diff
+        rm -rf ${basedir}test_outputs/$basename.c.out
         rm -rf ${reffile}.generated.out
         rm -rf ${reffile}.c
     else
