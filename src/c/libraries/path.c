@@ -6,7 +6,7 @@
 #include "libgen.h"
 
 // test function
-char* getName(char *path){
+char* getName(char *path, char *output){
 	char *dirc, *basec, *bname, *dname;
 
 	dirc = strdup(path);
@@ -14,13 +14,13 @@ char* getName(char *path){
 	dname = dirname(dirc);
 	bname = basename(basec);
 	//printf("dirname=%s, basename=%s\n", dname, bname);
-	return dname;
+	strcpy(output, dname);
+	return output;
 }
 
 int checkValid(char *path){
 	/* testing the stat sys call for files and directories */
 	struct stat info;
-
 	if (stat(path, &info) != 0)
 		return 0;
 	else
@@ -51,11 +51,13 @@ int getPathType(char *path){
 }
 
 // get the last directory or filename
-char* getPathName(char *path){
+char* getPathName(char *path, char *output){
 	if(checkValid(path)){
 		char *basec = strdup(path);
 		char *bname = basename(basec);
-		return bname;
+		strcpy(output, bname);
+		printf("\noutput %s\n", output);
+		return output;
 	}else
 		return NULL;
 }
