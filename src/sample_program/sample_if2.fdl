@@ -5,8 +5,7 @@ def int main()
 	a = 1
 	b = 2
 	c = a < b
-	if ( a < b )
-	then 
+	if ( a < b ) then
 		print b
 	end
 	return 1
