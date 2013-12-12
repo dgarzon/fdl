@@ -51,10 +51,8 @@ int main(int argc, char const *argv[])
     }
 
     char buffer[MAX_BUFFER];
-    int indentLevel = 0;
 
     while (fgets(buffer, sizeof(buffer), input) != NULL) {
-        int initialIndentLevel = indentLevel;
 
         size_t len = strlen(buffer) - 1;
         if (buffer[len] == '\n') {
@@ -63,7 +61,6 @@ int main(int argc, char const *argv[])
 
         if (strstr(buffer, "def ") != NULL) {
             fprintf(output, "%s {\n", buffer);
-            indentLevel++;
         }
         else if (strstr(buffer, "int ") != NULL) {
             fprintf(output, "%s;\n", buffer);
@@ -89,7 +86,13 @@ int main(int argc, char const *argv[])
         else if (strstr(buffer, "*/") != NULL) {
             fprintf(output, "%s\n", buffer);
         }
-        else if (strstr(buffer, "if (") != NULL || strstr(buffer, "if(") != NULL) {
+        else if ((strstr(buffer, "if (") != NULL || strstr(buffer, "if(") != NULL) && (strstr(buffer, "then") != NULL)) {
+            fprintf(output, "%s {\n", buffer);
+        }
+        else if ((strstr(buffer, "if (") != NULL || strstr(buffer, "if(") != NULL) && (strstr(buffer, "then") == NULL)) {
+            fprintf(output, "%s\n", buffer);
+        }
+        else if (strstr(buffer, "then") != NULL) {
             fprintf(output, "%s {\n", buffer);
         }
         else if (strstr(buffer, "else") != NULL) {
@@ -123,14 +126,13 @@ int main(int argc, char const *argv[])
             fprintf(output, "%s", buffer);
         }
         else {
-            if (strlen(buffer) > 1)
+            if (strcmp(buffer, "\n") == 1) {
+                fprintf(output, "\n");
+            }
+            else if (strlen(buffer) > 1)
                 fprintf(output, "%s;\n", buffer);
             else
                 fprintf(output, "\n");
-        }
-
-        if (indentLevel < initialIndentLevel) {
-            fprintf(output, "\n}\n");
         }
     }
     fclose(input);
