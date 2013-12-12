@@ -6,14 +6,15 @@
 #include "libgen.h"
 
 // test function
-void getName(char *path){
+char* getName(char *path){
 	char *dirc, *basec, *bname, *dname;
 
 	dirc = strdup(path);
 	basec = strdup(path);
 	dname = dirname(dirc);
 	bname = basename(basec);
-	printf("dirname=%s, basename=%s\n", dname, bname);
+	//printf("dirname=%s, basename=%s\n", dname, bname);
+	return dname;
 }
 
 int checkValid(char *path){

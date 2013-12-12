@@ -61,8 +61,12 @@ let rec string_of_stmt = function
       (* print needs to be made aware of expr type, otherwise won't work *)
   | Print(expr, expr_type) -> if expr_type = "string" || expr_type = "path" then
                                 "printf(\"%s\"," ^ string_of_expr expr ^ ");\n"
-                              else
+                              else if expr_type = "int" || expr_type = "bool" then
                                 "printf(\"%d\"," ^ string_of_expr expr ^ ");\n"
+                              else 
+                                "traverseList(" ^ string_of_expr expr ^",&printNode);\n"
+                              
+
   (*| For(e1, e2, s1) ->  "for (" ^ string_of_expr e1 ^ " in "
       ^ string_of_expr e2 ^ ")\n" ^ string_of_stmt s1*)
   | For(e1, e2, s1) ->  (*"while (" ^ (get_list_arg le2) ^")\n if(findNode(" ^ (get_list_arg le2) ^","^arg^") == 0)\n"^string_of_stmt s1*)
