@@ -1,5 +1,21 @@
 #!/bin/sh
 
+if [ ! -f "c/libraries/liblist.a" ] || [ ! -f "c/libraries/libpath.a" ] ; then
+    cd c/libraries
+    make
+    cd ../..
+fi
+
+if [ ! -f "preprocessor/./preprocessor" ]; then
+    cd preprocessor
+    make
+    cd ..
+fi
+
+if [ ! -f "./fdl" ]; then
+    make
+fi
+
 FDL="./fdl"
 PRE="preprocessor/./preprocessor"
 
@@ -47,16 +63,17 @@ function compile() {
 
 	# running the binary
     if [ -f "${reffile}" ]; then
-    	eval "${reffile}" > ${reffile}.generated.out
+    	eval ${reffile} > ${reffile}.generated.out
         cp ${reffile}.generated.out ${basedir}test_outputs/$basename.c.out
     	Compare ${testoutput} ${reffile}.generated.out ${reffile}.c.diff
-        rm -rf ${basedir}test_outputs/$basename.c.out
         rm -rf ${reffile}.generated.out
         rm -rf ${reffile}.c
+        rm -rf ${reffile}
     else
     	echo "C to binary of ${reffile}.c failed"
     fi
 }
+
 
 files=sample_program/*.fdl
 

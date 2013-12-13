@@ -59,6 +59,7 @@ and string_of_expr = function
                           Pathname -> "getPathName(" ^ id ^ ")"
                           | Pathcreated -> "getCreatedAt(" ^ id ^ ")"
                           | Pathkind -> "getPathType(" ^ id ^ ")"
+                          | Pathext -> "getExtension(" ^ id ^ ")"
                         )
   | Noexpr -> ""
 
