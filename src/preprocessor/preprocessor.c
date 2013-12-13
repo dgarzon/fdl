@@ -59,11 +59,9 @@ int main(int argc, char const *argv[])
             buffer[len] = '\0';
         }
         if (strstr(buffer, "*/") != NULL) {
-            printf("Close Comment");
             fprintf(output, "%s\n", buffer);
         }
         else if (strstr(buffer, "/*") != NULL) {
-            printf("Close Comment");
             fprintf(output, "%s\n", buffer);
         }
         else if (strstr(buffer, "def ") != NULL) {
@@ -134,7 +132,6 @@ int main(int argc, char const *argv[])
                 fprintf(output, "\n");
             }
             else if (strlen(buffer) > 1) {
-                printf("In Buffer > 1");
                 fprintf(output, "%s;\n", buffer);
             }
             else

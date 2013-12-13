@@ -1,5 +1,22 @@
 #!/bin/sh
 
+
+if [ ! -f "c/libraries/liblist.a" ] || [ ! -f "c/libraries/libpath.a" ] ; then
+    cd c/libraries
+    make
+    cd ../..
+fi
+
+if [ ! -f "preprocessor/./preprocessor" ]; then
+    cd preprocessor
+    make
+    cd ..
+fi
+
+if [ ! -f "./fdl" ]; then
+    make
+fi
+
 # fdl exectutable
 FDL="./fdl"
 # preprocessor executable
@@ -30,30 +47,18 @@ function compileAndRun() {
     	return
     fi
 
-    # running the binary
+ 	# running the binary
     if [ -f "${reffile}" ]; then
-    	eval "${reffile}"
-    	rm -rf $preprocessorOutputFileName
-    	rm -rf ${reffile}.c
-    	rm -rf ${reffile}
+        eval "${reffile}" > ${reffile}.generated.out
+        rm -rf ${reffile}.generated.out
+        rm -rf ${reffile}.c
+        rm -rf ${reffile}
     else
-    	echo "Could not run the C program at ${reffile}"
+        echo "C to binary of ${reffile}.c failed"
     fi
 
-
-	# # running the binary
-    # if [ -f "${reffile}" ]; then
-    #     eval "${reffile}" > ${reffile}.generated.out
-    #     rm -rf ${basedir}test_outputs/$basename.c.out
-    #     rm -rf ${reffile}.generated.out
-    #     rm -rf ${reffile}.c
-    #     rm -rf ${reffile}
-    # else
-    #     echo "C to binary of ${reffile}.c failed"
-    # fi
 }
 
-# the path to the .fdl file
 if [ -f $1 ]; then
 	compileAndRun $1
 else
