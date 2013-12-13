@@ -84,8 +84,6 @@ int copyFile(char* src, char *dest){
 
 int moveFile(char* src, char *dest){
 	char movecommand[1000];
-	printf("%s\n", "Moving..");
-	printf("%s\n", dest);
 
 	if (checkValid(dest) == 0) {
 		char temp[1000] = "mkdir -p ";
