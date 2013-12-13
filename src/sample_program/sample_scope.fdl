@@ -3,6 +3,6 @@ int a
 def int main()
         int a
         a = 2
-	print a;
+	print a
         return 0
 end

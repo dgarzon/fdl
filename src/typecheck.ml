@@ -10,7 +10,6 @@ let string_of_vtype = function
   | BoolType -> "bool"
   | PathType -> "path"
   | ListType -> "list"
-  | _ -> raise (Failure ("Unknown type"))
 
 let get_sast_type = function
 	Ast.PathType -> Sast.PathType
@@ -19,14 +18,12 @@ let get_sast_type = function
 	| Ast.BoolType -> Sast.BoolType
 	| Ast.VoidType -> Sast.VoidType
 	| Ast.ListType -> Sast.ListType
-	| _ -> raise (Failure ("Unknown type"))
 
 let get_sast_pathattrtype = function
 	Ast.Pathname -> Sast.Pathname, "string"
 	| Ast.Pathcreated -> Sast.Pathcreated, "int"
 	| Ast.Pathkind -> Sast.Pathkind, "int"
 	| Ast.Pathext -> Sast.Pathext, "string"
-	| _ -> raise (Failure ("Unknown path attribute type"))
 
 (* convert a variable to its SAST type *)
 let convert_to_sast_type x = 
@@ -86,8 +83,10 @@ let match_oper e1 op e2 =
 		  (* equal and not equal have special case for string comparison 
 		  		we may need to add SAST and Eqs and Neqs *)
 	 | Ast.Equal -> if expr_t = "int" then (Sast.Binop(fst e1, Sast.Equal, fst e2), "bool") else
-                  raise (Failure ("type error"))
+	 				if expr_t = "string" then (Sast.Binop(fst e1, Sast.StrEqual, fst e2), "bool") else
+                  raise (Failure ("type error in == "))
 	 | Ast.Neq -> if expr_t = "int" then (Sast.Binop(fst e1, Sast.Neq, fst e2), "bool") else
+	 				if expr_t = "string" then (Sast.Binop(fst e1, Sast.StrNeq, fst e2), "bool") else
                   raise (Failure ("type error"))
 	 | Ast.Less ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Less, fst e2), "bool") else
                   raise (Failure ("type error")) 
@@ -97,6 +96,10 @@ let match_oper e1 op e2 =
                   raise (Failure ("type error"))
 	 | Ast.Geq ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Geq, fst e2), "bool") else
                   raise (Failure ("type error")) 
+     | Ast.And ->if expr_t = "bool" then (Sast.Binop(fst e1, Sast.And, fst e2), "bool") else
+      			  raise (Failure ("type error in and")) 
+     | Ast.Or ->if expr_t = "bool" then (Sast.Binop(fst e1, Sast.Or, fst e2), "bool") else
+      			  raise (Failure ("type error in or")) 
 	)
 
 (* it returns the expr and its type *)

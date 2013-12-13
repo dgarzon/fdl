@@ -1,4 +1,4 @@
-type op_t = Add | Sub | Mult | Div | In | Equal | Neq | Less | Leq | Greater | Geq
+type op_t = Add | Sub | Mult | Div | Equal | Neq | Less | Leq | Greater | Geq | And | Or | StrEqual | StrNeq
 
 type sep_t = Comma
 
@@ -10,7 +10,6 @@ type list_expr_t =
     ListId of string * string
   | ListItemInt of int
   | ListItemStr of string
-  | ListItemBool of bool
 
 type items_t = 
     Item of expr_t
@@ -19,7 +18,6 @@ type items_t =
 and expr_t =
     LitInt of int
   | LitStr of string
-  | LitBool of bool
   | Id of string
   | Binop of expr_t * op_t * expr_t
   | Assign of string * expr_t

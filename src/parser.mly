@@ -20,6 +20,7 @@
 
 %right ASSIGN MOVE COPY NOT
 
+%left AND OR
 %left EQ NEQ
 %left LT GT LEQ GEQ
 %left IN
@@ -94,6 +95,7 @@ stmt_list:
 rev_stmt_list:
     stmt_list          { List.rev $1 }
 
+
 /* using SEMI to separate stmts for now */
 stmt:
     expr SEMI                                      { Expr($1) }
@@ -114,7 +116,6 @@ list_expr:
     ID                            { ListId($1) }
     | LIT_INT                      { ListItemInt($1) }
     | LIT_STR                      { ListItemStr($1) }
-    | LIT_BOOL                     { ListItemBool($1) }
 /* expression optional, return; */
 expr_opt:
     /* nothing */ { Noexpr }
@@ -123,20 +124,20 @@ expr_opt:
 expr:
     | LIT_INT                      { LitInt($1) }
     | LIT_STR                      { LitStr($1) }
-    | LIT_BOOL                                   { LitBool($1) }
     | LBRACK list_items RBRACK     { List($2) }
     | ID                           { Id($1) }
     | expr PLUS   expr             { Binop($1, Add,      $3) }
     | expr MINUS  expr             { Binop($1, Sub,      $3) }
     | expr TIMES  expr             { Binop($1, Mult,     $3) }
     | expr DIVIDE expr             { Binop($1, Div,      $3) }
-    | expr IN expr                 { Binop($1, In,       $3) }
     | expr EQ     expr             { Binop($1, Equal,    $3) }
     | expr NEQ    expr             { Binop($1, Neq,      $3) }
     | expr LT     expr             { Binop($1, Less,     $3) }
     | expr LEQ    expr             { Binop($1, Leq,      $3) }
     | expr GT     expr             { Binop($1, Greater,  $3) }
     | expr GEQ    expr             { Binop($1, Geq,      $3) }
+    | expr AND expr                { Binop($1, And,      $3) }
+    | expr OR expr                 { Binop($1, Or,       $3) }
     | ID ASSIGN expr               { Assign($1, $3) }
     | expr COPY expr                 { Copy($1,   $3) }
     | expr MOVE expr                 { Move($1,  $3) }
