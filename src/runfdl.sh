@@ -51,8 +51,8 @@ function compileAndRun() {
    # running the binary
     if [ -f "${reffile}" ]; then
         eval ${reffile}
-        # rm -rf ${reffile}.fdlp
-        # rm -rf ${reffile}.c
+        rm -rf ${reffile}.fdlp
+        rm -rf ${reffile}.c
         rm -rf ${reffile}
     else
         echo "C to binary of ${reffile}.c failed"
