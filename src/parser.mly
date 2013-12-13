@@ -116,7 +116,6 @@ list_expr:
     ID                            { ListId($1) }
     | LIT_INT                      { ListItemInt($1) }
     | LIT_STR                      { ListItemStr($1) }
-    | LIT_BOOL                     { ListItemBool($1) }
 /* expression optional, return; */
 expr_opt:
     /* nothing */ { Noexpr }
@@ -125,14 +124,12 @@ expr_opt:
 expr:
     | LIT_INT                      { LitInt($1) }
     | LIT_STR                      { LitStr($1) }
-    | LIT_BOOL                                   { LitBool($1) }
     | LBRACK list_items RBRACK     { List($2) }
     | ID                           { Id($1) }
     | expr PLUS   expr             { Binop($1, Add,      $3) }
     | expr MINUS  expr             { Binop($1, Sub,      $3) }
     | expr TIMES  expr             { Binop($1, Mult,     $3) }
     | expr DIVIDE expr             { Binop($1, Div,      $3) }
-    | expr IN expr                 { Binop($1, In,       $3) }
     | expr EQ     expr             { Binop($1, Equal,    $3) }
     | expr NEQ    expr             { Binop($1, Neq,      $3) }
     | expr LT     expr             { Binop($1, Less,     $3) }

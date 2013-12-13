@@ -10,7 +10,6 @@ let string_of_vtype = function
   | BoolType -> "bool"
   | PathType -> "path"
   | ListType -> "list"
-  | _ -> raise (Failure ("Unknown type"))
 
 let get_sast_type = function
 	Ast.PathType -> Sast.PathType
@@ -19,14 +18,12 @@ let get_sast_type = function
 	| Ast.BoolType -> Sast.BoolType
 	| Ast.VoidType -> Sast.VoidType
 	| Ast.ListType -> Sast.ListType
-	| _ -> raise (Failure ("Unknown type"))
 
 let get_sast_pathattrtype = function
 	Ast.Pathname -> Sast.Pathname, "string"
 	| Ast.Pathcreated -> Sast.Pathcreated, "int"
 	| Ast.Pathkind -> Sast.Pathkind, "int"
 	| Ast.Pathext -> Sast.Pathext, "string"
-	| _ -> raise (Failure ("Unknown path attribute type"))
 
 (* convert a variable to its SAST type *)
 let convert_to_sast_type x = 

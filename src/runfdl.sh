@@ -14,7 +14,7 @@ if [ ! -f "preprocessor/./preprocessor" ]; then
 fi
 
 if [ ! -f "./fdl" ]; then
-    make
+    make > compiler_msgs.txt
 fi
 
 # fdl exectutable
@@ -41,7 +41,7 @@ function compileAndRun() {
 
     # compliling the C file
     if [ -f "${reffile}.c" ]; then
-    	gcc -Ic/libraries -Lc/libraries -llist -lpath -o "${reffile}" "${reffile}.c" && echo "COMPILATION of ${reffile}.c succeeded"
+    	gcc -Ic/libraries -Lc/libraries -llist -lpath -w -o "${reffile}" "${reffile}.c" && echo "COMPILATION of ${reffile}.c succeeded"
     else
     	echo "Ocaml to C of $1 failed"
     	return
