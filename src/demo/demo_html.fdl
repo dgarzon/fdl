@@ -1,0 +1,31 @@
+def int main()
+    path src
+    path js
+    path css
+    path imgs
+    path html
+    path f
+
+    src = "./demo/site"
+    js =  "./demo/site/js"
+    css =  "./demo/site/css"
+    imgs = "./demo/site/imgs"
+    html = "./demo/site/html"
+
+    for ( f in src )
+        if (f.type == ".js") then
+            js <<- f
+        end
+        if (f.type == ".css") then
+            css <<- f
+        end
+        if (f.type == ".jpeg") then
+            imgs <<- f
+        end
+        if (f.type == ".html" && f.name != "index.html") then
+            html <<- f
+        end
+    end
+
+    return 0
+end
