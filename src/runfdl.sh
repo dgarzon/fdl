@@ -49,8 +49,8 @@ function compileAndRun() {
 
  	# running the binary
     if [ -f "${reffile}" ]; then
-        eval "${reffile}" > ${reffile}.generated.out
-        rm -rf ${reffile}.generated.out
+        eval ${reffile}
+        rm -rf ${reffile}.fdlp
         rm -rf ${reffile}.c
         rm -rf ${reffile}
     else

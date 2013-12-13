@@ -50,6 +50,16 @@ int getPathType(char *path){
 		return -1;
 }
 
+int isDir(char *path){
+	if(checkValid(path)){
+		struct stat info;
+		stat(path, &info);
+
+		return S_ISDIR(info.st_mode);
+	}else
+		return -1;
+}
+
 // get the last directory or filename
 char* getPathName(char* path){
 	if(checkValid(path)){
