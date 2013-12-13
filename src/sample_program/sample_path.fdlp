@@ -1,0 +1,8 @@
+int a;
+
+def void main() {
+	path home;
+	home = "./sample_program";
+	print home.name;
+	return;
+}
