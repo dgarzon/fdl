@@ -20,6 +20,7 @@
 
 %right ASSIGN MOVE COPY NOT
 
+%left AND OR
 %left EQ NEQ
 %left LT GT LEQ GEQ
 %left IN
@@ -94,6 +95,7 @@ stmt_list:
 rev_stmt_list:
     stmt_list          { List.rev $1 }
 
+
 /* using SEMI to separate stmts for now */
 stmt:
     expr SEMI                                      { Expr($1) }
@@ -137,6 +139,8 @@ expr:
     | expr LEQ    expr             { Binop($1, Leq,      $3) }
     | expr GT     expr             { Binop($1, Greater,  $3) }
     | expr GEQ    expr             { Binop($1, Geq,      $3) }
+    | expr AND expr                { Binop($1, And,      $3) }
+    | expr OR expr                 { Binop($1, Or,       $3) }
     | ID ASSIGN expr               { Assign($1, $3) }
     | expr COPY expr                 { Copy($1,   $3) }
     | expr MOVE expr                 { Move($1,  $3) }

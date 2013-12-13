@@ -99,6 +99,10 @@ let match_oper e1 op e2 =
                   raise (Failure ("type error"))
 	 | Ast.Geq ->if expr_t = "int" then (Sast.Binop(fst e1, Sast.Geq, fst e2), "bool") else
                   raise (Failure ("type error")) 
+     | Ast.And ->if expr_t = "bool" then (Sast.Binop(fst e1, Sast.And, fst e2), "bool") else
+      			  raise (Failure ("type error in and")) 
+     | Ast.Or ->if expr_t = "bool" then (Sast.Binop(fst e1, Sast.Or, fst e2), "bool") else
+      			  raise (Failure ("type error in or")) 
 	)
 
 (* it returns the expr and its type *)

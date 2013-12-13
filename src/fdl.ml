@@ -33,7 +33,8 @@ and string_of_expr = function
       ( match o with
           Add -> "+" | Sub -> "-" | Mult -> "*" | Div -> "/" | In -> "in"
         | Equal -> "==" | Neq -> "!="
-        | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">=" ) ^ " " ^ string_of_expr e2
+        | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">=" 
+        | And -> "&&" | Or -> "||" ) ^ " " ^ string_of_expr e2
   | Assign(v, e) -> v ^ " = " ^ string_of_expr e
   (* Maybe used built-in functions for copy and move *)
    (* | Copy(e_dest, e_src) -> "execl(\"/bin/cp\",\"/bin/cp\"," ^ string_of_expr e_src ^ "," ^ string_of_expr e_dest ^ ", (char *) 0)" *)
