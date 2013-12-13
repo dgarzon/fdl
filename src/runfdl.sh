@@ -42,15 +42,15 @@ function compileAndRun() {
 
 
 	# # running the binary
-    if [ -f "${reffile}" ]; then
-        eval "${reffile}" > ${reffile}.generated.out
-        rm -rf ${basedir}test_outputs/$basename.c.out
-        rm -rf ${reffile}.generated.out
-        rm -rf ${reffile}.c
-        rm -rf ${reffile}
-    else
-        echo "C to binary of ${reffile}.c failed"
-    fi
+    # if [ -f "${reffile}" ]; then
+    #     eval "${reffile}" > ${reffile}.generated.out
+    #     rm -rf ${basedir}test_outputs/$basename.c.out
+    #     rm -rf ${reffile}.generated.out
+    #     rm -rf ${reffile}.c
+    #     rm -rf ${reffile}
+    # else
+    #     echo "C to binary of ${reffile}.c failed"
+    # fi
 }
 
 # the path to the .fdl file
