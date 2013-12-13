@@ -1,8 +1,6 @@
 int a
-
 def int main()
 	int b
-	/*c = 10;*/
-	print 1+2
+	print 1*2
 	return 1
 end

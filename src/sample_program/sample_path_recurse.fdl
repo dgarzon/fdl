@@ -1,6 +1,6 @@
 def void recurse(path parent)
     path f
-    for ( f in parent ) 
+    for ( f in parent )
         print f
         if (f.kind == 1) then
             recurse(f)
@@ -8,7 +8,7 @@ def void recurse(path parent)
     end
     return
 end
-    
+
 def int main()
     path dir
     dir = "."

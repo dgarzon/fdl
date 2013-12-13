@@ -46,7 +46,7 @@ and string_of_expr = function
                           ListItemInt(l) -> "createIntNode("^string_of_int l^",fdl_int)"
                         | ListItemStr(l) -> "createStrNode("^l^",fdl_str)"
                         | ListId(i, t) -> if t = "path" || t = "string" then
-                                        "createStrNode("^i^",fdl_str)"
+                                        "createStrNode(strdup("^i^"),fdl_str)"
                                       else if t = "int" || t = "bool" then
                                         "createIntNode("^i^",fdl_int)"
                                       else raise (Failure ("Invalid id type used in If-in statement."))
@@ -90,9 +90,9 @@ let rec string_of_stmt = function
       string_of_stmt s1 ^ "else\n" ^ string_of_stmt s2
       (* print needs to be made aware of expr type, otherwise won't work *)
   | Print(expr, expr_type) -> if expr_type = "string" || expr_type = "path" then
-                                "printf(\"%s\"," ^ string_of_expr expr ^ ");\n"
+                                "printf(\"%s\\n\"," ^ string_of_expr expr ^ ");\n"
                               else if expr_type = "int" || expr_type = "bool" then
-                                "printf(\"%d\"," ^ string_of_expr expr ^ ");\n"
+                                "printf(\"%d\\n\"," ^ string_of_expr expr ^ ");\n"
                               else 
                                 "traverseList(" ^ string_of_expr expr ^",&printNode);\n"
                               
@@ -100,10 +100,9 @@ let rec string_of_stmt = function
   (*| For(e1, e2, s1) ->  "for (" ^ string_of_expr e1 ^ " in "
       ^ string_of_expr e2 ^ ")\n" ^ string_of_stmt s1*)
   | For(e1, e2, s1) ->  (*"while (" ^ (get_list_arg le2) ^")\n if(findNode(" ^ (get_list_arg le2) ^","^arg^") == 0)\n"^string_of_stmt s1*)
-        "struct List subPathList; \n" ^
       "initList(&subPathList);\n" ^
       "loadDirectoryToList(" ^ get_for_id e2 ^ ", &subPathList);\n" ^
-      "struct Node *node = subPathList.head;\n"^
+      "node = subPathList.head;\n"^
       (*"char *"^get_for_id e1^";\n"^*)
       "while(node){\n"^
       get_for_id e1 ^" = node->string_item;\n"^
@@ -146,7 +145,7 @@ let string_of_fdecl fdecl =
 
 let string_of_program (vars, funcs) =
   "\n#include<stdio.h>\n#include<stdlib.h>\n#include<string.h>\n#include \"list.h\"\n" ^
-  "#include \"path.h\"\n struct List temp_list;\nint tempint;\n" ^
+  "#include \"path.h\"\n struct List temp_list;\nstruct Node *node;\n" ^ "struct List subPathList;\n" ^
   String.concat "\n" (List.map string_of_vdecl vars) ^ "\n" ^
   String.concat "\n" (List.map string_of_fdecl funcs)
 
