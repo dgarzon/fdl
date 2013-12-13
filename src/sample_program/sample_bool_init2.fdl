@@ -1,0 +1,5 @@
+def int main()
+	bool a
+	a = 1==1
+        return 0
+end
