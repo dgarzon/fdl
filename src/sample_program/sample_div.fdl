@@ -1,5 +1,6 @@
+int a
 def int main()
-	print 1<1
-	print 1<2
+	int b
+	print 1/2
 	return 1
 end
