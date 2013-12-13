@@ -28,7 +28,6 @@ rule token = parse
 	| "for"			{ FOR }			| "in"			{ IN }
 	| "do"			{ DO }			| "bool"		{ BOOL }
 	| "while"		{ WHILE }		| "return"		{ RETURN }
-	| "break"		{ BREAK }		| "continue"	{ CONTINUE }
 	| "void"		{ VOID } 		| ".add"		{ ADD }
 	| "true"		{ TRUE }		| ".remove"		{ REMOVE }
 	| "false"		{ FALSE }		| ".type"		{ PATHEXT }
