@@ -8,5 +8,12 @@ def int main()
 	print home.name*/
 	
 	print home.type
+	print "\n"
+	if(home.kind == 1) then
+		print "we have a directory here"
+	else
+		print "we have a file here here"
+	end
+
 	return 1
 end

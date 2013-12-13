@@ -8,8 +8,10 @@ def int main()
     dest = "./test"
     count = 0
 
-	for ( dir in f ) 
-        	print count
+	for ( f in dir ) 
+        	if (f.type == ".sh") then
+                dest <- f
+            end
 		print f
 	end
 	return 1

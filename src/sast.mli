@@ -1,4 +1,4 @@
-type op_t = Add | Sub | Mult | Div | Equal | Neq | Less | Leq | Greater | Geq
+type op_t = Add | Sub | Mult | Div | Equal | Neq | Less | Leq | Greater | Geq | StrEqual | StrNeq
 
 type sep_t = Comma
 

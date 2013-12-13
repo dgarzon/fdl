@@ -21,6 +21,13 @@ and string_of_expr = function
   | Call(f, el) ->
       f ^ "(" ^ String.concat ", " (List.map string_of_expr el) ^ ");"
   | Binop(e1, o, e2) ->
+      if o = Sast.StrEqual then
+        "!strcmp(" ^ string_of_expr e1 ^ ", " ^ string_of_expr e2 ^ ")"
+        (* strcmp returns 0 for match, that's why the ! *)
+      else if o = Sast.StrNeq then
+        "strcmp(" ^ string_of_expr e1 ^ ", " ^ string_of_expr e2 ^ ")"
+        (* strcmp returns 0 for match *)
+      else
       string_of_expr e1 ^ " " ^
       ( match o with
           Add -> "+" | Sub -> "-" | Mult -> "*" | Div -> "/"

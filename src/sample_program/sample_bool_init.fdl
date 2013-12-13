@@ -1,6 +1,6 @@
 bool b
 
 def int main() 
-	b = false
+	b =0 
         return 0
 end

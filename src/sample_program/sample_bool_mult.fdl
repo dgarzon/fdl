@@ -1,0 +1,9 @@
+def int main()
+	bool a
+	bool b
+	bool c
+	a = 1==1
+	b = 1<1
+	c = a*b
+        return 0
+end

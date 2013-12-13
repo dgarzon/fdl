@@ -3,6 +3,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <assert.h>
+#include <ctype.h>  /* For isspace(). */
+#include <stddef.h>  /* For size_t. */
 
 #define MAX_BUFFER 4096
 
@@ -17,6 +19,25 @@ const char *getFileExtension(const char *fileName) {
     if(!dot || dot == fileName) return "";
     return dot + 1;
 }
+
+void remove_whitespace(char *str) {
+    char *p;
+    size_t len = strlen(str);
+
+    for(p = str; *p; p ++, len --) {
+        while(isspace(*p)) memmove(p, p+1, len--);
+    }
+}
+
+int is_empty(const char *s) {
+  while (*s != '\0') {
+    if (!isspace(*s))
+      return 0;
+    s++;
+  }
+  return 1;
+}
+
 
 int main(int argc, char const *argv[])
 {
@@ -128,14 +149,12 @@ int main(int argc, char const *argv[])
             fprintf(output, "%s", buffer);
         }
         else {
-            if (strcmp(buffer, "\n") == 1) {
+            if (is_empty(buffer)) {
+                remove_whitespace(buffer);
                 fprintf(output, "\n");
-            }
-            else if (strlen(buffer) > 1) {
+            } else {
                 fprintf(output, "%s;\n", buffer);
             }
-            else
-                fprintf(output, "\n");
         }
     }
     fclose(input);
