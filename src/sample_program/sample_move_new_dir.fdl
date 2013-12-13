@@ -1,0 +1,9 @@
+def int main()
+    path src
+    path dst
+    src = "~/Desktop/IMG_0556.jpeg"
+    dst =  "~/Desktop/test"
+    dst <- src
+    return 0
+end
+

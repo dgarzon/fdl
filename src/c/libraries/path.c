@@ -63,12 +63,25 @@ char* getPathName(char* path){
 
 int copyFile(char* src, char *dest){
 	char copycommand[1000];
+	if (checkValid(dest) == 0) {
+		char temp[1000] = "mkdir -p ";
+		strcat(temp, dest);
+		system(temp);
+	}
 	sprintf(copycommand, "/bin/cp %s %s", src, dest);
 	return system(copycommand);
 }
 
 int moveFile(char* src, char *dest){
 	char movecommand[1000];
+	printf("%s\n", "Moving..");
+	printf("%s\n", dest);
+
+	if (checkValid(dest) == 0) {
+		char temp[1000] = "mkdir -p ";
+		strcat(temp, dest);
+		system(temp);
+	}
 	sprintf(movecommand, "/bin/mv %s %s", src, dest);
 	return system(movecommand);
 }
