@@ -3,7 +3,7 @@ ocamlc -c ast.mli
 ocamlc -c parser.mli
 ocamlc -c parser.ml
 ocamllex scanner.mll
-151 states, 6290 transitions, table size 26066 bytes
+139 states, 5390 transitions, table size 22394 bytes
 ocamlc -c scanner.ml
 ocamlc -c symboltable.ml
 ocamlc -c sast.mli

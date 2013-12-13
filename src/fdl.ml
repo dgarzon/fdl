@@ -27,6 +27,8 @@ and string_of_expr = function
       else if o = Sast.StrNeq then
         "strcmp(" ^ string_of_expr e1 ^ ", " ^ string_of_expr e2 ^ ")"
         (* strcmp returns 0 for match *)
+      else if o = Sast.StrAdd then
+        "stringConcat(" ^ string_of_expr e1 ^ ", " ^ string_of_expr e2 ^ ")"
       else
       string_of_expr e1 ^ " " ^
       ( match o with

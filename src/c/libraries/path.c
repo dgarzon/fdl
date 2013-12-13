@@ -98,3 +98,10 @@ char* getExtension(char *path){
 	char *ptr = rindex(path, '.');
 	return strdup(ptr);
 }
+
+char* stringConcat(char *str1, char *str2){
+	char *strdup1 = strdup(str1);
+	char *strdup2 = strdup(str2);
+	strcat(strdup1, strdup2);
+	return strdup1;
+}

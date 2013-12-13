@@ -75,7 +75,8 @@ let match_oper e1 op e2 =
 	let expr_t = get_expr_type (snd e1) (snd e2) in
 	(match op with
 	   Ast.Add -> if expr_t = "int" then (Sast.Binop(fst e1, Sast.Add, fst e2), "int") else
-		  raise (Failure ("type error"))
+	   			if expr_t = "string" then (Sast.Binop(fst e1, Sast.StrAdd, fst e2), "string") else
+		  		raise (Failure ("type error"))
 	 | Ast.Sub -> if expr_t = "int" then (Sast.Binop(fst e1, Sast.Sub, fst e2), "int") else
 		  raise (Failure ("type error"))
 	 | Ast.Mult -> if expr_t = "int" then (Sast.Binop(fst e1, Sast.Mult, fst e2), "int") else

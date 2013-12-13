@@ -10,5 +10,6 @@ char* getPathName(char *path);
 int copyFile(char* src, char *dest);
 int moveFile(char* src, char *dest);
 char* getExtension(char *path);
+char* stringConcat(char *str1, char *str2);
 
 #endif
