@@ -1,7 +1,9 @@
 #!/bin/sh
 
-if [ ! -f "./fdl" ]; then
+if [ ! -f "c/libraries/liblist.a" ] || [ ! -f "c/libraries/libpath.a" ] ; then
+    cd c/libraries
     make
+    cd ../..
 fi
 
 if [ ! -f "preprocessor/./preprocessor" ]; then
@@ -10,10 +12,8 @@ if [ ! -f "preprocessor/./preprocessor" ]; then
     cd ..
 fi
 
-if [ ! -f "c/libraries/libpath.a" && ! -f "c/libraries/liblist.a"  ]; then
-    cd c/libraries/
+if [ ! -f "./fdl" ]; then
     make
-    cd ../..
 fi
 
 FDL="./fdl"
