@@ -1,0 +1,19 @@
+def void recurse(path parent)
+    path f
+    for ( f in parent )
+        print f
+        if (f.kind == 1) then
+            recurse(f)
+        end
+    end
+    return
+end
+	
+def int main()
+    path dir
+    dir = "."
+
+    recurse(dir)
+
+    return 1
+end
