@@ -16,7 +16,6 @@ and string_of_items = function
 
 and string_of_expr = function
     LitInt(l) -> string_of_int l
-  | LitBool(l) -> string_of_bool l
   | LitStr(l) -> l
   | Id(s) -> s
   | Call(f, el) ->
@@ -24,7 +23,7 @@ and string_of_expr = function
   | Binop(e1, o, e2) ->
       string_of_expr e1 ^ " " ^
       ( match o with
-          Add -> "+" | Sub -> "-" | Mult -> "*" | Div -> "/" | In -> "in"
+          Add -> "+" | Sub -> "-" | Mult -> "*" | Div -> "/"
         | Equal -> "==" | Neq -> "!="
         | Less -> "<" | Leq -> "<=" | Greater -> ">" | Geq -> ">=" ) ^ " " ^ string_of_expr e2
   | Assign(v, e) -> v ^ " = " ^ string_of_expr e
@@ -71,7 +70,6 @@ let get_list_arg le = match le
 let get_for_id e = match e
     with
     Forid(id) -> id
-  | _ -> raise (Failure("For loops work only with type path!"))
 
 let rec string_of_stmt = function
     Expr(expr) -> if compare (string_of_expr expr) "" = 0 then "\n" else string_of_expr expr ^ ";\n"
