@@ -4,5 +4,7 @@ def int main()
 	bool c
 	a = 1==1
 	b = 1<1
+	print a
+	print b
         return 0
 end

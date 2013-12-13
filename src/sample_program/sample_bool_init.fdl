@@ -2,5 +2,8 @@ bool b
 
 def int main() 
 	b = 0
-        return 0
+	print b
+	b = false
+	print b
+    return 0
 end

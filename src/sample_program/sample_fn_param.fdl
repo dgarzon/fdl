@@ -1,9 +1,11 @@
-void fun(int a)
-        print a
+def void fun(int a)
+    print a
+    return
+end
 
 def int main()
-        int a
-        a=5
-        fun(5)
-        return 0
+    int a
+    a=5
+    fun(5)
+    return 0
 end

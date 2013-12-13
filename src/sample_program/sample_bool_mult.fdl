@@ -4,6 +4,9 @@ def int main()
 	bool c
 	a = 1==1
 	b = 1<1
-	c = a*b
+	c = a || b
+	print a
+	print b
+	print c
         return 0
 end

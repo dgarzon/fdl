@@ -9,8 +9,8 @@ def int main()
 	list l
 
 	l = []
-	dir1 = "/Users/rupayanbasu/Documents/Courses/PLT/fdl/fdl/src/sample_program"
-	dir2 = "/Users/rupayanbasu/Documents/Courses/PLT/fdl/fdl/src"
+	dir1 = "."
+	dir2 = "./c"
 
 	for (file1 in dir2)
 		a = file1.name

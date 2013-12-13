@@ -47,6 +47,8 @@ let get_expr_type t1 t2 =
 	if t1 = "string" || t2 = "string" then "string" else
 	if t1 = "int" && t2 = "int" then "int" else
 	if t1 = "bool" && t2 = "bool" then "bool" else
+	if t1 = "int" && t2 = "bool" then "int" else
+	if t1 = "bool" && t2 = "int" then "int" else
 	raise (Failure ("type error"))
 
 
@@ -180,6 +182,7 @@ and get_expr_with_type env expr t =
 	let e = check_expr env expr in
 	(* added special case for the path variable *)
 	if ((snd e) = "string" && t = "path") then (fst e)
+	else if ((snd e) = "int" && t = "bool") then (fst e)
 	else if not((snd e) = t) then raise (Failure ("type error")) else (fst e)
 
 

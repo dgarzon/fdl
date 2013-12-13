@@ -123,6 +123,8 @@ expr_opt:
 
 expr:
     | LIT_INT                      { LitInt($1) }
+    | TRUE                         { LitInt(1) }
+    | FALSE                        { LitInt(0) }
     | LIT_STR                      { LitStr($1) }
     | LBRACK list_items RBRACK     { List($2) }
     | ID                           { Id($1) }

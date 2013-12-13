@@ -2,25 +2,26 @@ def int main()
    	path f
     path dir
     path dest
-    int count
 
-    dir = "."
-    dest = "./test"
-    count = 0
+    dir = "./test/src"
+    dest = "./test/dest"
 
     print "destination "
     print dest.kind
-    print "\n"
-	for ( f in dir ) 
-        print "file path "
-        print f
+    /* moving to destination */
+	for ( f in dir )
         if (f.kind == 0) then
             print f
-            dest <- f
+            dest <<- f
         end
-        print "\n"
-        count = count + 1    
 	end
+
+    /* moving back */
+    for ( f in dest)
+        if (f.kind == 0) then
+            dir <<- f
+        end
+    end
 
 	return 1
 end
