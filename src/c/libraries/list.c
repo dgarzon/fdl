@@ -82,11 +82,11 @@ void traverseList(struct List *list, void (*f)(struct Node *))
 void printNode(struct Node *node)
 {
     switch(node->type){
-        case fdl_int: printf("%d ",node->int_item); break;
-        case fdl_bool: if(node->bool_item == 1) printf("True ");
-                        else printf("False "); break;
-        case fdl_str: printf("%s ",node->string_item); break;
-        case fdl_path: printf("%s ",node->path_item); break;
+        case fdl_int: printf("%d\n",node->int_item); break;
+        case fdl_bool: if(node->bool_item == 1) printf("True\n");
+                        else printf("False\n"); break;
+        case fdl_str: printf("%s\n",node->string_item); break;
+        case fdl_path: printf("%s\n",node->path_item); break;
     }
 }
 
