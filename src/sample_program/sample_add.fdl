@@ -1,6 +1,6 @@
-int a = 1
+int a = 1 + 2
 def int main()
-	int b = 2
+	int b = a + 2
 	print a + b
 	return 1
 end
