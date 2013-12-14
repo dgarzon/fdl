@@ -2,18 +2,18 @@
 
 if [ ! -f "c/libraries/liblist.a" ] || [ ! -f "c/libraries/libpath.a" ] ; then
     cd c/libraries
-    make
+    make >> lib_msgs.txt
     cd ../..
 fi
 
 if [ ! -f "preprocessor/./preprocessor" ]; then
     cd preprocessor
-    make
+    make >> preproc_msgs.txt
     cd ..
 fi
 
 if [ ! -f "./fdl" ]; then
-    make
+    make >> compiler_msgs.txt
 fi
 
 FDL="./fdl"

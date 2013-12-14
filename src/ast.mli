@@ -48,6 +48,7 @@ type stmt =
 type var_decl = {
   vtype : data_type;
   vname : string;
+  vexpr : expr;
 }
 
 type func_decl = {

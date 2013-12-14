@@ -62,11 +62,11 @@ formal_list:
     | formal_list COMMA formal { $3 :: $1 }
 
 formal:
-    INT ID        { { vtype = IntType;  vname = $2; } }
-    | BOOL ID     { { vtype = BoolType; vname = $2; } }
-    | PATH ID     { { vtype = PathType; vname = $2; } }
-    | STR ID      { { vtype = StrType;  vname = $2; } }
-    | LIST ID     { { vtype = ListType; vname = $2; } }
+    INT ID        { { vtype = IntType;  vname = $2; vexpr = Noexpr; } }
+    | BOOL ID     { { vtype = BoolType; vname = $2; vexpr = Noexpr; } }
+    | PATH ID     { { vtype = PathType; vname = $2; vexpr = Noexpr; } }
+    | STR ID      { { vtype = StrType;  vname = $2; vexpr = Noexpr; } }
+    | LIST ID     { { vtype = ListType; vname = $2; vexpr = Noexpr; } }
 
 /* Var declarations can also be optional */
 vdecl_opt:
@@ -79,13 +79,17 @@ vdecl_list:
 
 /* Using SEMI to separate variable declarations for now */
 vdecl:
+      vdecl_type ID SEMI    { { vtype = $1;  vname = $2; vexpr = Noexpr } }
+    | vdecl_type ID ASSIGN expr SEMI  { { vtype = $1;  vname = $2; vexpr = $4 } }
+   
 /* addded void type to variables so we can give this error in type checking*/
-    VOID ID SEMI    { { vtype = VoidType;  vname = $2; } }
-    | INT ID SEMI    { { vtype = IntType;  vname = $2; } }
-    | BOOL ID SEMI { { vtype = BoolType; vname = $2; } }
-    | STR ID SEMI  { { vtype = StrType;  vname = $2; } }
-    | PATH ID SEMI { { vtype = PathType; vname = $2; } }
-    | LIST ID SEMI { { vtype = ListType; vname = $2; } }
+vdecl_type:
+    VOID            { VoidType }
+    | INT           { IntType }
+    | BOOL          { BoolType }
+    | STR           { StrType }
+    | PATH          { PathType }
+    | LIST          { ListType }
 
 stmt_list:
     { [] }
@@ -97,22 +101,23 @@ rev_stmt_list:
 
 /* using SEMI to separate stmts for now */
 stmt:
-    expr SEMI                                      { Expr($1) }
-    | RETURN expr_opt SEMI                         { Return($2) }
-    | IF LPAREN expr RPAREN THEN stmt %prec NOELSE { If($3, $6, Block([])) }
-    | IF LPAREN expr RPAREN THEN stmt ELSE stmt    { If($3, $6, $8) }
-    | PRINT expr SEMI                              { Print($2) }
-    | WHILE LPAREN expr RPAREN stmt                           { While($3, $5) } 
-    | FOR LPAREN for_expr IN for_expr RPAREN stmt               { For($3, $5, $7 ) } 
+    expr SEMI                                           { Expr($1) }
+    | RETURN expr_opt SEMI                              { Return($2) }
+    | IF LPAREN expr RPAREN THEN stmt %prec NOELSE      { If($3, $6, Block([])) }
+    | IF LPAREN expr RPAREN THEN stmt ELSE stmt         { If($3, $6, $8) }
+    | PRINT expr SEMI                                   { Print($2) }
+    | WHILE LPAREN expr RPAREN stmt                     { While($3, $5) } 
+    | FOR LPAREN for_expr IN for_expr RPAREN stmt       { For($3, $5, $7 ) } 
     | IF list_expr IN list_expr THEN stmt %prec NOELSE  { Ifin($2, $4, $6, Block([])) }
     | IF list_expr IN list_expr THEN stmt ELSE stmt     { Ifin($2, $4, $6, $8) }
     | LBRACE rev_stmt_list RBRACE                       { Block($2) }
+
 
 for_expr:
     ID                              { Forid($1) }
 
 list_expr:
-    ID                            { ListId($1) }
+    ID                             { ListId($1) }
     | LIT_INT                      { ListItemInt($1) }
     | LIT_STR                      { ListItemStr($1) }
 /* expression optional, return; */

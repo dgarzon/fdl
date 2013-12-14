@@ -43,11 +43,12 @@ type stmt_t =
   | While of expr_t * stmt_t
   | Print of expr_t * string
   | Ifin of list_expr_t * list_expr_t * stmt_t * stmt_t
-  (* the string in Print represents its type, need to change to data_type_t *)
+
 
 type var_decl_t = {
   vtype : data_type_t;
   vname : string;
+  vexpr : expr_t;
 }
 
 type func_decl_t = {

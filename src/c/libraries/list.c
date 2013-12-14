@@ -42,7 +42,7 @@ struct Node *createIntNode(int data, enum fdl_type type) {
     switch(newNode->type){
         case fdl_int: newNode->int_item = data; break;
         case fdl_bool: newNode->bool_item = data; break;
-        default: fdl_int: newNode->int_item = data;
+        default: break;
     }
     return newNode;
 }
@@ -59,7 +59,7 @@ struct Node *createStrNode(char *data, enum fdl_type type) {
     switch(newNode->type){
         case fdl_str: newNode->string_item = data; break;
         case fdl_path: newNode->path_item = data; break;
-        default: fdl_str: newNode->string_item = data; break;
+        default: break;
     }
     return newNode;
 }

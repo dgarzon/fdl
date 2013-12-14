@@ -30,7 +30,7 @@ path.o: path.c path.h
 
 .PHONY: clean
 clean:
-	rm -f *.o a.out core liblist.a libpath.a
+	rm -f *.o *.txt a.out core liblist.a libpath.a
 
 .PHONY: all
 all: clean

@@ -16,7 +16,7 @@ preprocessor: preprocessor.o
 
 .PHONY: clean
 clean:
-	rm -f *.o *~ a.out core preprocessor
+	rm -f *.o *.txt *~ a.out core preprocessor
 
 .PHONY: all
 all: clean default

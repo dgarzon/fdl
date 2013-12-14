@@ -23,7 +23,7 @@ stat_calls.o: stat_calls.c
 # Clean:
 .PHONY: clean
 clean:
-		rm -f *.o a.out core stat_calls
+		rm -f *.o *.txt a.out core stat_calls
 
 .PHONY: all
 all: clean stat_calls

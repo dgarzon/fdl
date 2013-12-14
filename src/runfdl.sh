@@ -3,18 +3,18 @@
 
 if [ ! -f "c/libraries/liblist.a" ] || [ ! -f "c/libraries/libpath.a" ] ; then
     cd c/libraries
-    make
+    make >> lib_msgs.txt
     cd ../..
 fi
 
 if [ ! -f "preprocessor/./preprocessor" ]; then
     cd preprocessor
-    make
+    make >> preproc_msgs.txt
     cd ..
 fi
 
 if [ ! -f "./fdl" ]; then
-    make > compiler_msgs.txt
+    make >> compiler_msgs.txt
 fi
 
 # fdl exectutable
@@ -32,16 +32,17 @@ function compileAndRun() {
 
 	$PRE $1 $prepfile
 
-	echo "Compiling '$prepfile'"
-	if [ -f $prepfile ]; then
-		echo "$prepfile exists"
+	#echo "Compiling '$prepfile'"
+	if [ ! -f $prepfile ]; then
+		echo "$prepfile does not exist"
+        return
 	fi
 	# converting from fdlp to C
-    $FDL $prepfile > "${reffile}.c" && echo "Ocaml to C of $1 succeeded"
+    $FDL $prepfile > "${reffile}.c" #&& echo "Ocaml to C of $1 succeeded"
 
     # compliling the C file
     if [ -f "${reffile}.c" ]; then
-    	gcc -Ic/libraries -Lc/libraries -llist -lpath -w -o "${reffile}" "${reffile}.c" && echo "COMPILATION of ${reffile}.c succeeded"
+    	gcc -Ic/libraries -Lc/libraries -llist -lpath -w -o "${reffile}" "${reffile}.c" #&& echo "COMPILATION of ${reffile}.c succeeded"
     else
     	echo "Ocaml to C of $1 failed"
     	return

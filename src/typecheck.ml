@@ -25,12 +25,7 @@ let get_sast_pathattrtype = function
 	| Ast.Pathkind -> Sast.Pathkind, "int"
 	| Ast.Pathext -> Sast.Pathext, "string"
 
-(* convert a variable to its SAST type *)
-let convert_to_sast_type x = 
-	{
-		Sast.vtype = get_sast_type x.vtype;
-		Sast.vname = x.vname;
-	}
+
 
 (* get variable type according to the name
  * raise error if no name matching in variable list *)
@@ -229,9 +224,24 @@ let rec check_stmt env func = function
 	| Ast.Print(expr) -> let (expr, expr_type) = check_expr env expr in
 							(Sast.Print(expr , expr_type)), env
 
+
 and check_stmt_list env func = function 
 	  [] -> []
 	| hd::tl -> let s,e = (check_stmt env func hd) in s::(check_stmt_list e func tl)
+
+(* convert a variable to its SAST type *)
+let convert_to_sast_type x env = 
+	let t = get_vtype env x.vname in
+		let s_expr = 
+		if not (x.vexpr = Ast.Noexpr) then
+			get_expr_with_type env x.vexpr t
+		else Sast.Noexpr
+		in
+	{
+		Sast.vtype = get_sast_type x.vtype;
+		Sast.vname = x.vname;
+		Sast.vexpr = s_expr;
+	}
 
 let check_formal env formal = 
 	let ret = add_local formal.vname formal.vtype env in
@@ -239,13 +249,12 @@ let check_formal env formal =
 	if StringMap.is_empty ret then raise (Failure ("local variable " ^ formal.vname ^ " is already defined"))
 	(* update the env with locals from ret *)
 	else let env = {locals = ret; globals = env.globals; functions = env.functions } in
-	convert_to_sast_type formal, env
+	convert_to_sast_type formal env, env
 
 let rec check_formals env formals = 
 	match formals with 
 	  [] -> []
 	| hd::tl -> let f, e = (check_formal env hd) in (f, e)::(check_formals e tl) 
-
 
 let check_local env local =
 	let ret = add_local local.vname local.vtype env in
@@ -253,13 +262,12 @@ let check_local env local =
 	if StringMap.is_empty ret then raise (Failure ("local variable " ^ local.vname ^ " is already defined"))
 	(* update the env with globals from ret *)
 	else let env = {locals = ret; globals = env.globals; functions = env.functions } in
-	convert_to_sast_type local, env
+	convert_to_sast_type local env, env
 
 let rec check_locals env locals = 
 	match locals with
 	  [] -> []
 	| hd::tl -> let l, e = (check_local env hd) in (l, e)::(check_locals e tl)
-
 
 (* this function will return the updated formals and body as per the abstract syntax tree, the return type, name and locals *)
 let check_function env func =
@@ -329,7 +337,7 @@ let check_global env global =
 	if StringMap.is_empty ret then raise (Failure ("global variable " ^ global.vname ^ " is already defined"))
 	(* update the env with globals from ret *)
 	else let env = {locals = env.locals; globals = ret; functions = env.functions } in
-	convert_to_sast_type global, env
+	convert_to_sast_type global env, env
 
 let rec check_globals env globals = 
 	match globals with
