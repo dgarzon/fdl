@@ -1,14 +1,11 @@
 def int main()
    	path f
-    path dir
-    int count
-    dir = "/Users/rupayanbasu/Documents/Courses/PLT/fdl/fdl/src"
-    count = 0
+    path dir = "."
+    int count = 0
 	for ( f in dir ) 
-        	print count
-		print f
-        	print "\n"
-        	count = count + 1
+        print count
+        print f
+		count = count + 1
 	end
 
 	return 1
