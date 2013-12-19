@@ -1,17 +1,11 @@
 def int main()
-    path src
-    path js
-    path css
-    path imgs
-    path html
+    path src = "./demo/site"
+    path js = "./demo/site/js"
+    path css = "./demo/site/css"
+    path imgs = "./demo/site/images"
+    path html = "./demo/site/html"
+
     path f
-
-    src = "./demo/site"
-    js =  "./demo/site/js"
-    css =  "./demo/site/css"
-    imgs = "./demo/site/imgs"
-    html = "./demo/site/html"
-
     for ( f in src )
         if (f.type == ".js") then
             js <<- f
