@@ -1,0 +1,16 @@
+def int gcd(int a, int b)
+	while (a != b)
+		if(a>b) then
+			a = a-b
+		else
+			b = b-a
+		end
+	end
+	return a
+end
+
+def int main()
+	int g = gcd(15, 30)
+	print g
+	return 0
+end
