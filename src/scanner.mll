@@ -31,7 +31,6 @@ rule token = parse
 	| "void"		{ VOID } 		| ".add"		{ ADD }
 	| "true"		{ TRUE }		| ".remove"		{ REMOVE }
 	| "false"		{ FALSE }		| ".type"		{ PATHEXT }
-	| "trash"		{ TRASH }
 	| eof			{ EOF }			(* do as microC *)
 	| digit+ as lit					{ LIT_INT(int_of_string lit) }
 	| quote [^'"']* quote as lit	{ LIT_STR(lit) }

@@ -1,6 +1,7 @@
 def int main()
-	path dir1 = "."
-	path dir2 = "./sample_program"
+	path dir1 = "./demo/duplicates/fdl_copy"
+	path dir2 = "./demo/duplicates/fdl"
+	path trash = "~/.Trash"
 	path file1
 	path file2
 	int check = 0
@@ -14,7 +15,7 @@ def int main()
 		a = file1.name
 		l.add(a)
 	end
-	
+
 	l.remove(".")
 	l.remove("..")
 	l.remove(".DS_Store")
@@ -22,8 +23,9 @@ def int main()
 	for (file2 in dir1)
 		b = file2.name
 		if b in l then
-			print "duplicate found"
+			print "Duplicate Found"
 			print b
+			trash <<- file2
 			check = 1
 		end
 	end
@@ -32,6 +34,5 @@ def int main()
 		print "No duplicates found"
 	end
 
-	
 	return 0
 end
