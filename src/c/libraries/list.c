@@ -134,9 +134,7 @@ void removeNode(struct List *list, struct Node *node1) {
             prev->next = node2->next;
         free(node2);
     }
-    else {
-        printf("List item not found.\n");
-    }
+    
 }
 
 struct Node popFront(struct List *list) {
