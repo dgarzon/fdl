@@ -9,7 +9,7 @@ def int main()
 	
 	print home.type
 	print "\n"
-	if(home.kind == 1) then
+	if(home.kind == 2) then
 		print "we have a directory here"
 	else
 		print "we have a file here here"
