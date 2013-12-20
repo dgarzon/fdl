@@ -28,7 +28,7 @@ int checkValid(char *path){
 		return S_ISDIR(info.st_mode) ? 1 : S_ISREG(info.st_mode);
 }
 
-// returns -1 in case of invalid path
+// returns 0 in case of invalid path
 int getCreatedAt(char *path){
 	if(checkValid(path)){
 		struct stat info;
@@ -36,18 +36,18 @@ int getCreatedAt(char *path){
 
 		return (int) info.st_birthtime;
 	}else
-		return -1;
+		return 0;
 }
 
-// Directory 1, File 0, invalid path -1
+// Directory 2, File 1, invalid path 0
 int getPathType(char *path){
 	if(checkValid(path)){
 		struct stat info;
 		stat(path, &info);
 
-		return S_ISDIR(info.st_mode);
+		return S_ISDIR(info.st_mode)+1;
 	}else
-		return -1;
+		return 0;
 }
 
 int isDir(char *path){
@@ -57,7 +57,7 @@ int isDir(char *path){
 
 		return S_ISDIR(info.st_mode);
 	}else
-		return -1;
+		return 0;
 }
 
 // get the last directory or filename
