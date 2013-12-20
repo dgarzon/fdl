@@ -1,16 +1,14 @@
 def int main()
-	path dir1
-	path dir2
+	path dir1 = "."
+	path dir2 = "./sample_program"
 	path file1
 	path file2
-	int check
+	int check = 0
 	string a
 	string b
 	list l
 
 	l = []
-	dir1 = "."
-	dir2 = "./c"
 
 	for (file1 in dir2)
 		a = file1.name
@@ -21,18 +19,17 @@ def int main()
 	l.remove("..")
 	l.remove(".DS_Store")
 
-	check = 0
 	for (file2 in dir1)
 		b = file2.name
 		if b in l then
-			print "duplicate found\n"
+			print "duplicate found"
 			print b
 			check = 1
 		end
 	end
 
 	if (check != 1) then
-		print "No duplicates found\n"
+		print "No duplicates found"
 	end
 
 	

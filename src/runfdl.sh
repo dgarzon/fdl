@@ -42,20 +42,20 @@ function compileAndRun() {
 
     # compliling the C file
     if [ -f "${reffile}.c" ]; then
-    	gcc -Ic/libraries -Lc/libraries -llist -lpath -w -o "${reffile}" "${reffile}.c" #&& echo "COMPILATION of ${reffile}.c succeeded"
+    	gcc -Ic/libraries -Lc/libraries -llist -lpath -w -o "${reffile}" "${reffile}.c" 2>> errors.txt
     else
-    	echo "Ocaml to C of $1 failed"
+    	#echo "Ocaml to C of $1 failed"
     	return
     fi
 
  	# running the binary
     if [ -f "${reffile}" ]; then
-        eval ${reffile}
+        eval ${reffile} 2>> errors.txt
         rm -rf ${reffile}.fdlp
         rm -rf ${reffile}.c
         rm -rf ${reffile}
-    else
-        echo "C to binary of ${reffile}.c failed"
+    #else
+        #echo "C to binary of ${reffile}.c failed"
     fi
 
 }
