@@ -1,5 +1,7 @@
 #!/bin/bash
 
+type NUL > 'index'.html
+
 for i in {1..20}
 do
    type NUL > 'index-'$i.html
