@@ -1,0 +1,2 @@
+gcc -g -Wall    -c -o preprocessor.o preprocessor.c
+gcc   preprocessor.o   -o preprocessor

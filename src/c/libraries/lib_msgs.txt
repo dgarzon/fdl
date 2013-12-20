@@ -1,0 +1,6 @@
+cc -g -Wall    -c -o list.o list.c
+ar rc liblist.a list.o
+ranlib liblist.a
+cc -g -Wall    -c -o path.o path.c
+ar rc libpath.a path.o
+ranlib libpath.a
