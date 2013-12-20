@@ -1,0 +1,22 @@
+def void findAndMove()
+	path loc1 = "./sample_program/move.txt"
+	path loc1dest = "."
+	path loc2 = "./move.txt"
+	path loc2dest = "./sample_program"
+
+	if (loc1.kind != 0) then
+		loc1dest <<- loc1
+		print "moved to"
+		print loc1dest
+	else
+		loc2dest <<- loc2
+		print "moved to"
+		print loc2dest
+	end
+	return
+end
+
+def int main()
+	findAndMove()
+	return 0
+end

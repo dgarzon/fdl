@@ -1,0 +1,23 @@
+def void findAndCopy()
+	path loc1 = "./sample_program/copy.txt"
+	path loc1dest = "."
+	path loc2 = "./copy.txt"
+	path loc2dest = "./sample_program"
+
+	/* move the file out if it exists*/
+	if (loc1.kind != 0) then
+		loc1dest <<- loc1
+		print "moved"
+	end
+
+	/* copy the file back*/
+	loc2dest <- loc2
+	print "copied"
+
+	return
+end
+
+def int main()
+	findAndCopy()
+	return 0
+end
