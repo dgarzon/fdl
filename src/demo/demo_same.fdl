@@ -1,0 +1,40 @@
+def int main()
+	path d1 = "."
+	path d2 = "./c"
+	path f1
+	path f2
+	list l
+	string a 
+	string b
+	int check = 0
+	l = []
+
+	for ( f1 in d1 )
+		if (f1.kind == 1) then
+			a = f1.type
+			l.add(a)
+		end
+	end
+
+	l.remove(".")
+	l.remove("..")
+	l.remove(".DS_Store")
+
+	for ( f2 in d2 )
+		b = f2.type
+		if b in l then 
+			print "type " + b 
+			print f2.name
+			check = 1
+		end
+	end
+
+	if (check != 1) then
+		print "No files of same type found"
+	end
+
+	return 0
+end
+
+
+
